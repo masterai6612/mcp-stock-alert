@@ -87,3 +87,17 @@ python main_copilot.py
 # detach from session: Ctrl-b d
 # reattach later:
 tmux attach -t mcp-alert
+
+
+# Graceful stop: attach and Ctrl-C inside session
+tmux attach -t mcp-alert   # then Ctrl-C in the running window
+
+# Kill the whole session from shell:
+tmux kill-session -t mcp-alert
+
+# To restart, create a new session as above or run:
+tmux new -s mcp-alert 'cd /Users/monie/Desktop/GitHub/Stocks/Preplexity/mcp-stock-alert && source venv/bin/activate && python main_copilot.py >> ~/mcp-stock-alert.log 2>&1'
+
+
+# follow output
+tail -F ~/mcp-stock-alert.log
