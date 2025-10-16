@@ -18,13 +18,13 @@ symbols = [
     "SPY", "QQQ", "SHOP", "BNS", "TD",
     "PFE", "KO", "MO", "PM", "VZ", "T", "ENB", "SLF",
     "KHC", "PEP", "CMCSA", "CSCO", "QCOM", "ADP", "HON",
-    "LYB", "UPS", "CAG", "PEAK", "ARE", "AMCR", "EIX", "DOW", "OKE", "BEN", "VICI", "SBUX", "PAYX",
+    "LYB", "UPS", "CAG", "ARE", "AMCR", "EIX", "DOW", "OKE", "BEN", "VICI", "SBUX", "PAYX",
     # AI stocks additions
     "AI", "BBAI", "SOUN", "TEM", "PATH",
     # Rare mineral additions
-    "MP", "UUUU", "UCU", "TMC", "HBM",
+    "MP", "UUUU", "TMC", "HBM",
     # Crypto stocks and coins
-    "HUT", "RIOT", "MARA", "COIN", "STKE", "BTC", "ETH", "SOL", "BNB", "XRP",
+    "HUT", "RIOT", "MARA", "COIN", "STKE", "BTC", "ETH", "SOL",
     # Controversial/top surge stocks
     "CELH", "CRSP", "UBER", "ANF", "ALM", "GME"
 ]
