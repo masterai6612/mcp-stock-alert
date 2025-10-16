@@ -11,19 +11,27 @@ from email.mime.text import MIMEText
 
 # ----------- SETTINGS -----------
 symbols = [
-    # AI, Commodities, 2025 trends
     "NVDA", "AMD", "MSFT", "GOOGL", "META", "SNOW", "PLTR",
     "AVGO", "ORCL", "FANG", "AEM", "WPM", "NEM", "RRC", "LRCX",
-    # High Volume / Most Traded
     "TSLA", "AAPL", "AMZN", "JPM", "BAC", "NFLX", "XOM", "CVX",
     "SPY", "QQQ", "SHOP", "BNS", "TD",
-    # Highest Dividend Stocks & REITs
     "PFE", "KO", "MO", "PM", "VZ", "T", "ENB", "SLF",
+    "KHC", "PEP", "CMCSA", "CSCO", "QCOM", "ADP", "HON",
+    "LYB", "UPS", "CAG", "PEAK", "ARE", "AMCR", "EIX", "DOW", "OKE", "BEN", "VICI", "SBUX", "PAYX",
+    # AI stocks additions
+    "AI", "BBAI", "SOUN", "TEM", "PATH",
+    # Rare mineral additions
+    "MP", "UUUU", "UCU", "TMC", "HBM",
+    # Crypto stocks and coins
+    "HUT", "RIOT", "MARA", "COIN", "STKE", "BTC", "ETH", "SOL", "BNB", "XRP",
+    # Controversial/top surge stocks
+    "CELH", "CRSP", "UBER", "ANF", "ALM", "GME"
 ]
+
 
 email_to = "masterai6612@gmail.com"
 email_from = "masterai6612@gmail.com"
-email_password = "atun odem xhbm nqpu"  # <--- Replace with your Gmail app password
+email_password = "svpq udbt cnsf awab"  # <--- Replace with your Gmail app password
 
 x_bearer_token = "AAAAAAAAAAAAAAAAAAAAACkK4wEAAAAAKdKADQ5xHT9pZ2UAfrak4x9fhx4%3D3jEBEHsBTX3o3KpxCjIWsq7LCM5AA8nqcj0RjIXdRUrwTO5szv"  # <--- Replace with your real X/Twitter Bearer Token
 
