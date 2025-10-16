@@ -59,3 +59,31 @@ text
 - Email/X (Twitter) API keys as needed (see main.py or .env for details)
 
 ---
+
+
+
+
+
+# GitHub Copilot
+
+source venv/bin/activate
+python -c 'from main_copilot import main_task; main_task()'
+
+
+# To run this continiously
+
+# install tmux if needed
+brew install tmux
+
+# start a session
+tmux new -s mcp-alert
+
+# inside tmux: activate venv and run the script
+cd /Users/monie/Desktop/GitHub/Stocks/Preplexity/mcp-stock-alert
+source venv/bin/activate
+# run continuously (script already loops)
+python main_copilot.py
+
+# detach from session: Ctrl-b d
+# reattach later:
+tmux attach -t mcp-alert
