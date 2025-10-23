@@ -9,26 +9,92 @@ import time
 import smtplib
 from email.mime.text import MIMEText
 from zoneinfo import ZoneInfo
-import json
-import hashlib
 
 # ----------- SETTINGS -----------
+# S&P 500 + Additional High-Growth Stocks Watchlist
 symbols = [
-    "NVDA", "AMD", "MSFT", "GOOGL", "META", "SNOW", "PLTR",
-    "AVGO", "ORCL", "FANG", "AEM", "WPM", "NEM", "RRC", "LRCX",
-    "TSLA", "AAPL", "AMZN", "JPM", "BAC", "NFLX", "XOM", "CVX",
-    "SPY", "QQQ", "SHOP", "BNS", "TD",
-    "PFE", "KO", "MO", "PM", "VZ", "T", "ENB", "SLF",
-    "KHC", "PEP", "CMCSA", "CSCO", "QCOM", "ADP", "HON",
-    "LYB", "UPS", "CAG", "ARE", "AMCR", "EIX", "DOW", "OKE", "BEN", "VICI", "SBUX", "PAYX",
-    # AI stocks additions
-    "AI", "BBAI", "SOUN", "TEM", "PATH",
-    # Rare mineral additions
-    "MP", "UUUU", "TMC", "HBM",
-    # Crypto stocks and coins
-    "HUT", "RIOT", "MARA", "COIN", "STKE", "BTC", "ETH", "SOL",
-    # Controversial/top surge stocks
-    "CELH", "CRSP", "UBER", "ANF", "ALM", "GME"
+    # Core S&P 500 Technology Giants
+    "AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "NVDA", "META", "TSLA", "AVGO", "ORCL", 
+    "CRM", "ADBE", "ACN", "CSCO", "AMD", "IBM", "INTU", "QCOM", "TXN", "NOW", 
+    "AMAT", "MU", "ADI", "LRCX", "KLAC", "MCHP", "CDNS", "SNPS", "FTNT", "NXPI",
+    
+    # Healthcare & Pharmaceuticals
+    "UNH", "JNJ", "PFE", "ABBV", "TMO", "ABT", "DHR", "BMY", "LLY", "MRK", 
+    "AMGN", "GILD", "MDT", "ISRG", "VRTX", "REGN", "CI", "HUM", "CVS", "ZTS",
+    "SYK", "BSX", "EW", "HOLX", "BAX", "BDX", "ZBH", "ALGN", "IDXX", "DXCM",
+    
+    # Financials
+    "BRK.B", "JPM", "BAC", "WFC", "GS", "MS", "C", "USB", "PNC", "TFC", 
+    "COF", "SCHW", "BK", "STT", "AXP", "MA", "V", "PYPL", "FISV", "FIS", 
+    "PAYX", "ADP", "SPGI", "MCO", "ICE", "CME", "NDAQ", "BLK", "TROW",
+    
+    # Consumer Discretionary
+    "HD", "MCD", "NKE", "LOW", "SBUX", "TJX", "BKNG", "CMG", "ORLY", "AZO", 
+    "ROST", "YUM", "GM", "F", "COST", "WMT", "TGT", "HLT", "MAR", "RCL", 
+    "CCL", "NCLH", "LVS", "WYNN", "MGM", "ABNB", "UBER", "LYFT", "DASH",
+    
+    # Consumer Staples
+    "PG", "KO", "PEP", "MDLZ", "CL", "KMB", "GIS", "K", "CPB", "CAG", 
+    "SJM", "HSY", "MKC", "CLX", "CHD", "EL", "KR", "SYY", "ADM", "TSN", 
+    "PM", "MO", "WBA",
+    
+    # Energy
+    "XOM", "CVX", "COP", "EOG", "SLB", "PSX", "VLO", "MPC", "HES", "BKR", 
+    "HAL", "OXY", "DVN", "FANG", "APA", "EQT", "COG", "RRC", "AR", "MRO",
+    
+    # Industrials
+    "BA", "CAT", "HON", "UPS", "RTX", "LMT", "GE", "MMM", "DE", "UNP", 
+    "CSX", "NSC", "FDX", "LUV", "DAL", "UAL", "AAL", "TDG", "LHX", "NOC", 
+    "GD", "EMR", "ETN", "PH", "ROK", "DOV", "ITW", "IR", "XYL", "CARR", "OTIS",
+    
+    # Materials
+    "LIN", "APD", "SHW", "ECL", "FCX", "NEM", "DOW", "DD", "LYB", "EMN", 
+    "PPG", "VMC", "MLM", "NUE", "STLD", "PKG", "IP", "WY", "CF", "MOS", 
+    "FMC", "ALB", "AEM", "WPM", "GOLD", "AU",
+    
+    # Real Estate
+    "AMT", "PLD", "CCI", "EQIX", "PSA", "WELL", "DLR", "O", "SBAC", "EXR", 
+    "AVB", "EQR", "VTR", "VICI", "ARE", "BXP", "HST", "REG", "FRT", "KIM",
+    
+    # Utilities
+    "NEE", "DUK", "SO", "D", "AEP", "EXC", "XEL", "SRE", "PEG", "ED", 
+    "EIX", "PPL", "FE", "ES", "AEE", "DTE", "ETR", "EVRG", "AWK", "WEC",
+    
+    # Communication Services
+    "NFLX", "DIS", "CMCSA", "VZ", "T", "CHTR", "TMUS", "ATVI", "EA", "TTWO", 
+    "PINS", "SNAP", "SPOT", "ROKU", "LYV",
+    
+    # AI & High-Growth Tech
+    "AI", "PLTR", "SNOW", "CRWD", "ZS", "DDOG", "NET", "OKTA", "PANW", "WDAY", 
+    "TEAM", "ZM", "DOCU", "TWLO", "VEEV", "SMCI", "ARM", "RBLX",
+    
+    # Biotech & Gene Editing
+    "CRSP", "EDIT", "NTLA", "BEAM", "MRNA", "BNTX", "BIIB", "ILMN", "TWST",
+    
+    # Clean Energy & EVs
+    "ENPH", "SEDG", "FSLR", "PLUG", "FCEL", "BE", "LCID", "RIVN", "CHPT", "BLNK",
+    
+    # Crypto & Fintech
+    "COIN", "MSTR", "HUT", "RIOT", "MARA", "SQ", "HOOD", "SOFI", "AFRM", "UPST",
+    
+    # Rare Earth & Mining
+    "MP", "UUUU", "LAC", "ALB", "SQM", "LTHM", "PLL", "TMC", "HBM", "STLD",
+    
+    # Meme & High Volatility
+    "GME", "AMC", "BBBY", "CLOV", "WISH", "SPCE", "NKLA", "RIDE",
+    
+    # ETFs for Market Tracking
+    "SPY", "QQQ", "IWM", "DIA", "VTI", "VOO", "VEA", "VWO", "GLD", "SLV",
+    
+    # International & ADRs
+    "BABA", "JD", "PDD", "NIO", "XPEV", "LI", "BIDU", "TSM", "ASML", "SAP", 
+    "NVO", "SHOP", "SPOT", "SE", "GRAB", "DIDI",
+    
+    # Cannabis & Specialty
+    "TLRY", "CGC", "CRON", "ACB", "SNDL", "HEXO", "OGI", "APHA",
+    
+    # Additional High-Beta Stocks
+    "CELH", "BYND", "PTON", "ZM", "ZOOM", "DOCN", "FSLY", "ESTC", "MDB", "SNOW"
 ]
 
 # Credentials via environment (safer). Set ALERT_EMAIL_PASS to enable SMTP send.
@@ -47,55 +113,6 @@ ANTICIPATED_KEYWORDS = [
 ]
 
 ET_ZONE = ZoneInfo("America/New_York")
-
-# File to store alert history
-ALERT_HISTORY_FILE = "alert_history.json"
-
-def load_alert_history():
-    """Load previous alert history from file"""
-    try:
-        if os.path.exists(ALERT_HISTORY_FILE):
-            with open(ALERT_HISTORY_FILE, 'r') as f:
-                return json.load(f)
-    except Exception as e:
-        print(f"Error loading alert history: {e}")
-    return {}
-
-def save_alert_history(history):
-    """Save alert history to file"""
-    try:
-        with open(ALERT_HISTORY_FILE, 'w') as f:
-            json.dump(history, f, indent=2)
-    except Exception as e:
-        print(f"Error saving alert history: {e}")
-
-def generate_alert_signature(symbol, alert_type, growth_percent, recommendation):
-    """Generate a unique signature for an alert to detect duplicates"""
-    # Round growth to nearest 2% to avoid minor fluctuation alerts
-    rounded_growth = round(growth_percent / 2) * 2
-    signature_data = f"{symbol}_{alert_type}_{rounded_growth}_{recommendation}"
-    return hashlib.md5(signature_data.encode()).hexdigest()
-
-def should_send_alert(symbol, alert_type, growth_percent, recommendation, history):
-    """Check if we should send an alert based on history"""
-    today = datetime.date.today().isoformat()
-    signature = generate_alert_signature(symbol, alert_type, growth_percent, recommendation)
-    
-    # Clean old entries (older than 7 days)
-    cutoff_date = (datetime.date.today() - datetime.timedelta(days=7)).isoformat()
-    history = {k: v for k, v in history.items() if k >= cutoff_date}
-    
-    # Check if we've already sent this alert today
-    if today in history:
-        if signature in history[today]:
-            return False, history
-    
-    # Add this alert to history
-    if today not in history:
-        history[today] = []
-    history[today].append(signature)
-    
-    return True, history
 
 def is_market_open():
     today = datetime.date.today()
@@ -230,35 +247,8 @@ def alert_candidates(stock_data, news_all):
 def send_email(alerts, news_dict, recs_dict, x_dict):
     if not alerts:
         return
-    
-    # Load alert history and filter out duplicate alerts
-    history = load_alert_history()
-    new_alerts = {}
-    
+    body = "Buy signals & recommendations:\n"
     for sym, info in alerts.items():
-        alert_type = "news" if info.get("news_alert") else "growth"
-        growth = info.get('growth', 0)
-        recommendation = recs_dict.get(sym, 'NO SIGNAL')
-        
-        should_alert, updated_history = should_send_alert(sym, alert_type, growth, recommendation, history)
-        
-        if should_alert:
-            new_alerts[sym] = info
-            history = updated_history
-            print(f"New alert for {sym}: {alert_type} - {growth:.2f}% - {recommendation}")
-        else:
-            print(f"Skipping duplicate alert for {sym}: {alert_type} - {growth:.2f}% - {recommendation}")
-    
-    # Save updated history
-    save_alert_history(history)
-    
-    if not new_alerts:
-        print("No new alerts to send (all were duplicates)")
-        return
-    
-    # Build email body only for new alerts
-    body = f"New Stock Buy Signals & Recommendations ({len(new_alerts)} new alerts):\n"
-    for sym, info in new_alerts.items():
         reason = "News: Anticipated Raise" if info.get("news_alert") else "Growth ≥ 7%"
         body += (
             f"\n{sym} - Recommendation: {recs_dict.get(sym,'NO SIGNAL')}\n"
@@ -273,8 +263,7 @@ def send_email(alerts, news_dict, recs_dict, x_dict):
         )
         for headline, sentiment in news_dict.get(sym, []):
             body += f"    - [{sentiment}] {headline}\n"
-    
-    subject = f"Stock Buy Signals - {len(new_alerts)} New Alert{'s' if len(new_alerts) > 1 else ''}"
+    subject = "Stock Buy Signals, News & Recommendation"
     msg = MIMEText(body)
     msg["Subject"] = subject
     msg["From"] = email_from
@@ -290,7 +279,7 @@ def send_email(alerts, news_dict, recs_dict, x_dict):
             s.starttls()
             s.login(email_from, email_password)
             s.sendmail(email_from, [email_to], msg.as_string())
-        print(f"Email sent to {email_to} with {len(new_alerts)} new alerts")
+        print("Email sent to", email_to)
     except smtplib.SMTPAuthenticationError:
         print("SMTP authentication failed. Use a Gmail App Password and set ALERT_EMAIL_PASS env var.")
     except Exception as e:
@@ -328,8 +317,6 @@ def main_task():
         )
         for headline, sentiment in news_dict[sym]:
             print(f"    [{sentiment}] {headline}")
-    
-    # Send email with duplicate filtering
     send_email(alerts, news_dict, recs_dict, x_dict)
 
 if __name__ == "__main__":

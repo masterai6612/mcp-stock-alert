@@ -22,18 +22,4 @@ fi
 # Make all .sh scripts in the directory executable
 chmod +x ./*.sh
 
-echo "Setup complete!"
-
-echo ""
-echo "Next steps:"
-echo "1. Set environment variables for email alerts (optional):"
-echo "   export ALERT_EMAIL_TO='your-email@gmail.com'"
-echo "   export ALERT_EMAIL_FROM='your-email@gmail.com'"
-echo "   export ALERT_EMAIL_PASS='your-gmail-app-password'"
-echo "   export X_BEARER_TOKEN='your-twitter-bearer-token'"
-echo ""
-echo "2. Run the stock monitor:"
-echo "   ./start_stock_monitor.sh"
-echo ""
-echo "3. Or run with tmux for background operation:"
-echo "   ./start_mcp_tmux.sh"
+echo "Setup complete

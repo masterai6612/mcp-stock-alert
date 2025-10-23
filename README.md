@@ -9,7 +9,6 @@ It is designed for swing trading, stock alerts, and real-time analytics, with ea
 
 - **FastAPI MCP Server:** Runs a local WebSocket endpoint for agentic communication and monitoring.
 - **Automated Stock/News Analytics:** Periodic analysis script tracks price, news, and alerts (customizable in main.py).
-- **Duplicate Alert Prevention:** Smart filtering prevents repeated alerts for the same stock conditions within 7 days.
 - **Easy Startup:** One-click script launches server, analytics agent, and (optionally) a WebSocket test client.
 - **Portable Setup:** Fully reproducible on any Mac/Linux via git clone and shell scripts.
 - **Extensible:** Add new agents, endpoints, or analytics tasks with ease.
@@ -20,45 +19,27 @@ It is designed for swing trading, stock alerts, and real-time analytics, with ea
 
 ### 1. Clone This Repository
 
-```bash
 git clone https://github.com/masterai6612/mcp-stock-alert.git
 cd mcp-stock-alert
-```
+
+text
 
 ### 2. Run the Setup Script
 
 Creates and activates a Python virtual environment, installs dependencies, and prepares startup scripts.
 
-```bash
 chmod +x setup_mcp_agent.sh
 ./setup_mcp_agent.sh
-```
 
-### 3. Configure Environment (Optional)
+text
 
-For email alerts and Twitter sentiment analysis:
+### 3. Run the Agent
 
-```bash
-cp .env.template .env
-# Edit .env with your credentials
-```
+This launches the MCP FastAPI server, your analytics/alert agent, and a WebSocket test client (optional).
 
-### 4. Run the Agent
-
-This launches the MCP FastAPI server, your analytics/alert agent, and a WebSocket test client.
-
-```bash
 ./start_stock_monitor.sh
-```
 
-### 5. Run in Background (Alternative)
-
-For continuous operation using tmux:
-
-```bash
-./start_mcp_tmux.sh
-# To stop: ./stop_mcp_tmux.sh
-```
+text
 
 ---
 
@@ -83,41 +64,40 @@ For continuous operation using tmux:
 
 
 
----
+# GitHub Copilot
 
-## Manual Commands
-
-### Run Single Analysis
-```bash
 source venv/bin/activate
 python -c 'from main_copilot import main_task; main_task()'
-```
 
-### Manual tmux Setup (if scripts don't work)
-```bash
-# Install tmux if needed
+
+# To run this continiously
+
+# install tmux if needed
 brew install tmux
 
-# Start session and run agent
+# start a session
 tmux new -s mcp-alert
+
+# inside tmux: activate venv and run the script
+cd /Users/monie/Desktop/GitHub/Stocks/Preplexity/mcp-stock-alert
 source venv/bin/activate
+# run continuously (script already loops)
 python main_copilot.py
 
-# Detach: Ctrl-b d
-# Reattach: tmux attach -t mcp-alert
-# Kill session: tmux kill-session -t mcp-alert
-```
+# detach from session: Ctrl-b d
+# reattach later:
+tmux attach -t mcp-alert
 
-### Monitor Logs
-```bash
+
+# Graceful stop: attach and Ctrl-C inside session
+tmux attach -t mcp-alert   # then Ctrl-C in the running window
+
+# Kill the whole session from shell:
+tmux kill-session -t mcp-alert
+
+# To restart, create a new session as above or run:
+tmux new -s mcp-alert 'cd /Users/monie/Desktop/GitHub/Stocks/Preplexity/mcp-stock-alert && source venv/bin/activate && python main_copilot.py >> ~/mcp-stock-alert.log 2>&1'
+
+
+# follow output
 tail -F ~/mcp-stock-alert.log
-```
-
-### Manage Alert History
-```bash
-# Show current alert history
-python clear_alert_history.py show
-
-# Clear alert history (to reset duplicate prevention)
-python clear_alert_history.py clear
-```
