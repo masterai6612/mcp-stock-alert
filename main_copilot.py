@@ -9,6 +9,8 @@ import time
 import smtplib
 from email.mime.text import MIMEText
 from zoneinfo import ZoneInfo
+import json
+import hashlib
 
 # ----------- SETTINGS -----------
 symbols = [
@@ -45,6 +47,55 @@ ANTICIPATED_KEYWORDS = [
 ]
 
 ET_ZONE = ZoneInfo("America/New_York")
+
+# File to store alert history
+ALERT_HISTORY_FILE = "alert_history.json"
+
+def load_alert_history():
+    """Load previous alert history from file"""
+    try:
+        if os.path.exists(ALERT_HISTORY_FILE):
+            with open(ALERT_HISTORY_FILE, 'r') as f:
+                return json.load(f)
+    except Exception as e:
+        print(f"Error loading alert history: {e}")
+    return {}
+
+def save_alert_history(history):
+    """Save alert history to file"""
+    try:
+        with open(ALERT_HISTORY_FILE, 'w') as f:
+            json.dump(history, f, indent=2)
+    except Exception as e:
+        print(f"Error saving alert history: {e}")
+
+def generate_alert_signature(symbol, alert_type, growth_percent, recommendation):
+    """Generate a unique signature for an alert to detect duplicates"""
+    # Round growth to nearest 2% to avoid minor fluctuation alerts
+    rounded_growth = round(growth_percent / 2) * 2
+    signature_data = f"{symbol}_{alert_type}_{rounded_growth}_{recommendation}"
+    return hashlib.md5(signature_data.encode()).hexdigest()
+
+def should_send_alert(symbol, alert_type, growth_percent, recommendation, history):
+    """Check if we should send an alert based on history"""
+    today = datetime.date.today().isoformat()
+    signature = generate_alert_signature(symbol, alert_type, growth_percent, recommendation)
+    
+    # Clean old entries (older than 7 days)
+    cutoff_date = (datetime.date.today() - datetime.timedelta(days=7)).isoformat()
+    history = {k: v for k, v in history.items() if k >= cutoff_date}
+    
+    # Check if we've already sent this alert today
+    if today in history:
+        if signature in history[today]:
+            return False, history
+    
+    # Add this alert to history
+    if today not in history:
+        history[today] = []
+    history[today].append(signature)
+    
+    return True, history
 
 def is_market_open():
     today = datetime.date.today()
@@ -179,8 +230,35 @@ def alert_candidates(stock_data, news_all):
 def send_email(alerts, news_dict, recs_dict, x_dict):
     if not alerts:
         return
-    body = "Buy signals & recommendations:\n"
+    
+    # Load alert history and filter out duplicate alerts
+    history = load_alert_history()
+    new_alerts = {}
+    
     for sym, info in alerts.items():
+        alert_type = "news" if info.get("news_alert") else "growth"
+        growth = info.get('growth', 0)
+        recommendation = recs_dict.get(sym, 'NO SIGNAL')
+        
+        should_alert, updated_history = should_send_alert(sym, alert_type, growth, recommendation, history)
+        
+        if should_alert:
+            new_alerts[sym] = info
+            history = updated_history
+            print(f"New alert for {sym}: {alert_type} - {growth:.2f}% - {recommendation}")
+        else:
+            print(f"Skipping duplicate alert for {sym}: {alert_type} - {growth:.2f}% - {recommendation}")
+    
+    # Save updated history
+    save_alert_history(history)
+    
+    if not new_alerts:
+        print("No new alerts to send (all were duplicates)")
+        return
+    
+    # Build email body only for new alerts
+    body = f"New Stock Buy Signals & Recommendations ({len(new_alerts)} new alerts):\n"
+    for sym, info in new_alerts.items():
         reason = "News: Anticipated Raise" if info.get("news_alert") else "Growth ≥ 7%"
         body += (
             f"\n{sym} - Recommendation: {recs_dict.get(sym,'NO SIGNAL')}\n"
@@ -195,7 +273,8 @@ def send_email(alerts, news_dict, recs_dict, x_dict):
         )
         for headline, sentiment in news_dict.get(sym, []):
             body += f"    - [{sentiment}] {headline}\n"
-    subject = "Stock Buy Signals, News & Recommendation"
+    
+    subject = f"Stock Buy Signals - {len(new_alerts)} New Alert{'s' if len(new_alerts) > 1 else ''}"
     msg = MIMEText(body)
     msg["Subject"] = subject
     msg["From"] = email_from
@@ -211,7 +290,7 @@ def send_email(alerts, news_dict, recs_dict, x_dict):
             s.starttls()
             s.login(email_from, email_password)
             s.sendmail(email_from, [email_to], msg.as_string())
-        print("Email sent to", email_to)
+        print(f"Email sent to {email_to} with {len(new_alerts)} new alerts")
     except smtplib.SMTPAuthenticationError:
         print("SMTP authentication failed. Use a Gmail App Password and set ALERT_EMAIL_PASS env var.")
     except Exception as e:
@@ -249,6 +328,8 @@ def main_task():
         )
         for headline, sentiment in news_dict[sym]:
             print(f"    [{sentiment}] {headline}")
+    
+    # Send email with duplicate filtering
     send_email(alerts, news_dict, recs_dict, x_dict)
 
 if __name__ == "__main__":

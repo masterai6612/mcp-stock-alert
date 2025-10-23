@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SESSION="mcp-alert"
-REPO="/Users/monie/Desktop/GitHub/Stocks/Preplexity/mcp-stock-alert"
+REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 VENV_ACTIVATE="$REPO/venv/bin/activate"
 SCRIPT="$REPO/main_copilot.py"
 LOG="$HOME/mcp-stock-alert.log"
