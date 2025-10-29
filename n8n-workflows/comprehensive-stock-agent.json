@@ -1,0 +1,174 @@
+{
+  "name": "Comprehensive Stock Agent - 269+ Stocks with Enhanced Analytics",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes", 
+              "minutesInterval": 30
+            }
+          ]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Every 30 Minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://host.docker.internal:5002/api/comprehensive-analysis",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "{\n  \"analysis_type\": \"full_universe\",\n  \"include_earnings\": true,\n  \"include_themes\": true,\n  \"include_sentiment\": true,\n  \"stock_limit\": 100\n}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "comprehensive-analysis",
+      "name": "Comprehensive Stock Analysis",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "// Process comprehensive analysis results\nconst analysisData = $input.all()[0].json;\n\nif (!analysisData.success) {\n  return [{ json: { error: 'Analysis failed', data: analysisData } }];\n}\n\nconst results = analysisData.data || [];\nconst buySignals = [];\nconst watchSignals = [];\nconst marketContext = analysisData.market_context || {};\n\n// Filter and categorize signals\nfor (const stock of results) {\n  if (stock.recommendation === 'BUY' || stock.recommendation === 'STRONG BUY') {\n    buySignals.push({\n      symbol: stock.symbol,\n      price: stock.price,\n      recommendation: stock.recommendation,\n      rsi: stock.rsi,\n      change_percent: stock.change_percent,\n      volume: stock.volume,\n      earnings_soon: stock.earnings_soon || false,\n      in_hot_theme: stock.in_hot_theme || false,\n      priority: stock.recommendation === 'STRONG BUY' ? 'HIGH' : 'MEDIUM'\n    });\n  } else if (stock.recommendation === 'WATCH') {\n    watchSignals.push(stock);\n  }\n}\n\n// Create summary\nconst summary = {\n  timestamp: new Date().toISOString(),\n  total_analyzed: results.length,\n  buy_signals: buySignals.length,\n  watch_signals: watchSignals.length,\n  market_sentiment: marketContext.sentiment || 'NEUTRAL',\n  earnings_today: marketContext.earnings_today || 0,\n  hot_themes: marketContext.hot_themes || 0,\n  should_send_alerts: buySignals.length > 0\n};\n\nreturn [{\n  json: {\n    summary: summary,\n    buy_signals: buySignals,\n    watch_signals: watchSignals.slice(0, 10), // Limit watch signals\n    market_context: marketContext\n  }\n}];"
+      },
+      "id": "process-signals",
+      "name": "Process Trading Signals",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-1",
+              "leftValue": "={{ $json.summary.should_send_alerts }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equal"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "should-alert",
+      "name": "Should Send Alerts?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://host.docker.internal:5001/api/dashboard-update",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "id": "update-dashboard",
+      "name": "Update Dashboard",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1120, 200]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://host.docker.internal:5002/api/send-email-alert",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "timeout": 15000
+        }
+      },
+      "id": "send-email-alerts",
+      "name": "Send Email Alerts",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1120, 400]
+    }
+  ],
+  "connections": {
+    "Every 30 Minutes": {
+      "main": [
+        [
+          {
+            "node": "Comprehensive Stock Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Comprehensive Stock Analysis": {
+      "main": [
+        [
+          {
+            "node": "Process Trading Signals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Trading Signals": {
+      "main": [
+        [
+          {
+            "node": "Should Send Alerts?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Should Send Alerts?": {
+      "main": [
+        [
+          {
+            "node": "Update Dashboard",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send Email Alerts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "id": "comprehensive-stock-agent",
+  "tags": ["trading", "stocks", "agent"]
+}

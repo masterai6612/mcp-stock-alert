@@ -1,0 +1,83 @@
+{
+  "watchlists": {
+    "test_watchlist": [
+      "AAPL",
+      "MSFT",
+      "GOOGL",
+      "NVDA",
+      "AMD",
+      "TSLA",
+      "META",
+      "AMZN",
+      "SHOP",
+      "TD",
+      "BNS",
+      "ENB",
+      "SLF",
+      "JPM",
+      "BAC",
+      "XOM",
+      "CVX"
+    ],
+    "morning_watchlist": [
+      "CRSP",
+      "UBER",
+      "ANF"
+    ]
+  },
+  "last_updated": "2025-10-28T22:55:13.633619",
+  "change_history": [
+    {
+      "timestamp": "2025-10-28T22:54:02.585411",
+      "watchlist": "test_watchlist",
+      "added": [
+        "OKTA",
+        "CRWD",
+        "PLTR",
+        "SNOW",
+        "ZS"
+      ],
+      "removed": []
+    },
+    {
+      "timestamp": "2025-10-28T22:54:02.585616",
+      "watchlist": "morning_watchlist",
+      "added": [
+        "CRSP",
+        "UBER",
+        "ANF"
+      ],
+      "removed": []
+    },
+    {
+      "timestamp": "2025-10-28T22:55:13.633633",
+      "watchlist": "test_watchlist",
+      "added": [
+        "AMD",
+        "GOOGL",
+        "META",
+        "SHOP",
+        "MSFT",
+        "TSLA",
+        "CVX",
+        "BAC",
+        "TD",
+        "AAPL",
+        "XOM",
+        "AMZN",
+        "SLF",
+        "ENB",
+        "BNS",
+        "NVDA",
+        "JPM"
+      ],
+      "removed": [
+        "OKTA",
+        "PLTR",
+        "CRWD",
+        "ZS",
+        "SNOW"
+      ]
+    }
+  ]
+}
