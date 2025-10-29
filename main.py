@@ -1,3 +1,9 @@
+"""
+Enhanced Stock Alert System with Yahoo Finance
+Includes earnings calendar and investment themes
+"""
+
+import os
 import yfinance as yf
 import requests
 from bs4 import BeautifulSoup
@@ -8,6 +14,7 @@ import schedule
 import time
 import smtplib
 from email.mime.text import MIMEText
+from enhanced_yahoo_client import EnhancedYahooClient
 
 # ----------- SETTINGS -----------
 # Import comprehensive stock universe
@@ -16,12 +23,11 @@ from stock_universe import get_comprehensive_stock_list
 # Get expanded stock list (300+ stocks)
 symbols = get_comprehensive_stock_list()
 
-
-email_to = "masterai6612@gmail.com"
-email_from = "masterai6612@gmail.com"
-email_password = "svpq udbt cnsf awab"  # <--- Replace with your Gmail app password
-
-x_bearer_token = "AAAAAAAAAAAAAAAAAAAAACkK4wEAAAAAKdKADQ5xHT9pZ2UAfrak4x9fhx4%3D3jEBEHsBTX3o3KpxCjIWsq7LCM5AA8nqcj0RjIXdRUrwTO5szv"  # <--- Replace with your real X/Twitter Bearer Token
+# Credentials via environment (safer). Set ALERT_EMAIL_PASS to enable SMTP send.
+email_to = os.environ.get("ALERT_EMAIL_TO", "masterai6612@gmail.com")
+email_from = os.environ.get("ALERT_EMAIL_FROM", "masterai6612@gmail.com")
+email_password = os.environ.get("ALERT_EMAIL_PASS", "svpq udbt cnsf awab")  # Gmail app password recommended
+x_bearer_token = os.environ.get("X_BEARER_TOKEN", "AAAAAAAAAAAAAAAAAAAAACkK4wEAAAAAKdKADQ5xHT9pZ2UAfrak4x9fhx4%3D3jEBEHsBTX3o3KpxCjIWsq7LCM5AA8nqcj0RjIXdRUrwTO5szv")
 
 BULLISH = ["upgrade", "buy", "beats", "growth", "strong", "outperform", "target raised", "record", "top pick"]
 BEARISH = ["downgrade", "sell", "misses", "fall", "weak", "underperform", "disappoint", "decline"]
@@ -99,77 +105,191 @@ def fetch_x_feed_sentiment(symbol):
         print(f"X Sentiment fetch error for {symbol}:", e)
         return "Unknown"
 
-def make_recommendation(info, headlines, x_sentiment):
+def make_recommendation(info, headlines, x_sentiment, earnings_soon=False, in_hot_theme=False):
+    """Enhanced recommendation with earnings and theme data"""
     bullish_count = sum(1 for _, sentiment in headlines if sentiment == "Bullish")
     bearish_count = sum(1 for _, sentiment in headlines if sentiment == "Bearish")
-    if info["growth"] >= 7 and 55 <= info["rsi"] <= 80 and bullish_count >= 2 and bearish_count == 0 and x_sentiment == "Bullish":
+    
+    # Enhanced scoring with new factors
+    score = 0
+    
+    # Original factors
+    if info["growth"] >= 7:
+        score += 3
+    if 55 <= info["rsi"] <= 80:
+        score += 2
+    if bullish_count >= 2 and bearish_count == 0:
+        score += 2
+    if x_sentiment == "Bullish":
+        score += 1
+    
+    # New factors
+    if earnings_soon:
+        score += 2  # Earnings catalyst
+    if in_hot_theme:
+        score += 1  # Theme momentum
+    
+    # Recommendation logic
+    if score >= 8:
+        return "STRONG BUY"
+    elif score >= 6:
         return "BUY"
-    elif info["growth"] >= 7 and bullish_count >= 2 and x_sentiment == "Bullish":
+    elif score >= 4:
         return "WATCH"
     else:
         return "NO SIGNAL"
 
-def send_email(alerts, news_dict, recs_dict, x_dict):
+def get_enhanced_data():
+    """Get earnings calendar and investment themes"""
+    client = EnhancedYahooClient()
+    
+    # Get earnings calendar
+    earnings = client.get_earnings_calendar(days_ahead=7)
+    earnings_symbols = {item['symbol'] for item in earnings} if earnings else set()
+    
+    # Get investment themes
+    themes = client.get_investment_themes()
+    hot_theme_stocks = set()
+    
+    if themes and themes.get('themes'):
+        for theme in themes['themes'][:3]:  # Top 3 themes
+            if theme.get('representative_stocks'):
+                hot_theme_stocks.update(theme['representative_stocks'])
+    
+    return earnings_symbols, hot_theme_stocks, themes
+
+def send_enhanced_email(alerts, news_dict, recs_dict, x_dict, earnings_symbols, themes):
+    """Enhanced email with earnings and theme information"""
     if not alerts:
         return
-    body = "Buy signals & recommendations (growth ≥ 7%):\n"
+    
+    body = "🚀 ENHANCED STOCK ALERTS & RECOMMENDATIONS\n"
+    body += "=" * 50 + "\n\n"
+    
+    # Add market themes summary
+    if themes and themes.get('themes'):
+        body += "🎯 TOP MARKET THEMES:\n"
+        for i, theme in enumerate(themes['themes'][:3], 1):
+            body += f"  {i}. {theme['theme']}: {theme['avg_change_percent']:+.2f}%\n"
+        body += "\n"
+    
+    # Add sector performance
+    if themes and themes.get('trending_sectors'):
+        body += "📈 TOP PERFORMING SECTORS:\n"
+        for i, sector in enumerate(themes['trending_sectors'][:3], 1):
+            body += f"  {i}. {sector['sector']}: {sector['change_percent_5d']:+.2f}%\n"
+        body += "\n"
+    
+    body += "📊 STOCK ALERTS (Growth ≥ 7%):\n"
+    body += "=" * 30 + "\n"
+    
     for sym, info in alerts.items():
-        body += (
-            f"\n{sym} - Recommendation: {recs_dict[sym] or 'NO SIGNAL'}\n"
-            f"  Growth: {info['growth']:.2f}%\n"
-            f"  Open: {info['open']:.2f}\n"
-            f"  Close: {info['close']:.2f}\n"
-            f"  Volume: {info['volume']:,}\n"
-            f"  RSI(14): {info['rsi']:.2f}\n"
-            f"  X Feed Sentiment: {x_dict[sym]}\n"
-            "  Recent News Headlines & Sentiment:\n"
-        )
+        earnings_soon = sym in earnings_symbols
+        recommendation = recs_dict[sym]
+        
+        # Add special indicators
+        indicators = []
+        if earnings_soon:
+            indicators.append("📅 EARNINGS SOON")
+        if recommendation in ["BUY", "STRONG BUY"]:
+            indicators.append("🔥 HOT PICK")
+        
+        body += f"\n{sym} - {recommendation}"
+        if indicators:
+            body += f" ({', '.join(indicators)})"
+        body += "\n"
+        
+        body += f"  💰 Price: ${info['open']:.2f} → ${info['close']:.2f}\n"
+        body += f"  📈 Growth: {info['growth']:.2f}%\n"
+        body += f"  📊 Volume: {info['volume']:,}\n"
+        body += f"  🎯 RSI(14): {info['rsi']:.2f}\n"
+        body += f"  🐦 X Sentiment: {x_dict[sym]}\n"
+        
+        if earnings_soon:
+            body += f"  📅 Earnings: Within 7 days\n"
+        
+        body += "  📰 Recent News:\n"
         for headline, sentiment in news_dict[sym]:
-            body += f"    - [{sentiment}] {headline}\n"
-    subject = "Stock Buy Signals, News & Recommendation"
+            body += f"    [{sentiment}] {headline}\n"
+    
+    # Send email
+    subject = f"🚀 Enhanced Stock Alerts - {len(alerts)} Signals"
     msg = MIMEText(body)
     msg["Subject"] = subject
     msg["From"] = email_from
     msg["To"] = email_to
+    
     with smtplib.SMTP("smtp.gmail.com", 587) as s:
         s.starttls()
         s.login(email_from, email_password)
         s.sendmail(email_from, [email_to], msg.as_string())
-    print("Email sent to", email_to)
+    
+    print(f"Enhanced email sent to {email_to}")
 
 def buy_signals(stock_data):
     return {sym: info for sym, info in stock_data.items() if info['growth'] >= 7}
 
-def main_task():
+def main_enhanced_task():
+    """Enhanced main task with earnings and themes"""
     if not is_market_open():
         print("Markets closed today (weekend or holiday). Skipping analysis.")
         return
+    
+    print("🚀 Starting Enhanced Stock Analysis...")
+    
+    # Get enhanced data
+    earnings_symbols, hot_theme_stocks, themes = get_enhanced_data()
+    print(f"📅 Found {len(earnings_symbols)} stocks with upcoming earnings")
+    print(f"🎯 Found {len(hot_theme_stocks)} stocks in hot themes")
+    
+    # Get stock data
     data = fetch_stocks(symbols)
     signals = buy_signals(data)
+    
+    # Get news and sentiment
     news_dict = {sym: fetch_stock_news(sym) for sym in signals}
     x_dict = {sym: fetch_x_feed_sentiment(sym) for sym in signals}
-    recs_dict = {sym: make_recommendation(signals[sym], news_dict[sym], x_dict[sym]) for sym in signals}
-    print("Buy Signals (Growth ≥ 7%) & Recommendations:")
+    
+    # Enhanced recommendations
+    recs_dict = {}
+    for sym in signals:
+        earnings_soon = sym in earnings_symbols
+        in_hot_theme = sym in hot_theme_stocks
+        recs_dict[sym] = make_recommendation(
+            signals[sym], news_dict[sym], x_dict[sym], 
+            earnings_soon, in_hot_theme
+        )
+    
+    # Display results
+    print("\n🎯 ENHANCED STOCK ANALYSIS RESULTS:")
+    print("=" * 50)
+    
     for sym in signals:
         info = signals[sym]
-        print(
-            f"{sym} - Recommendation: {recs_dict[sym]}\n"
-            f"  Open: {info['open']:.2f}\n"
-            f"  Close: {info['close']:.2f}\n"
-            f"  Growth: {info['growth']:.2f}%\n"
-            f"  Volume: {info['volume']:,}\n"
-            f"  RSI(14): {info['rsi']:.2f}\n"
-            f"  X Feed Sentiment: {x_dict[sym]}\n"
-            "  Recent News Headlines and Sentiment:"
-        )
-        for headline, sentiment in news_dict[sym]:
-            print(f"    [{sentiment}] {headline}")
-    send_email(signals, news_dict, recs_dict, x_dict)
+        recommendation = recs_dict[sym]
+        earnings_soon = sym in earnings_symbols
+        in_hot_theme = sym in hot_theme_stocks
+        
+        print(f"\n{sym} - {recommendation}")
+        if earnings_soon:
+            print("  📅 EARNINGS WITHIN 7 DAYS")
+        if in_hot_theme:
+            print("  🎯 IN HOT THEME")
+        
+        print(f"  💰 ${info['open']:.2f} → ${info['close']:.2f} ({info['growth']:+.2f}%)")
+        print(f"  📊 Volume: {info['volume']:,} | RSI: {info['rsi']:.2f}")
+        print(f"  🐦 X Sentiment: {x_dict[sym]}")
+    
+    # Send enhanced email
+    send_enhanced_email(signals, news_dict, recs_dict, x_dict, earnings_symbols, themes)
 
 if __name__ == "__main__":
-    schedule.every().day.at("07:30").do(main_task)
-    print("Scheduler started. Waiting for the next run...")
-    while True:
-        schedule.run_pending()
-        time.sleep(60)
-
+    # Run once for testing
+    main_enhanced_task()
+    
+    # Uncomment below for scheduled runs
+    # schedule.every().day.at("07:30").do(main_enhanced_task)
+    # print("Enhanced scheduler started. Waiting for the next run...")
+    # while True:
+    #     schedule.run_pending()
+    #     time.sleep(60)
