@@ -11,23 +11,11 @@ from email.mime.text import MIMEText
 from zoneinfo import ZoneInfo
 
 # ----------- SETTINGS -----------
-symbols = [
-    "NVDA", "AMD", "MSFT", "GOOGL", "META", "SNOW", "PLTR",
-    "AVGO", "ORCL", "FANG", "AEM", "WPM", "NEM", "RRC", "LRCX",
-    "TSLA", "AAPL", "AMZN", "JPM", "BAC", "NFLX", "XOM", "CVX",
-    "SPY", "QQQ", "SHOP", "BNS", "TD",
-    "PFE", "KO", "MO", "PM", "VZ", "T", "ENB", "SLF",
-    "KHC", "PEP", "CMCSA", "CSCO", "QCOM", "ADP", "HON",
-    "LYB", "UPS", "CAG", "ARE", "AMCR", "EIX", "DOW", "OKE", "BEN", "VICI", "SBUX", "PAYX",
-    # AI stocks additions
-    "AI", "BBAI", "SOUN", "TEM", "PATH",
-    # Rare mineral additions
-    "MP", "UUUU", "TMC", "HBM",
-    # Crypto stocks and coins
-    "HUT", "RIOT", "MARA", "COIN", "STKE", "BTC", "ETH", "SOL",
-    # Controversial/top surge stocks
-    "CELH", "CRSP", "UBER", "ANF", "ALM", "GME"
-]
+# Import comprehensive stock universe
+from stock_universe import get_comprehensive_stock_list
+
+# Get expanded stock list (300+ stocks)
+symbols = get_comprehensive_stock_list()
 
 # Credentials via environment (safer). Set ALERT_EMAIL_PASS to enable SMTP send.
 email_to = os.environ.get("ALERT_EMAIL_TO", "masterai6612@gmail.com")

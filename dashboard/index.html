@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Alert System - Dashboard Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-6 py-8">
+            <div class="text-center">
+                <i class="fas fa-chart-line text-6xl mb-4"></i>
+                <h1 class="text-4xl font-bold mb-2">Stock Alert System</h1>
+                <p class="text-xl opacity-90">Real-time Dashboard & Monitoring</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-6 py-12">
+        <!-- Quick Access Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Main Dashboard -->
+            <div class="bg-white rounded-xl shadow-lg p-8 card-hover transition-all cursor-pointer" onclick="window.location.href='/dashboard'">
+                <div class="text-center">
+                    <div class="text-5xl mb-4">
+                        <i class="fas fa-tachometer-alt text-blue-500"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-2">Main Dashboard</h2>
+                    <p class="text-gray-600 mb-4">Real-time system monitoring, top stocks, and market data</p>
+                    <div class="bg-blue-500 text-white px-6 py-2 rounded-lg inline-block">
+                        Launch Dashboard
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Status -->
+            <div class="bg-white rounded-xl shadow-lg p-8 card-hover transition-all cursor-pointer" onclick="checkSystemStatus()">
+                <div class="text-center">
+                    <div class="text-5xl mb-4">
+                        <i class="fas fa-heartbeat text-green-500"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-2">System Health</h2>
+                    <p class="text-gray-600 mb-4">Check alert system status and performance</p>
+                    <div id="systemStatusBtn" class="bg-green-500 text-white px-6 py-2 rounded-lg inline-block">
+                        Check Status
+                    </div>
+                </div>
+            </div>
+
+            <!-- API Endpoints -->
+            <div class="bg-white rounded-xl shadow-lg p-8 card-hover transition-all cursor-pointer" onclick="showApiInfo()">
+                <div class="text-center">
+                    <div class="text-5xl mb-4">
+                        <i class="fas fa-code text-purple-500"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-2">API Access</h2>
+                    <p class="text-gray-600 mb-4">Direct access to data APIs and endpoints</p>
+                    <div class="bg-purple-500 text-white px-6 py-2 rounded-lg inline-block">
+                        View APIs
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Information -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                <i class="fas fa-info-circle mr-3 text-blue-500"></i>
+                System Information
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="text-3xl text-green-500 mb-2">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="font-bold">Scheduler</h3>
+                    <p class="text-gray-600">7:30 AM Daily Alerts</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl text-blue-500 mb-2">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 class="font-bold">Email Alerts</h3>
+                    <p class="text-gray-600">Real-time Notifications</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl text-yellow-500 mb-2">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3 class="font-bold">Market Data</h3>
+                    <p class="text-gray-600">NYSE, NASDAQ, TSX</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl text-red-500 mb-2">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="font-bold">Mobile Ready</h3>
+                    <p class="text-gray-600">Responsive Design</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="bg-white rounded-xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                <i class="fas fa-link mr-3 text-green-500"></i>
+                Quick Links
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="/api/status" class="bg-gray-100 hover:bg-gray-200 p-4 rounded-lg text-center transition-all">
+                    <i class="fas fa-server text-2xl mb-2 text-gray-600"></i>
+                    <div class="font-medium">System Status</div>
+                </a>
+                <a href="/api/stocks" class="bg-gray-100 hover:bg-gray-200 p-4 rounded-lg text-center transition-all">
+                    <i class="fas fa-chart-line text-2xl mb-2 text-gray-600"></i>
+                    <div class="font-medium">Top Stocks</div>
+                </a>
+                <a href="/api/market" class="bg-gray-100 hover:bg-gray-200 p-4 rounded-lg text-center transition-all">
+                    <i class="fas fa-globe text-2xl mb-2 text-gray-600"></i>
+                    <div class="font-medium">Market Data</div>
+                </a>
+                <a href="/api/earnings" class="bg-gray-100 hover:bg-gray-200 p-4 rounded-lg text-center transition-all">
+                    <i class="fas fa-calendar text-2xl mb-2 text-gray-600"></i>
+                    <div class="font-medium">Earnings</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Stock Alert System Dashboard. Powered by Yahoo Finance & Flask.</p>
+            <p class="text-sm opacity-75 mt-2">Dashboard running on port 5001</p>
+        </div>
+    </footer>
+
+    <script>
+        function checkSystemStatus() {
+            const btn = document.getElementById('systemStatusBtn');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Checking...';
+            
+            fetch('/api/status')
+                .then(response => response.json())
+                .then(data => {
+                    const isRunning = data.scheduler_running;
+                    btn.innerHTML = isRunning ? 
+                        '<i class="fas fa-check mr-2"></i>System Running' : 
+                        '<i class="fas fa-exclamation-triangle mr-2"></i>System Stopped';
+                    btn.className = isRunning ? 
+                        'bg-green-500 text-white px-6 py-2 rounded-lg inline-block' :
+                        'bg-red-500 text-white px-6 py-2 rounded-lg inline-block';
+                })
+                .catch(error => {
+                    btn.innerHTML = '<i class="fas fa-times mr-2"></i>Check Failed';
+                    btn.className = 'bg-red-500 text-white px-6 py-2 rounded-lg inline-block';
+                });
+        }
+
+        function showApiInfo() {
+            alert('API Endpoints:\n\n' +
+                  '• /api/status - System health\n' +
+                  '• /api/stocks - Top performing stocks\n' +
+                  '• /api/market - Market indices\n' +
+                  '• /api/earnings - Earnings calendar\n' +
+                  '• /api/themes - Investment themes\n\n' +
+                  'All endpoints return JSON data.');
+        }
+
+        // Auto-check system status on load
+        window.addEventListener('load', function() {
+            setTimeout(checkSystemStatus, 1000);
+        });
+    </script>
+</body>
+</html>

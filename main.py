@@ -10,23 +10,11 @@ import smtplib
 from email.mime.text import MIMEText
 
 # ----------- SETTINGS -----------
-symbols = [
-    "NVDA", "AMD", "MSFT", "GOOGL", "META", "SNOW", "PLTR",
-    "AVGO", "ORCL", "FANG", "AEM", "WPM", "NEM", "RRC", "LRCX",
-    "TSLA", "AAPL", "AMZN", "JPM", "BAC", "NFLX", "XOM", "CVX",
-    "SPY", "QQQ", "SHOP", "BNS", "TD",
-    "PFE", "KO", "MO", "PM", "VZ", "T", "ENB", "SLF",
-    "KHC", "PEP", "CMCSA", "CSCO", "QCOM", "ADP", "HON",
-    "LYB", "UPS", "CAG", "PEAK", "ARE", "AMCR", "EIX", "DOW", "OKE", "BEN", "VICI", "SBUX", "PAYX",
-    # AI stocks additions
-    "AI", "BBAI", "SOUN", "TEM", "PATH",
-    # Rare mineral additions
-    "MP", "UUUU", "UCU", "TMC", "HBM",
-    # Crypto stocks and coins
-    "HUT", "RIOT", "MARA", "COIN", "STKE", "BTC", "ETH", "SOL", "BNB", "XRP",
-    # Controversial/top surge stocks
-    "CELH", "CRSP", "UBER", "ANF", "ALM", "GME"
-]
+# Import comprehensive stock universe
+from stock_universe import get_comprehensive_stock_list
+
+# Get expanded stock list (300+ stocks)
+symbols = get_comprehensive_stock_list()
 
 
 email_to = "masterai6612@gmail.com"

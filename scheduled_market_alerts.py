@@ -156,11 +156,14 @@ def morning_market_alert():
     earnings = client.get_earnings_calendar(days_ahead=7)
     themes = client.get_investment_themes()
     
-    # Analyze key stocks
-    key_stocks = [
-        "AAPL", "MSFT", "GOOGL", "NVDA", "AMD", "TSLA", "META", "AMZN",
-        "SHOP", "TD", "BNS", "ENB", "SLF", "JPM", "BAC"
-    ]
+    # Import comprehensive stock universe
+    from stock_universe import get_comprehensive_stock_list
+    
+    # Get expanded stock list but limit for morning analysis (performance)
+    all_stocks = get_comprehensive_stock_list()
+    
+    # For morning alerts, focus on top 120 most liquid stocks for faster processing
+    key_stocks = all_stocks[:120]  # Top 120 from comprehensive list
     
     # Track changes in watchlist
     changes = track_watchlist_changes("morning_watchlist", key_stocks)
@@ -270,11 +273,14 @@ def check_upward_trends():
     if today not in sent_alerts:
         sent_alerts[today] = []
     
-    # Monitor key stocks
-    monitor_stocks = [
-        "AAPL", "MSFT", "GOOGL", "NVDA", "AMD", "TSLA", "META", "AMZN",
-        "SHOP", "TD", "BNS", "ENB", "SLF", "JPM", "BAC", "XOM", "CVX"
-    ]
+    # Import comprehensive stock universe
+    from stock_universe import get_comprehensive_stock_list
+    
+    # Monitor expanded stock list but limit for intraday analysis (performance)
+    all_stocks = get_comprehensive_stock_list()
+    
+    # For intraday monitoring, use top 180 stocks for balance of coverage vs performance
+    monitor_stocks = all_stocks[:180]
     
     # Track changes in monitoring list
     changes = track_watchlist_changes("trend_monitoring", monitor_stocks)

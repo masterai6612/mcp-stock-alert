@@ -8,7 +8,7 @@ It is designed for swing trading, stock alerts, and real-time analytics, with ea
 ## Features
 
 - **FastAPI MCP Server:** Runs a local WebSocket endpoint for agentic communication and monitoring.
-- **Automated Stock/News Analytics:** Periodic analysis script tracks price, news, and alerts (customizable in main.py).
+- **Automated Stock/News Analytics:** Monitors 269+ stocks including S&P 500 large caps, recent IPOs, and trending stocks with periodic analysis for price, news, and alerts.
 - **Easy Startup:** One-click script launches server, analytics agent, and (optionally) a WebSocket test client.
 - **Portable Setup:** Fully reproducible on any Mac/Linux via git clone and shell scripts.
 - **Extensible:** Add new agents, endpoints, or analytics tasks with ease.

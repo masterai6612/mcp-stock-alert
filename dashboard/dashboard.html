@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Alert System Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        .status-running { background-color: #10b981; }
+        .status-stopped { background-color: #ef4444; }
+        .status-warning { background-color: #f59e0b; }
+        
+        .market-open { color: #10b981; }
+        .market-closed { color: #ef4444; }
+        .market-pre { color: #f59e0b; }
+        
+        .stock-positive { color: #10b981; }
+        .stock-negative { color: #ef4444; }
+        
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <i class="fas fa-chart-line text-2xl mr-3"></i>
+                    <h1 class="text-2xl font-bold">Stock Alert System Dashboard</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span id="lastUpdate" class="text-sm opacity-75"></span>
+                    <button onclick="refreshData()" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg transition-all">
+                        <i class="fas fa-sync-alt mr-2"></i>Refresh
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-6 py-8">
+        <!-- System Status Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Scheduler Status -->
+            <div class="bg-white rounded-xl shadow-lg p-6 card-hover transition-all">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">Scheduler Status</p>
+                        <p id="schedulerStatus" class="text-xl font-bold">Loading...</p>
+                        <p id="schedulerUptime" class="text-xs text-gray-500"></p>
+                    </div>
+                    <div class="text-3xl">
+                        <i id="schedulerIcon" class="fas fa-clock text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Market Status -->
+            <div class="bg-white rounded-xl shadow-lg p-6 card-hover transition-all">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">Market Status</p>
+                        <p id="marketStatus" class="text-xl font-bold">Loading...</p>
+                        <p id="nextAlert" class="text-xs text-gray-500"></p>
+                    </div>
+                    <div class="text-3xl">
+                        <i id="marketIcon" class="fas fa-chart-bar text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alerts Today -->
+            <div class="bg-white rounded-xl shadow-lg p-6 card-hover transition-all">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">Alerts Sent Today</p>
+                        <p id="alertsToday" class="text-xl font-bold">Loading...</p>
+                        <p class="text-xs text-gray-500">Email notifications</p>
+                    </div>
+                    <div class="text-3xl">
+                        <i class="fas fa-envelope text-blue-500"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Watchlists -->
+            <div class="bg-white rounded-xl shadow-lg p-6 card-hover transition-all">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">Stocks Monitored</p>
+                        <p id="stocksMonitored" class="text-xl font-bold">Loading...</p>
+                        <p id="watchlistCount" class="text-xs text-gray-500"></p>
+                    </div>
+                    <div class="text-3xl">
+                        <i class="fas fa-list text-green-500"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Market Indices -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-globe-americas mr-2 text-blue-500"></i>
+                    Market Indices
+                </h2>
+                <div id="marketIndices" class="space-y-3">
+                    <div class="animate-pulse">Loading market data...</div>
+                </div>
+            </div>
+
+            <!-- Top Performing Stocks -->
+            <div class="lg:col-span-2 bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-trophy mr-2 text-yellow-500"></i>
+                    Top Performing Stocks
+                </h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b">
+                                <th class="text-left py-2">Symbol</th>
+                                <th class="text-left py-2">Company</th>
+                                <th class="text-right py-2">Price</th>
+                                <th class="text-right py-2">1D Change</th>
+                                <th class="text-right py-2">5D Change</th>
+                            </tr>
+                        </thead>
+                        <tbody id="topStocks">
+                            <tr>
+                                <td colspan="5" class="text-center py-4 animate-pulse">Loading stock data...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+            <!-- Upcoming Earnings -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-calendar-alt mr-2 text-purple-500"></i>
+                    Upcoming Earnings
+                </h2>
+                <div id="upcomingEarnings" class="space-y-2">
+                    <div class="animate-pulse">Loading earnings data...</div>
+                </div>
+            </div>
+
+            <!-- Investment Themes -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-lightbulb mr-2 text-orange-500"></i>
+                    Hot Investment Themes
+                </h2>
+                <div id="investmentThemes" class="space-y-2">
+                    <div class="animate-pulse">Loading themes data...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Stock Alert System Dashboard. Real-time monitoring powered by Yahoo Finance.</p>
+        </div>
+    </footer>
+
+    <script>
+        let refreshInterval;
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAllData();
+            startAutoRefresh();
+        });
+
+        function startAutoRefresh() {
+            // Refresh every 5 minutes (300 seconds) to reduce API traffic
+            refreshInterval = setInterval(loadAllData, 300000);
+        }
+
+        function stopAutoRefresh() {
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+            }
+        }
+
+        async function loadAllData() {
+            try {
+                await Promise.all([
+                    loadSystemStatus(),
+                    loadTopStocks(),
+                    loadMarketData(),
+                    loadEarnings(),
+                    loadThemes()
+                ]);
+                updateLastUpdateTime();
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        }
+
+        async function loadSystemStatus() {
+            try {
+                const response = await fetch('/api/status');
+                const data = await response.json();
+                
+                // Update scheduler status
+                const schedulerStatus = document.getElementById('schedulerStatus');
+                const schedulerIcon = document.getElementById('schedulerIcon');
+                const schedulerUptime = document.getElementById('schedulerUptime');
+                
+                if (data.scheduler_running) {
+                    schedulerStatus.textContent = 'Running';
+                    schedulerStatus.className = 'text-xl font-bold text-green-600';
+                    schedulerIcon.className = 'fas fa-play-circle text-green-500';
+                    schedulerUptime.textContent = `Uptime: ${data.scheduler_uptime || 'Unknown'}`;
+                } else {
+                    schedulerStatus.textContent = 'Stopped';
+                    schedulerStatus.className = 'text-xl font-bold text-red-600';
+                    schedulerIcon.className = 'fas fa-stop-circle text-red-500';
+                    schedulerUptime.textContent = 'Not running';
+                }
+                
+                // Update market status
+                const marketStatus = document.getElementById('marketStatus');
+                const marketIcon = document.getElementById('marketIcon');
+                const nextAlert = document.getElementById('nextAlert');
+                
+                const statusMap = {
+                    'open': { text: 'Open', class: 'text-green-600', icon: 'fas fa-chart-line text-green-500' },
+                    'closed': { text: 'Closed', class: 'text-red-600', icon: 'fas fa-chart-line text-red-500' },
+                    'pre_market': { text: 'Pre-Market', class: 'text-yellow-600', icon: 'fas fa-chart-line text-yellow-500' },
+                    'after_hours': { text: 'After Hours', class: 'text-blue-600', icon: 'fas fa-chart-line text-blue-500' }
+                };
+                
+                const status = statusMap[data.market_status] || statusMap['closed'];
+                marketStatus.textContent = status.text;
+                marketStatus.className = `text-xl font-bold ${status.class}`;
+                marketIcon.className = status.icon;
+                nextAlert.textContent = `Next alert: ${data.next_alert || 'Unknown'}`;
+                
+                // Update alerts today
+                document.getElementById('alertsToday').textContent = data.alerts_sent_today || 0;
+                
+                // Update watchlists
+                const totalStocks = Object.values(data.watchlists || {}).reduce((sum, count) => sum + count, 0);
+                document.getElementById('stocksMonitored').textContent = totalStocks;
+                document.getElementById('watchlistCount').textContent = `${Object.keys(data.watchlists || {}).length} watchlists`;
+                
+            } catch (error) {
+                console.error('Error loading system status:', error);
+            }
+        }
+
+        async function loadTopStocks() {
+            try {
+                const response = await fetch('/api/stocks');
+                const stocks = await response.json();
+                
+                const tbody = document.getElementById('topStocks');
+                tbody.innerHTML = '';
+                
+                stocks.forEach(stock => {
+                    const row = document.createElement('tr');
+                    row.className = 'border-b hover:bg-gray-50';
+                    
+                    const change1dClass = stock.change_1d >= 0 ? 'stock-positive' : 'stock-negative';
+                    const change5dClass = stock.change_5d >= 0 ? 'stock-positive' : 'stock-negative';
+                    
+                    row.innerHTML = `
+                        <td class="py-2 font-bold">${stock.symbol}</td>
+                        <td class="py-2">${stock.name || stock.symbol}</td>
+                        <td class="py-2 text-right">$${stock.price.toFixed(2)}</td>
+                        <td class="py-2 text-right ${change1dClass}">${stock.change_1d >= 0 ? '+' : ''}${stock.change_1d.toFixed(2)}%</td>
+                        <td class="py-2 text-right ${change5dClass}">${stock.change_5d >= 0 ? '+' : ''}${stock.change_5d.toFixed(2)}%</td>
+                    `;
+                    
+                    tbody.appendChild(row);
+                });
+                
+            } catch (error) {
+                console.error('Error loading top stocks:', error);
+            }
+        }
+
+        async function loadMarketData() {
+            try {
+                const response = await fetch('/api/market');
+                const market = await response.json();
+                
+                const container = document.getElementById('marketIndices');
+                container.innerHTML = '';
+                
+                Object.entries(market).forEach(([name, data]) => {
+                    const changeClass = data.change >= 0 ? 'stock-positive' : 'stock-negative';
+                    const arrow = data.change >= 0 ? '↗' : '↘';
+                    
+                    const div = document.createElement('div');
+                    div.className = 'flex justify-between items-center p-3 bg-gray-50 rounded-lg';
+                    div.innerHTML = `
+                        <span class="font-medium">${name}</span>
+                        <div class="text-right">
+                            <div class="font-bold">${data.value.toFixed(2)}</div>
+                            <div class="text-sm ${changeClass}">${arrow} ${data.change >= 0 ? '+' : ''}${data.change.toFixed(2)}%</div>
+                        </div>
+                    `;
+                    
+                    container.appendChild(div);
+                });
+                
+            } catch (error) {
+                console.error('Error loading market data:', error);
+            }
+        }
+
+        async function loadEarnings() {
+            try {
+                const response = await fetch('/api/earnings');
+                const earnings = await response.json();
+                
+                const container = document.getElementById('upcomingEarnings');
+                container.innerHTML = '';
+                
+                if (earnings && earnings.length > 0) {
+                    earnings.forEach(earning => {
+                        const div = document.createElement('div');
+                        div.className = 'flex justify-between items-center p-2 border-b';
+                        div.innerHTML = `
+                            <div>
+                                <span class="font-bold">${earning.symbol || 'N/A'}</span>
+                                <span class="text-gray-600 ml-2">${earning.company || ''}</span>
+                            </div>
+                            <span class="text-sm text-gray-500">${earning.date || 'TBD'}</span>
+                        `;
+                        container.appendChild(div);
+                    });
+                } else {
+                    container.innerHTML = '<div class="text-gray-500 text-center py-4">No upcoming earnings data</div>';
+                }
+                
+            } catch (error) {
+                console.error('Error loading earnings:', error);
+            }
+        }
+
+        async function loadThemes() {
+            try {
+                const response = await fetch('/api/themes');
+                const themes = await response.json();
+                
+                const container = document.getElementById('investmentThemes');
+                container.innerHTML = '';
+                
+                if (themes && themes.themes && themes.themes.length > 0) {
+                    themes.themes.slice(0, 5).forEach(theme => {
+                        const changeClass = theme.avg_change_percent >= 0 ? 'stock-positive' : 'stock-negative';
+                        
+                        const div = document.createElement('div');
+                        div.className = 'flex justify-between items-center p-2 border-b';
+                        div.innerHTML = `
+                            <div>
+                                <span class="font-medium">${theme.theme}</span>
+                                <div class="text-xs text-gray-500">${theme.description || ''}</div>
+                            </div>
+                            <span class="font-bold ${changeClass}">${theme.avg_change_percent >= 0 ? '+' : ''}${theme.avg_change_percent.toFixed(2)}%</span>
+                        `;
+                        container.appendChild(div);
+                    });
+                } else {
+                    container.innerHTML = '<div class="text-gray-500 text-center py-4">No themes data available</div>';
+                }
+                
+            } catch (error) {
+                console.error('Error loading themes:', error);
+            }
+        }
+
+        function updateLastUpdateTime() {
+            const now = new Date();
+            document.getElementById('lastUpdate').textContent = `Last updated: ${now.toLocaleTimeString()}`;
+        }
+
+        async function refreshData() {
+            const button = event.target.closest('button');
+            const icon = button.querySelector('i');
+            
+            // Add spinning animation
+            icon.classList.add('fa-spin');
+            button.disabled = true;
+            
+            try {
+                await fetch('/api/refresh');
+                await loadAllData();
+            } catch (error) {
+                console.error('Error refreshing data:', error);
+            } finally {
+                // Remove spinning animation
+                icon.classList.remove('fa-spin');
+                button.disabled = false;
+            }
+        }
+
+        // Handle page visibility changes
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                stopAutoRefresh();
+            } else {
+                loadAllData();
+                startAutoRefresh();
+            }
+        });
+    </script>
+</body>
+</html>
