@@ -11,22 +11,11 @@ from email.mime.text import MIMEText
 from zoneinfo import ZoneInfo
 
 # ----------- SETTINGS -----------
-# S&P 500 + Additional High-Growth Stocks Watchlist
-symbols = [
-    # Core S&P 500 Technology Giants
-    "AAPL", "MSFT", "GOOGL", "GOOG", "AMZN", "NVDA", "META", "TSLA", "AVGO", "ORCL", 
-    "CRM", "ADBE", "ACN", "CSCO", "AMD", "IBM", "INTU", "QCOM", "TXN", "NOW", 
-    "AMAT", "MU", "ADI", "LRCX", "KLAC", "MCHP", "CDNS", "SNPS", "FTNT", "NXPI",
-    
-    # Healthcare & Pharmaceuticals
-    "UNH", "JNJ", "PFE", "ABBV", "TMO", "ABT", "DHR", "BMY", "LLY", "MRK", 
-    "AMGN", "GILD", "MDT", "ISRG", "VRTX", "REGN", "CI", "HUM", "CVS", "ZTS",
-    "SYK", "BSX", "EW", "HOLX", "BAX", "BDX", "ZBH", "ALGN", "IDXX", "DXCM",
-    
-    # Financials
-    "BRK.B", "JPM", "BAC", "WFC", "GS", "MS", "C", "USB", "PNC", "TFC", 
-    "COF", "SCHW", "BK", "STT", "AXP", "MA", "V", "PYPL", "FISV", "FIS", 
-    "PAYX", "ADP", "SPGI", "MCO", "ICE", "CME", "NDAQ", "BLK", "TROW",
+# Import comprehensive stock universe
+from stock_universe import get_comprehensive_stock_list
+
+# Get expanded stock list (300+ stocks)
+symbols = get_comprehensive_stock_list()
     
     # Consumer Discretionary
     "HD", "MCD", "NKE", "LOW", "SBUX", "TJX", "BKNG", "CMG", "ORLY", "AZO", 
@@ -88,14 +77,7 @@ symbols = [
     
     # International & ADRs
     "BABA", "JD", "PDD", "NIO", "XPEV", "LI", "BIDU", "TSM", "ASML", "SAP", 
-    "NVO", "SHOP", "SPOT", "SE", "GRAB", "DIDI",
-    
-    # Cannabis & Specialty
-    "TLRY", "CGC", "CRON", "ACB", "SNDL", "HEXO", "OGI", "APHA",
-    
-    # Additional High-Beta Stocks
-    "CELH", "BYND", "PTON", "ZM", "ZOOM", "DOCN", "FSLY", "ESTC", "MDB", "SNOW"
-]
+
 
 # Credentials via environment (safer). Set ALERT_EMAIL_PASS to enable SMTP send.
 email_to = os.environ.get("ALERT_EMAIL_TO", "masterai6612@gmail.com")
