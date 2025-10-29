@@ -203,15 +203,20 @@ done
 
 # 5. Start MCP Server (Yahoo Finance)
 print_info "Starting MCP Server (Yahoo Finance)..."
-python yahoo_finance_mcp_server.py > mcp_server.log 2>&1 &
-MCP_SERVER_PID=$!
-sleep 5
-
-# Check if MCP server is running (it uses stdio, so we check process)
-if kill -0 $MCP_SERVER_PID 2>/dev/null; then
-    print_status "MCP Server started (PID: $MCP_SERVER_PID)"
+if [ -f "start_mcp_server.py" ]; then
+    python start_mcp_server.py > mcp_server.log 2>&1 &
+    MCP_SERVER_PID=$!
+    sleep 3
+    
+    # Check if MCP server is running (it uses stdio, so we check process)
+    if kill -0 $MCP_SERVER_PID 2>/dev/null; then
+        print_status "MCP Server started (PID: $MCP_SERVER_PID)"
+    else
+        print_warning "MCP Server failed to start (optional component)"
+        MCP_SERVER_PID=""
+    fi
 else
-    print_warning "MCP Server failed to start (optional component)"
+    print_warning "MCP Server script not found (optional component)"
     MCP_SERVER_PID=""
 fi
 
@@ -336,7 +341,42 @@ echo "      • Workflow: 'FULL UNIVERSE - All 269 Stocks Analysis'"
 echo "      • Status: Should be running automatically"
 echo
 print_info "📥 Setting up n8n workflows and authentication..."
-python scripts/setup_n8n_workflows.py
+echo "🔧 AUTOMATIC N8N WORKFLOW IMPORT"
+echo "=================================================="
+
+# Wait a bit more for n8n to be fully ready
+sleep 5
+
+# Run the workflow import
+if python scripts/import_n8n_workflows.py; then
+    print_status "n8n workflows imported successfully!"
+    echo
+    print_status "🌐 N8N ACCESS:"
+    echo "   URL: http://localhost:5678"
+    echo "   Email: masterai6612@gmail.com"
+    echo "   Password: stockagent123"
+    echo
+    print_info "🎯 Available workflows:"
+    echo "   • comprehensive-stock-agent.json - Full 269+ stock analysis"
+    echo "   • minimal-comprehensive-agent.json - Lightweight version"
+    echo "   • manual-comprehensive-test.json - Manual testing"
+else
+    print_warning "Automatic workflow import failed"
+    echo
+    print_info "💡 Manual import instructions:"
+    echo "1. Go to: http://localhost:5678"
+    echo "2. Login with: masterai6612@gmail.com / stockagent123"
+    echo "3. Go to Workflows section"
+    echo "4. Click 'Import from File'"
+    echo "5. Import files from: workflows/n8n-workflows/"
+    echo
+    print_info "📁 Available workflow files:"
+    if [ -d "workflows/n8n-workflows" ]; then
+        ls -1 workflows/n8n-workflows/*.json 2>/dev/null | sed 's/.*\//   • /' || echo "   • No workflow files found"
+    else
+        echo "   • Workflow directory not found"
+    fi
+fi
 
 print_info "🧪 Quick Tests:"
 echo "   • Test Script: python main_enhanced.py"
@@ -472,11 +512,7 @@ print_info "Both script-based and n8n workflow options are now active."
 print_info "You will receive email alerts at masterai6612@gmail.com"
 
 echo
-print_status "🌐 N8N WORKFLOW ACCESS:"
-echo "   URL: http://localhost:5678"
-echo "   Login: admin@stockagent.local"
-echo "   Password: stockagent123"
-echo
+
 print_info "💡 If workflows aren't visible, run:"
 echo "   python scripts/setup_n8n_workflows.py"
 echo
