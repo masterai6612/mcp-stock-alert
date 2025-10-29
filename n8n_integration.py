@@ -15,7 +15,7 @@ from datetime import datetime
 from flask import Flask, request, jsonify
 from threading import Thread
 import requests
-from main import fetch_stocks, make_recommendation, get_enhanced_data
+from main_enhanced import fetch_stocks, make_recommendation, get_enhanced_data
 from stock_universe import get_comprehensive_stock_list
 from enhanced_yahoo_client import EnhancedYahooClient
 

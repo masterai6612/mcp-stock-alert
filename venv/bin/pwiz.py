@@ -1,4 +1,4 @@
-#!/Users/monie/Desktop/GitHub/Stocks/Preplexity/mcp-stock-alert/venv/bin/python3.13
+#!/Users/monie/Desktop/kiro/mcp-stock-alert copy/venv/bin/python3
 
 import datetime
 import os
