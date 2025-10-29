@@ -1,0 +1,75 @@
+{
+  "name": "Manual Comprehensive Test - Full System",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual-trigger",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://host.docker.internal:5002/api/comprehensive-analysis",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "{\n  \"analysis_type\": \"full_universe\",\n  \"include_earnings\": true,\n  \"include_themes\": true,\n  \"include_sentiment\": true,\n  \"stock_limit\": 10\n}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "comprehensive-analysis",
+      "name": "Test Comprehensive Analysis",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "// Test all our sophisticated features\nconst data = $input.all()[0].json;\n\nconsole.log('🚀 Comprehensive Analysis Results:');\nconsole.log('Success:', data.success);\nconsole.log('Total Analyzed:', data.total_analyzed);\nconsole.log('Market Context:', JSON.stringify(data.market_context, null, 2));\n\nif (data.success && data.data) {\n  const buySignals = data.data.filter(stock => \n    stock.recommendation === 'BUY' || stock.recommendation === 'STRONG BUY'\n  );\n  \n  const earningsStocks = data.data.filter(stock => stock.earnings_soon);\n  const themeStocks = data.data.filter(stock => stock.in_hot_theme);\n  \n  console.log('📈 Buy Signals:', buySignals.length);\n  console.log('📅 Earnings Soon:', earningsStocks.length);\n  console.log('🔥 Hot Theme Stocks:', themeStocks.length);\n  \n  // Show sample buy signals\n  if (buySignals.length > 0) {\n    console.log('🎯 Top Buy Signals:');\n    buySignals.slice(0, 5).forEach(stock => {\n      console.log(`  ${stock.symbol}: ${stock.recommendation} at $${stock.price} (${stock.change_percent}%)`);  \n    });\n  }\n  \n  // Show earnings stocks\n  if (earningsStocks.length > 0) {\n    console.log('📅 Earnings Soon:');\n    earningsStocks.slice(0, 5).forEach(stock => {\n      console.log(`  ${stock.symbol}: Earnings upcoming`);\n    });\n  }\n  \n  // Show theme stocks\n  if (themeStocks.length > 0) {\n    console.log('🔥 Hot Theme Stocks:');\n    themeStocks.slice(0, 5).forEach(stock => {\n      console.log(`  ${stock.symbol}: In trending theme`);\n    });\n  }\n  \n  return [{\n    json: {\n      test_results: {\n        comprehensive_analysis: true,\n        total_stocks: data.total_analyzed,\n        buy_signals: buySignals.length,\n        earnings_stocks: earningsStocks.length,\n        theme_stocks: themeStocks.length,\n        market_sentiment: data.market_context?.sentiment,\n        earnings_today: data.market_context?.earnings_today,\n        hot_themes: data.market_context?.hot_themes,\n        system_working: true\n      },\n      sample_buy_signals: buySignals.slice(0, 3),\n      sample_earnings: earningsStocks.slice(0, 3),\n      sample_themes: themeStocks.slice(0, 3),\n      timestamp: new Date().toISOString()\n    }\n  }];\n} else {\n  console.log('❌ Analysis failed:', data.error);\n  return [{\n    json: {\n      test_results: {\n        comprehensive_analysis: false,\n        error: data.error,\n        system_working: false\n      }\n    }\n  }];\n}"
+      },
+      "id": "test-results",
+      "name": "Display Test Results",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 300]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Test Comprehensive Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Test Comprehensive Analysis": {
+      "main": [
+        [
+          {
+            "node": "Display Test Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "id": "manual-comprehensive-test",
+  "tags": ["test", "comprehensive"]
+}
