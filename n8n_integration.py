@@ -91,8 +91,8 @@ def comprehensive_analysis():
             include_earnings = True
             include_themes = True
             include_sentiment = True
-            stock_limit = 10
-            print("⚠️ Warning: Received GET request, using default parameters")
+            stock_limit = 269  # Full universe for GET requests
+            print("⚠️ Warning: Received GET request, using full universe parameters")
         else:
             # POST request with JSON data
             data = request.get_json() or {}
@@ -100,7 +100,7 @@ def comprehensive_analysis():
             include_earnings = data.get('include_earnings', True)
             include_themes = data.get('include_themes', True)
             include_sentiment = data.get('include_sentiment', True)
-            stock_limit = data.get('stock_limit', 100)
+            stock_limit = data.get('stock_limit', 269)  # Default to full universe
         
         print(f"🚀 Starting comprehensive analysis: {analysis_type}")
         
