@@ -1,0 +1,25 @@
+# Systemd service file for Stock Alert Dashboard
+# Copy to /etc/systemd/system/ and enable with:
+# sudo systemctl enable stock-dashboard.service
+# sudo systemctl start stock-dashboard.service
+
+[Unit]
+Description=Stock Alert Dashboard
+After=network.target
+
+[Service]
+Type=notify
+User=monie
+Group=staff
+WorkingDirectory=/Users/monie/Desktop/kiro/mcp-stock-alert copy
+Environment=PATH=/Users/monie/Desktop/kiro/mcp-stock-alert copy/venv/bin
+ExecStart=/Users/monie/Desktop/kiro/mcp-stock-alert copy/venv/bin/gunicorn --config gunicorn.conf.py web_dashboard:app
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=5
+PrivateTmp=true
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

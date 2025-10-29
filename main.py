@@ -27,6 +27,9 @@ symbols = get_comprehensive_stock_list()
 email_to = os.environ.get("ALERT_EMAIL_TO", "masterai6612@gmail.com")
 email_from = os.environ.get("ALERT_EMAIL_FROM", "masterai6612@gmail.com")
 email_password = os.environ.get("ALERT_EMAIL_PASS", "svpq udbt cnsf awab")  # Gmail app password recommended
+from dotenv import load_dotenv
+load_dotenv()
+
 x_bearer_token = os.environ.get("X_BEARER_TOKEN", "AAAAAAAAAAAAAAAAAAAAACkK4wEAAAAAKdKADQ5xHT9pZ2UAfrak4x9fhx4%3D3jEBEHsBTX3o3KpxCjIWsq7LCM5AA8nqcj0RjIXdRUrwTO5szv")
 
 BULLISH = ["upgrade", "buy", "beats", "growth", "strong", "outperform", "target raised", "record", "top pick"]
@@ -49,7 +52,8 @@ def calc_rsi(prices, period=14):
     rsi = 100 - (100 / (1 + rs))
     return rsi.iloc[-1]
 
-def fetch_stocks(symbols):
+def fetch_stocks(symbols, include_sentiment=True):
+    """Enhanced fetch_stocks with optional X (Twitter) sentiment analysis"""
     stock_data = {}
     for sym in symbols:
         ticker = yf.Ticker(sym)
@@ -60,15 +64,36 @@ def fetch_stocks(symbols):
             growth = ((close - open_) / open_) * 100
             volume = hist["Volume"].iloc[-1]
             rsi = calc_rsi(hist["Close"].tail(14))
-            stock_data[sym] = {
+            
+            # Enhanced data structure
+            stock_info = {
                 "open": open_,
                 "close": close,
+                "current_price": close,  # Add current_price for API compatibility
+                "change_percent": growth,  # Add change_percent for API compatibility
                 "growth": growth,
                 "volume": volume,
                 "rsi": rsi
             }
-        except Exception:
+            
+            # Add X (Twitter) sentiment if requested
+            if include_sentiment:
+                try:
+                    x_sentiment = fetch_x_feed_sentiment(sym)
+                    stock_info["x_sentiment"] = x_sentiment
+                    stock_info["social_sentiment"] = x_sentiment  # Alternative key
+                    print(f"🐦 {sym}: X sentiment = {x_sentiment}")
+                except Exception as e:
+                    print(f"⚠️ X sentiment failed for {sym}: {e}")
+                    stock_info["x_sentiment"] = "Unknown"
+                    stock_info["social_sentiment"] = "Unknown"
+            
+            stock_data[sym] = stock_info
+            
+        except Exception as e:
+            print(f"❌ Failed to fetch data for {sym}: {e}")
             continue
+    
     return stock_data
 
 def fetch_stock_news(symbol):
@@ -105,25 +130,47 @@ def fetch_x_feed_sentiment(symbol):
         print(f"X Sentiment fetch error for {symbol}:", e)
         return "Unknown"
 
-def make_recommendation(info, headlines, x_sentiment, earnings_soon=False, in_hot_theme=False):
-    """Enhanced recommendation with earnings and theme data"""
+def make_recommendation(info, headlines=[], x_sentiment=None, earnings_soon=False, in_hot_theme=False):
+    """Enhanced recommendation with earnings, themes, and X sentiment data"""
     bullish_count = sum(1 for _, sentiment in headlines if sentiment == "Bullish")
     bearish_count = sum(1 for _, sentiment in headlines if sentiment == "Bearish")
     
-    # Enhanced scoring with new factors
+    # Get X sentiment from stock info if not provided separately
+    if x_sentiment is None:
+        x_sentiment = info.get("x_sentiment", info.get("social_sentiment", "Unknown"))
+    
+    # Enhanced scoring with multiple factors
     score = 0
     
-    # Original factors
-    if info["growth"] >= 7:
+    # Technical factors
+    growth = info.get("growth", info.get("change_percent", 0))
+    rsi = info.get("rsi", 50)
+    
+    if growth >= 7:
         score += 3
-    if 55 <= info["rsi"] <= 80:
+    elif growth >= 3:
+        score += 1
+        
+    if 55 <= rsi <= 80:
         score += 2
-    if bullish_count >= 2 and bearish_count == 0:
-        score += 2
-    if x_sentiment == "Bullish":
+    elif 45 <= rsi <= 85:
         score += 1
     
-    # New factors
+    # News sentiment factors
+    if bullish_count >= 2 and bearish_count == 0:
+        score += 2
+    elif bullish_count > bearish_count:
+        score += 1
+    
+    # X (Twitter) sentiment factors
+    if x_sentiment == "Bullish":
+        score += 2  # Increased weight for social sentiment
+        print(f"🐦 Bullish X sentiment adds +2 to score")
+    elif x_sentiment == "Bearish":
+        score -= 1  # Negative sentiment penalty
+        print(f"🐦 Bearish X sentiment subtracts -1 from score")
+    
+    # Catalyst factors
     if earnings_soon:
         score += 2  # Earnings catalyst
     if in_hot_theme:

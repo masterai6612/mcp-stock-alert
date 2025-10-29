@@ -1,0 +1,84 @@
+{
+  "name": "Minimal Comprehensive Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 30
+            }
+          ]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Every 30 Minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://host.docker.internal:5002/api/comprehensive-analysis",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "{\\n  \\\"analysis_type\\\": \\\"full_universe\\\",\\n  \\\"include_earnings\\\": true,\\n  \\\"include_themes\\\": true,\\n  \\\"stock_limit\\\": 50\\n}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "comprehensive-analysis",
+      "name": "Comprehensive Analysis",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const data = $input.all()[0].json;\\n\\nif (data.success) {\\n  const buySignals = data.data.filter(stock => \\n    stock.recommendation === 'BUY' || stock.recommendation === 'STRONG BUY'\\n  );\\n  \\n  console.log(`Analysis complete: ${data.total_analyzed} stocks analyzed`);\\n  console.log(`Buy signals found: ${buySignals.length}`);\\n  \\n  return [{\\n    json: {\\n      success: true,\\n      buy_signals: buySignals,\\n      total_analyzed: data.total_analyzed,\\n      market_context: data.market_context\\n    }\\n  }];\\n} else {\\n  console.log('Analysis failed:', data.error);\\n  return [{ json: { success: false, error: data.error } }];\\n}"
+      },
+      "id": "process-results",
+      "name": "Process Results",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 300]
+    }
+  ],
+  "connections": {
+    "Every 30 Minutes": {
+      "main": [
+        [
+          {
+            "node": "Comprehensive Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Comprehensive Analysis": {
+      "main": [
+        [
+          {
+            "node": "Process Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "id": "minimal-comprehensive-agent",
+  "tags": ["trading", "minimal"]
+}
