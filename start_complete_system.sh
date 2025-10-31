@@ -45,7 +45,7 @@ print_info() {
 }
 
 # Check if we're in the right directory
-if [ ! -f "main.py" ] || [ ! -f "n8n_integration.py" ]; then
+if [ ! -f "main_enhanced.py" ] || [ ! -f "n8n_integration.py" ]; then
     print_error "Please run this script from the mcp-stock-alert directory"
     exit 1
 fi
@@ -220,7 +220,26 @@ else
     MCP_SERVER_PID=""
 fi
 
-# 6. Start Web Dashboard (essential component)
+# 6. Start Enhanced 24/7 Market Alert System
+print_info "Starting Enhanced 24/7 Market Alert System..."
+python scheduled_market_alerts.py &
+SCHEDULED_ALERTS_PID=$!
+sleep 3
+
+if kill -0 $SCHEDULED_ALERTS_PID 2>/dev/null; then
+    print_status "Enhanced 24/7 Market Alert System started (PID: $SCHEDULED_ALERTS_PID)"
+    print_info "   🔍 24/7 analysis: Pre-market, Regular, After-hours"
+    print_info "   📧 Emails ONLY for significant changes"
+    print_info "   🌅 Morning consolidation at 7:00 AM EST"
+    print_info "   📊 Daily summary at market close (4:05 PM EST)"
+    print_info "   📧 Email alerts to: masterai6612@gmail.com"
+    print_info "   🎯 Smart logic: Zero spam, maximum coverage"
+else
+    print_warning "Enhanced 24/7 Market Alert System failed to start"
+    SCHEDULED_ALERTS_PID=""
+fi
+
+# 7. Start Web Dashboard (essential component)
 print_info "Installing dashboard dependencies..."
 pip install psutil gunicorn > /dev/null 2>&1 || true
 print_status "Dashboard dependencies ready"
@@ -494,14 +513,18 @@ print_status "Created scripts/monitor_system.sh for system status checks"
 echo "N8N_API_PID=$N8N_API_PID" > .system_pids
 echo "DASHBOARD_PID=$DASHBOARD_PID" >> .system_pids
 echo "MCP_SERVER_PID=$MCP_SERVER_PID" >> .system_pids
+echo "SCHEDULED_ALERTS_PID=$SCHEDULED_ALERTS_PID" >> .system_pids
 print_status "Process IDs saved for cleanup"
 
 echo
 print_info "💡 Useful Commands:"
 echo "   • Monitor system: ./scripts/monitor_system.sh"
 echo "   • Stop system: ./scripts/stop_system.sh"
-echo "   • Test system: python tests/test_both_options.py"
-echo "   • View logs: tail -f *.log"
+echo "   • Test 24/7 alerts: python test_hourly_alerts.py"
+echo "   • View alert logs: tail -f scheduled_alerts.log"
+echo "   • View overnight actions: cat overnight_actions.json"
+echo "   • View all logs: tail -f *.log"
+echo "   • Manual analysis: python main_enhanced.py"
 echo "   • Restart n8n: docker-compose restart n8n"
 echo
 
@@ -546,6 +569,11 @@ if [ -f ".system_pids" ]; then
         echo "✅ Stopped MCP Server"
     fi
     
+    if [ ! -z "$SCHEDULED_ALERTS_PID" ]; then
+        kill $SCHEDULED_ALERTS_PID 2>/dev/null
+        echo "✅ Stopped Scheduled Alert System"
+    fi
+    
     rm .system_pids
 fi
 
@@ -568,10 +596,11 @@ else
     print_warning "⚠️ System verification found issues - check logs above"
 fi
 
-print_status "🎯 READY FOR EMAIL ALERTS!"
-print_info "Both script-based and n8n workflow options are now active."
-print_info "You will receive email alerts at masterai6612@gmail.com"
+print_status "🎯 READY FOR SMART EMAIL ALERTS!"
+print_info "Enhanced hourly monitoring system is now active."
+print_info "You will receive email alerts at masterai6612@gmail.com ONLY when recommendations change"
 print_info "Enhanced technical analysis with MACD, Bollinger Bands, RSI, and volume analysis is active"
+print_info "🎯 Smart Alert Logic: Runs every hour, emails only on changes - no spam!"
 
 echo
 

@@ -47,6 +47,38 @@ def convert_to_json_serializable(obj):
     else:
         return obj
 
+def is_canadian_stock(symbol):
+    """Check if a stock symbol is Canadian"""
+    return symbol.endswith('.TO') or symbol.endswith('.V') or symbol.endswith('.CN')
+
+def get_stock_market_info(symbol):
+    """Get market information for a stock symbol"""
+    if is_canadian_stock(symbol):
+        return {
+            'market': 'TSX',
+            'currency': 'CAD',
+            'flag': '🇨🇦',
+            'exchange': 'Toronto Stock Exchange'
+        }
+    else:
+        return {
+            'market': 'US',
+            'currency': 'USD', 
+            'flag': '🇺🇸',
+            'exchange': 'US Markets'
+        }
+
+def get_usd_cad_rate():
+    """Get current USD/CAD exchange rate"""
+    try:
+        ticker = yf.Ticker('USDCAD=X')
+        hist = ticker.history(period='1d')
+        if not hist.empty:
+            return float(hist['Close'].iloc[-1])
+    except:
+        pass
+    return 1.35  # Fallback rate
+
 def get_system_health():
     """Get comprehensive system health status"""
     health = {
@@ -164,15 +196,22 @@ def get_top_stocks():
         
         # For dashboard, focus on most liquid/popular stocks for faster loading
         priority_symbols = [
-            # Mega caps (always include)
+            # US Mega caps (always include)
             'AAPL', 'MSFT', 'GOOGL', 'AMZN', 'NVDA', 'META', 'TSLA', 'BRK-B',
-            # Large caps
+            # US Large caps
             'AVGO', 'LLY', 'JPM', 'UNH', 'XOM', 'V', 'PG', 'JNJ', 'MA', 'HD',
             'CVX', 'ABBV', 'NFLX', 'BAC', 'CRM', 'KO', 'ASML', 'COST', 'PEP',
             # Recent IPOs & Growth
             'RIVN', 'LCID', 'RBLX', 'COIN', 'HOOD', 'SOFI', 'SNOW', 'AI', 'CRWD',
-            # Canadian
-            'SHOP', 'TD', 'RY', 'BNS', 'ENB', 'CNR'
+            # Canadian Major Banks (US-listed)
+            'TD', 'RY', 'BNS', 'BMO', 'CM',
+            # Canadian Energy & Resources (US-listed)
+            'ENB', 'CNQ', 'SU', 'CNR', 'CP',
+            # Canadian Tech & Growth (US-listed)
+            'SHOP', 'BAM', 'TRI',
+            # Canadian TSX-listed (major ones)
+            'RY.TO', 'TD.TO', 'SHOP.TO', 'ENB.TO', 'CNR.TO', 'CNQ.TO', 'SU.TO',
+            'BNS.TO', 'BMO.TO', 'CM.TO', 'SLF.TO', 'MFC.TO', 'ABX.TO', 'GOLD.TO'
         ]
         
         # Use priority list for dashboard (faster loading)
@@ -193,6 +232,9 @@ def get_top_stocks():
                         five_days_ago = hist['Close'].iloc[0]
                         change_5d = ((current - five_days_ago) / five_days_ago) * 100
                         
+                        # Get market info
+                        market_info = get_stock_market_info(symbol)
+                        
                         stocks_data.append({
                             'symbol': symbol,
                             'name': quote.get('company_name', symbol),
@@ -200,7 +242,11 @@ def get_top_stocks():
                             'change_1d': float(quote.get('change_percent', 0)) if quote.get('change_percent') else 0,
                             'change_5d': float(change_5d) if not pd.isna(change_5d) else 0,
                             'volume': int(quote.get('volume', 0)) if quote.get('volume') else 0,
-                            'market_cap': int(quote.get('market_cap', 0)) if quote.get('market_cap') else 0
+                            'market_cap': int(quote.get('market_cap', 0)) if quote.get('market_cap') else 0,
+                            'market': market_info['market'],
+                            'currency': market_info['currency'],
+                            'flag': market_info['flag'],
+                            'exchange': market_info['exchange']
                         })
             except Exception as e:
                 print(f"Error getting data for {symbol}: {e}")
@@ -215,13 +261,16 @@ def get_top_stocks():
         return []
 
 def get_market_overview():
-    """Get market indices overview"""
+    """Get market indices overview including Canadian markets"""
     indices = {
         'S&P 500': '^GSPC',
         'NASDAQ': '^IXIC',
-        'TSX': '^GSPTSE',
+        'TSX Composite': '^GSPTSE',
+        'TSX 60': '^TX60.TO',
         'Dow Jones': '^DJI',
-        'VIX': '^VIX'
+        'Russell 2000': '^RUT',
+        'VIX': '^VIX',
+        'USD/CAD': 'USDCAD=X'
     }
     
     market_data = {}
@@ -310,6 +359,95 @@ def api_earnings():
 def api_themes():
     """API endpoint for investment themes"""
     return jsonify(cache['themes'])
+
+@app.route('/api/canadian-stocks')
+def api_canadian_stocks():
+    """API endpoint for Canadian stocks specifically"""
+    canadian_stocks = [stock for stock in cache['top_stocks'] if stock.get('market') == 'TSX']
+    
+    # If not enough Canadian stocks in cache, get fresh data
+    if len(canadian_stocks) < 5:
+        try:
+            from stock_universe import CANADIAN_LARGE_CAPS
+            client = EnhancedYahooClient()
+            
+            canadian_data = []
+            # Get top Canadian stocks
+            priority_canadian = ['RY.TO', 'TD.TO', 'SHOP.TO', 'ENB.TO', 'CNR.TO', 
+                                'CNQ.TO', 'SU.TO', 'BNS.TO', 'BMO.TO', 'CM.TO']
+            
+            for symbol in priority_canadian[:10]:
+                try:
+                    quote = client.get_stock_quote(symbol)
+                    if quote:
+                        ticker = yf.Ticker(symbol)
+                        hist = ticker.history(period='5d')
+                        
+                        if not hist.empty:
+                            current = hist['Close'].iloc[-1]
+                            five_days_ago = hist['Close'].iloc[0]
+                            change_5d = ((current - five_days_ago) / five_days_ago) * 100
+                            
+                            market_info = get_stock_market_info(symbol)
+                            
+                            canadian_data.append({
+                                'symbol': symbol,
+                                'name': quote.get('company_name', symbol),
+                                'price': float(quote.get('current_price', 0)) if quote.get('current_price') else 0,
+                                'change_1d': float(quote.get('change_percent', 0)) if quote.get('change_percent') else 0,
+                                'change_5d': float(change_5d) if not pd.isna(change_5d) else 0,
+                                'volume': int(quote.get('volume', 0)) if quote.get('volume') else 0,
+                                'market_cap': int(quote.get('market_cap', 0)) if quote.get('market_cap') else 0,
+                                'market': market_info['market'],
+                                'currency': market_info['currency'],
+                                'flag': market_info['flag'],
+                                'exchange': market_info['exchange']
+                            })
+                except Exception as e:
+                    print(f"Error getting Canadian stock {symbol}: {e}")
+                    continue
+            
+            canadian_data.sort(key=lambda x: x['change_1d'], reverse=True)
+            return jsonify(canadian_data)
+            
+        except Exception as e:
+            print(f"Error getting Canadian stocks: {e}")
+    
+    return jsonify(canadian_stocks)
+
+@app.route('/api/market-comparison')
+def api_market_comparison():
+    """API endpoint for US vs Canadian market comparison"""
+    try:
+        usd_cad_rate = get_usd_cad_rate()
+        
+        us_stocks = [stock for stock in cache['top_stocks'] if stock.get('market') == 'US']
+        canadian_stocks = [stock for stock in cache['top_stocks'] if stock.get('market') == 'TSX']
+        
+        comparison = {
+            'usd_cad_rate': usd_cad_rate,
+            'us_market': {
+                'count': len(us_stocks),
+                'avg_change': sum(s['change_1d'] for s in us_stocks) / len(us_stocks) if us_stocks else 0,
+                'top_performer': max(us_stocks, key=lambda x: x['change_1d']) if us_stocks else None
+            },
+            'canadian_market': {
+                'count': len(canadian_stocks),
+                'avg_change': sum(s['change_1d'] for s in canadian_stocks) / len(canadian_stocks) if canadian_stocks else 0,
+                'top_performer': max(canadian_stocks, key=lambda x: x['change_1d']) if canadian_stocks else None
+            },
+            'market_indices': {
+                'sp500': cache['market_data'].get('S&P 500', {}),
+                'tsx': cache['market_data'].get('TSX Composite', {}),
+                'nasdaq': cache['market_data'].get('NASDAQ', {})
+            }
+        }
+        
+        return jsonify(comparison)
+        
+    except Exception as e:
+        print(f"Error getting market comparison: {e}")
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/api/refresh')
 def api_refresh():

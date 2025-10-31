@@ -1,0 +1,226 @@
+{
+  "name": "Telegram Stock Alert Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "f6b4c5d7-8e9f-4a1b-2c3d-4e5f6a7b8c9d",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 300],
+      "webhookId": "",
+      "cronExpression": "0 */1 * * * *"
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:5002/api/comprehensive-analysis",
+        "options": {
+          "timeout": 30000
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"analysis_type\": \"full_universe\",\n  \"stock_limit\": 150,\n  \"include_earnings\": true,\n  \"include_themes\": true,\n  \"include_sentiment\": true\n}"
+      },
+      "id": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+      "name": "Get Stock Analysis",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+              "leftValue": "={{ $json.success }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equal"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "b2c3d4e5-f6a7-8b9c-0d1e-2f3a4b5c6d7e",
+      "name": "Check Analysis Success",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Filter for BUY signals and prepare data\nconst analysisData = $input.first().json;\nconst buySignals = [];\n\nif (analysisData.success && analysisData.data) {\n  for (const stock of analysisData.data) {\n    if (stock.recommendation && stock.recommendation.includes('BUY')) {\n      buySignals.push({\n        symbol: stock.symbol,\n        price: stock.price,\n        change_percent: stock.change_percent,\n        rsi: stock.rsi,\n        recommendation: stock.recommendation,\n        x_sentiment: stock.x_sentiment || 'Unknown',\n        earnings_soon: stock.earnings_soon || false,\n        in_hot_theme: stock.in_hot_theme || false\n      });\n    }\n  }\n}\n\n// Sort by recommendation strength and price change\nbuySignals.sort((a, b) => {\n  if (a.recommendation.includes('STRONG') && !b.recommendation.includes('STRONG')) return -1;\n  if (!a.recommendation.includes('STRONG') && b.recommendation.includes('STRONG')) return 1;\n  return b.change_percent - a.change_percent;\n});\n\nreturn {\n  buy_signals: buySignals,\n  total_signals: buySignals.length,\n  market_context: analysisData.market_context || {},\n  timestamp: new Date().toISOString(),\n  has_signals: buySignals.length > 0\n};"
+      },
+      "id": "c3d4e5f6-a7b8-9c0d-1e2f-3a4b5c6d7e8f",
+      "name": "Process Buy Signals",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 220]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e",
+              "leftValue": "={{ $json.has_signals }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equal"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "d4e5f6a7-b8c9-0d1e-2f3a-4b5c6d7e8f9a",
+      "name": "Check for Signals",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1120, 220]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:5002/api/send-email-alert",
+        "options": {
+          "timeout": 15000
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"buy_signals\": {{ $json.buy_signals }},\n  \"market_context\": {{ $json.market_context }},\n  \"summary\": {\n    \"total_analyzed\": 150,\n    \"timestamp\": \"{{ $json.timestamp }}\"\n  },\n  \"subject\": \"🚀 n8n Alert: {{ $json.total_signals }} BUY Signals Detected!\",\n  \"email_to\": \"masterai6612@gmail.com\"\n}"
+      },
+      "id": "e5f6a7b8-c9d0-1e2f-3a4b-5c6d7e8f9a0b",
+      "name": "Send Email + Telegram Alert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1340, 140]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:5002/api/send-telegram-alert",
+        "options": {
+          "timeout": 10000
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"subject\": \"📱 n8n Quick Alert\",\n  \"buy_signals\": {{ $json.buy_signals }}\n}"
+      },
+      "id": "f6a7b8c9-d0e1-2f3a-4b5c-6d7e8f9a0b1c",
+      "name": "Send Telegram Only",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1340, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:5002/api/test-telegram",
+        "options": {
+          "timeout": 5000
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"message\": \"🤖 *n8n Workflow Active*\\n\\nStock analysis completed but no BUY signals detected at this time.\\n\\n📊 Continuing to monitor market conditions...\"\n}"
+      },
+      "id": "a7b8c9d0-e1f2-3a4b-5c6d-7e8f9a0b1c2d",
+      "name": "No Signals Notification",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1340, 460]
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Stock Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Stock Analysis": {
+      "main": [
+        [
+          {
+            "node": "Check Analysis Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Analysis Success": {
+      "main": [
+        [
+          {
+            "node": "Process Buy Signals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Buy Signals": {
+      "main": [
+        [
+          {
+            "node": "Check for Signals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check for Signals": {
+      "main": [
+        [
+          {
+            "node": "Send Email + Telegram Alert",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send Telegram Only",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Signals Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "id": "telegram-stock-alert",
+  "tags": []
+}

@@ -111,11 +111,53 @@ TRENDING_STOCKS = [
     "NFLX", "DIS", "ROKU", "FUBO", "PARA", "WBD", "SPOT"
 ]
 
-# Canadian stocks (TSX)
+# Canadian stocks (TSX) - Expanded coverage
 CANADIAN_LARGE_CAPS = [
+    # Big 6 Banks
+    "RY.TO", "TD.TO", "BNS.TO", "BMO.TO", "CM.TO", "NA.TO",
+    
+    # Energy & Resources
+    "ENB.TO", "TRP.TO", "CNQ.TO", "SU.TO", "IMO.TO", "CVE.TO", "ARX.TO",
+    "WCP.TO", "BTE.TO", "MEG.TO", "OVV.TO", "POU.TO", "ERF.TO",
+    
+    # Mining & Materials
+    "ABX.TO", "GOLD.TO", "K.TO", "FM.TO", "TKO.TO", "WPM.TO", "AEM.TO",
+    "KL.TO", "NGT.TO", "CCO.TO", "NXE.TO", "FCU.TO", "DML.TO",
+    "SHOP.TO", "TFI.TO", "CSU.TO", "ATD.TO", "L.TO", "DOL.TO",
+    
+    # Railroads & Transportation
+    "CNR.TO", "CP.TO", "TFI.TO", "TFII.TO",
+    
+    # Telecommunications
+    "T.TO", "BCE.TO", "RCI-B.TO", "QBR-B.TO",
+    
+    # Utilities
+    "FTS.TO", "EMA.TO", "CU.TO", "H.TO", "AQN.TO", "BEP-UN.TO",
+    
+    # Insurance & Financial Services
+    "SLF.TO", "MFC.TO", "IFC.TO", "GWO.TO", "PWF.TO", "FFH.TO",
+    
+    # Real Estate & Infrastructure
+    "BAM.TO", "BIP-UN.TO", "BEP-UN.TO", "CCL-B.TO", "WCN.TO", "WSP.TO",
+    
+    # Technology & Innovation
+    "SHOP.TO", "CSU.TO", "OTEX.TO", "NVEI.TO", "NUVEI.TO", "LSPD.TO",
+    
+    # Consumer & Retail
+    "L.TO", "ATD.TO", "DOL.TO", "MG.TO", "EMP-A.TO", "GIL.TO",
+    
+    # Healthcare & Pharma
+    "TRI.TO", "CRH.TO", "WELL.TO", "VHI.TO", "PHM.TO",
+    
+    # Cannabis (Major Players)
+    "WEED.TO", "ACB.TO", "TLRY.TO", "CRON.TO", "OGI.TO",
+    
+    # REITs
+    "REI-UN.TO", "CRT-UN.TO", "HR-UN.TO", "CAR-UN.TO", "SRU-UN.TO",
+    
+    # US-listed Canadian companies (dual listings)
     "SHOP", "TD", "RY", "BNS", "BMO", "CM", "ENB", "CNR", "CP", "SLF",
-    "MFC", "BAM", "CCL-B", "WCN", "TRI", "CNQ", "SU", "IMO", "CVE",
-    "ABX", "GOLD", "K", "FM", "TKO", "WPM", "AEM", "KL", "NGT"
+    "MFC", "BAM", "TRI", "CNQ", "SU", "IMO", "CVE", "ABX", "GOLD", "K"
 ]
 
 def get_comprehensive_stock_list():
