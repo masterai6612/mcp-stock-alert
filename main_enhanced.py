@@ -58,6 +58,10 @@ def calc_rsi(prices, period=14):
 def calc_macd(prices, fast=12, slow=26, signal=9):
     """Calculate MACD (Moving Average Convergence Divergence)"""
     try:
+        # Ensure prices is a pandas Series
+        if not hasattr(prices, 'ewm') or len(prices) < slow:
+            return {'macd': 0, 'signal': 0, 'histogram': 0, 'bullish_crossover': False}
+            
         ema_fast = prices.ewm(span=fast).mean()
         ema_slow = prices.ewm(span=slow).mean()
         macd_line = ema_fast - ema_slow
@@ -104,6 +108,13 @@ def calc_bollinger_bands(prices, period=20, std_dev=2):
 def calc_moving_averages(prices):
     """Calculate various moving averages"""
     try:
+        # Ensure prices is a pandas Series
+        if not hasattr(prices, 'rolling') or not hasattr(prices, 'ewm'):
+            return {'sma_20': 0, 'sma_50': 0, 'ema_12': 0, 'ema_26': 0, 'above_sma_20': False, 'above_sma_50': False, 'golden_cross': False, 'death_cross': False}
+        
+        if len(prices) < 20:
+            return {'sma_20': 0, 'sma_50': 0, 'ema_12': 0, 'ema_26': 0, 'above_sma_20': False, 'above_sma_50': False, 'golden_cross': False, 'death_cross': False}
+            
         sma_20 = prices.rolling(window=20).mean().iloc[-1]
         sma_50 = prices.rolling(window=50).mean().iloc[-1] if len(prices) >= 50 else sma_20
         ema_12 = prices.ewm(span=12).mean().iloc[-1]
@@ -464,13 +475,27 @@ def make_recommendation(info, headlines=[], x_sentiment=None, earnings_soon=Fals
     
     score += min(signal_bonus, 1.0)  # Cap signal bonus at 1.0
     
-    # X sentiment (5% weight)
+    # Comprehensive Market Sentiment (8% weight) - Enhanced from multiple sources
+    sentiment_score = info.get('sentiment_score', 0)
+    sentiment_category = info.get('sentiment_category', 'neutral')
+    sentiment_confidence = info.get('sentiment_confidence', 0)
+    
+    if sentiment_category == "bullish":
+        sentiment_boost = 0.8 * sentiment_confidence  # Up to 0.8 points
+        score += sentiment_boost
+        signal_strength_multiplier *= (1.0 + sentiment_confidence * 0.1)
+    elif sentiment_category == "bearish":
+        sentiment_penalty = 0.8 * sentiment_confidence  # Up to -0.8 points
+        score -= sentiment_penalty
+        signal_strength_multiplier *= (1.0 - sentiment_confidence * 0.05)
+    
+    # Legacy X sentiment (2% weight) - Keep for backward compatibility
     if x_sentiment == "Bullish":
-        score += 0.5
-        signal_strength_multiplier *= 1.05
+        score += 0.2
+        signal_strength_multiplier *= 1.02
     elif x_sentiment == "Bearish":
-        score -= 0.5
-        signal_strength_multiplier *= 0.95
+        score -= 0.2
+        signal_strength_multiplier *= 0.98
     
     # News sentiment (3% weight)
     if bullish_count > bearish_count:

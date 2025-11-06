@@ -20,6 +20,9 @@ from dotenv import load_dotenv
 from main_enhanced import fetch_stocks, make_recommendation, get_enhanced_data
 from stock_universe import get_comprehensive_stock_list
 from enhanced_yahoo_client import EnhancedYahooClient
+from market_sentiment import MarketSentimentAnalyzer
+import numpy as np
+import pandas as pd
 
 # Load environment variables
 load_dotenv()
@@ -28,6 +31,25 @@ app = Flask(__name__)
 
 # n8n Configuration
 N8N_BASE_URL = "http://localhost:5678"
+
+def make_json_serializable(obj):
+    """Convert numpy/pandas types to JSON serializable types"""
+    if isinstance(obj, (np.integer, np.int64)):
+        return int(obj)
+    elif isinstance(obj, (np.floating, np.float64)):
+        return float(obj)
+    elif isinstance(obj, np.bool_):
+        return bool(obj)
+    elif isinstance(obj, np.ndarray):
+        return obj.tolist()
+    elif isinstance(obj, dict):
+        return {key: make_json_serializable(value) for key, value in obj.items()}
+    elif isinstance(obj, list):
+        return [make_json_serializable(item) for item in obj]
+    elif pd.isna(obj):
+        return None
+    else:
+        return obj
 N8N_AUTH = ("admin", "stockagent123")
 
 # Telegram Configuration
@@ -206,6 +228,55 @@ def send_gmail_email(to_email, subject, html_body):
 
 # API Endpoints for n8n
 
+@app.route('/api/quick-analysis', methods=['GET', 'POST'])
+def quick_analysis():
+    """Quick analysis with reduced features for faster processing"""
+    try:
+        data = request.get_json() or {}
+        stock_limit = min(data.get('stock_limit', 50), 100)  # Cap at 100 for speed
+        
+        print(f"🚀 Starting quick analysis: {stock_limit} stocks")
+        
+        # Get stock universe
+        from stock_universe import get_comprehensive_stock_list
+        all_stocks = get_comprehensive_stock_list()
+        symbols_to_analyze = all_stocks[:stock_limit]
+        
+        # Quick analysis without sentiment (faster)
+        results = []
+        for symbol in symbols_to_analyze[:stock_limit]:
+            try:
+                stock_data = fetch_stocks([symbol], include_sentiment=False)
+                if symbol in stock_data:
+                    info = stock_data[symbol]
+                    
+                    # Quick result with essential data only
+                    result = {
+                        'symbol': symbol,
+                        'price': float(info.get('current_price', 0)),
+                        'change_percent': float(info.get('change_percent', 0)),
+                        'rsi': float(info.get('rsi', 0)),
+                        'technical_score': make_json_serializable(info.get('technical_score', 0)),
+                        'recommendation': 'BUY' if info.get('technical_score', 0) >= 70 else 'WATCH' if info.get('technical_score', 0) >= 50 else 'NO SIGNAL',
+                        'timestamp': datetime.now().isoformat()
+                    }
+                    results.append(result)
+            except Exception as e:
+                print(f"Error analyzing {symbol}: {e}")
+                continue
+        
+        return jsonify({
+            'success': True,
+            'data': results,
+            'total_analyzed': len(results),
+            'analysis_type': 'quick',
+            'timestamp': datetime.now().isoformat()
+        })
+        
+    except Exception as e:
+        print(f"❌ Quick analysis error: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
 @app.route('/api/comprehensive-analysis', methods=['GET', 'POST'])
 def comprehensive_analysis():
     """Comprehensive analysis using all our sophisticated features"""
@@ -241,14 +312,40 @@ def comprehensive_analysis():
         
         print(f"📊 Analyzing {len(symbols_to_analyze)} stocks")
         
-        # Perform comprehensive analysis with X sentiment
+        # Initialize sentiment analyzer
+        sentiment_analyzer = MarketSentimentAnalyzer() if include_sentiment else None
+        
+        # Get market-wide sentiment indicators
+        market_sentiment = sentiment_analyzer.get_market_fear_greed_index() if sentiment_analyzer else {}
+        
+        # Perform comprehensive analysis with enhanced sentiment
         results = []
+        sentiment_batch = {}
+        
+        # Get sentiment for all symbols in batch (more efficient)
+        if sentiment_analyzer and len(symbols_to_analyze) > 0:
+            print("🔍 Analyzing market sentiment from multiple sources...")
+            sentiment_batch = sentiment_analyzer.analyze_market_sentiment_batch(symbols_to_analyze, max_symbols=100)
+        
         for symbol in symbols_to_analyze:
             try:
-                # Get stock data using our enhanced system with X sentiment
-                stock_data = fetch_stocks([symbol], include_sentiment=include_sentiment)
+                # Get stock data using our enhanced system
+                stock_data = fetch_stocks([symbol], include_sentiment=False)  # We'll add our own sentiment
                 if symbol in stock_data:
                     info = stock_data[symbol]
+                    
+                    # Add comprehensive sentiment analysis
+                    if symbol in sentiment_batch:
+                        sentiment_data = sentiment_batch[symbol]
+                        info['sentiment_analysis'] = sentiment_data
+                        info['sentiment_score'] = sentiment_data['composite_sentiment']
+                        info['sentiment_category'] = sentiment_data['sentiment_category']
+                        info['sentiment_confidence'] = sentiment_data['confidence']
+                    else:
+                        info['sentiment_analysis'] = None
+                        info['sentiment_score'] = 0
+                        info['sentiment_category'] = 'neutral'
+                        info['sentiment_confidence'] = 0
                     
                     # Check if stock has upcoming earnings
                     earnings_soon = symbol in earnings_symbols if include_earnings else False
@@ -256,7 +353,7 @@ def comprehensive_analysis():
                     # Check if stock is in hot themes
                     in_hot_theme = symbol in hot_theme_stocks if include_themes else False
                     
-                    # Get enhanced recommendation
+                    # Get enhanced recommendation with sentiment
                     recommendation = make_recommendation(
                         info, [], "Neutral", 
                         earnings_soon=earnings_soon, 
@@ -268,7 +365,8 @@ def comprehensive_analysis():
                     if math.isnan(rsi_val) if isinstance(rsi_val, float) else False:
                         rsi_val = 0
                     
-                    results.append({
+                    # Create comprehensive result with all technical analysis data
+                    result = {
                         'symbol': symbol,
                         'price': float(info.get('current_price', 0)) if info.get('current_price') else 0,
                         'change_percent': float(info.get('change_percent', 0)) if info.get('change_percent') else 0,
@@ -279,8 +377,35 @@ def comprehensive_analysis():
                         'in_hot_theme': in_hot_theme,
                         'x_sentiment': info.get('x_sentiment', 'Unknown'),
                         'social_sentiment': info.get('x_sentiment', 'Unknown'),
-                        'timestamp': datetime.now().isoformat()
-                    })
+                        'timestamp': datetime.now().isoformat(),
+                        
+                        # COMPREHENSIVE TECHNICAL ANALYSIS DATA
+                        'technical_score': make_json_serializable(info.get('technical_score', 0)),
+                        'technical_signals': make_json_serializable(info.get('technical_signals', [])),
+                        'macd': make_json_serializable(info.get('macd', {})),
+                        'bollinger': make_json_serializable(info.get('bollinger', {})),
+                        'moving_averages': make_json_serializable(info.get('moving_averages', {})),
+                        'volume_analysis': make_json_serializable(info.get('volume_analysis', {})),
+                        'momentum': make_json_serializable(info.get('momentum', {})),
+                        
+                        # SENTIMENT ANALYSIS DATA
+                        'sentiment_analysis': make_json_serializable(info.get('sentiment_analysis', {})),
+                        'sentiment_score': make_json_serializable(info.get('sentiment_score', 0)),
+                        'sentiment_category': info.get('sentiment_category', 'neutral'),
+                        'sentiment_confidence': make_json_serializable(info.get('sentiment_confidence', 0)),
+                        
+                        # ADDITIONAL PRICE DATA
+                        'open': float(info.get('open', 0)) if info.get('open') else 0,
+                        'high': float(info.get('high', 0)) if info.get('high') else 0,
+                        'low': float(info.get('low', 0)) if info.get('low') else 0,
+                        'daily_range': float(info.get('daily_range', 0)) if info.get('daily_range') else 0,
+                        'support_level': float(info.get('support_level', 0)) if info.get('support_level') else 0,
+                        'resistance_level': float(info.get('resistance_level', 0)) if info.get('resistance_level') else 0,
+                        'price_near_support': bool(info.get('price_near_support', False)),
+                        'price_near_resistance': bool(info.get('price_near_resistance', False))
+                    }
+                    
+                    results.append(result)
             except Exception as e:
                 print(f"Error analyzing {symbol}: {e}")
                 continue

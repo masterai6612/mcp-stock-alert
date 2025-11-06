@@ -337,8 +337,9 @@ def get_technical_score(symbol):
         # MACD
         exp1 = close.ewm(span=12).mean()
         exp2 = close.ewm(span=26).mean()
-        macd = (exp1 - exp2).iloc[-1]
-        signal = macd.ewm(span=9).mean().iloc[-1]
+        macd_line = exp1 - exp2
+        macd = macd_line.iloc[-1]
+        signal = macd_line.ewm(span=9).mean().iloc[-1]
         
         current_price = close.iloc[-1]
         
@@ -414,17 +415,17 @@ def analyze_market_24x7():
     from stock_universe import get_comprehensive_stock_list
     all_stocks = get_comprehensive_stock_list()
     
-    # Adjust stock coverage based on session
+    # Adjust stock coverage based on session - NOW USING FULL UNIVERSE!
     if session == "REGULAR_HOURS":
-        monitor_stocks = all_stocks[:200]  # Full coverage during regular hours
+        monitor_stocks = all_stocks  # FULL 600+ stock universe during regular hours
         buy_threshold = 7
         watch_threshold = 5
     elif session in ["PRE_MARKET", "AFTER_HOURS"]:
-        monitor_stocks = all_stocks[:100]  # Focused coverage during extended hours
+        monitor_stocks = all_stocks[:400]  # 400 stocks during extended hours (US + top Canadian)
         buy_threshold = 8  # Higher threshold for extended hours
         watch_threshold = 6
     else:  # Weekend/off-hours
-        monitor_stocks = all_stocks[:50]   # Limited coverage for international exposure
+        monitor_stocks = all_stocks[:200]   # 200 stocks for international exposure
         buy_threshold = 8
         watch_threshold = 6
     
@@ -1259,11 +1260,13 @@ def main():
     print("✅ Session-aware thresholds")
     print("✅ Morning consolidation (overnight summary)")
     print()
-    print("🎯 ANALYSIS COVERAGE:")
-    print("=" * 22)
-    print("📊 Regular Hours: 200 stocks (BUY≥7, WATCH≥5)")
-    print("🌅 Pre/After Hours: 100 stocks (BUY≥8, WATCH≥6)")
-    print("🌍 Weekends: 50 international stocks (BUY≥8, WATCH≥6)")
+    print("🎯 COMPREHENSIVE ANALYSIS COVERAGE:")
+    print("=" * 35)
+    print("📊 Regular Hours: 600+ stocks - FULL UNIVERSE (BUY≥7, WATCH≥5)")
+    print("   🇺🇸 300+ US NASDAQ/NYSE stocks")
+    print("   🇨🇦 300+ Canadian TSX stocks")
+    print("🌅 Pre/After Hours: 400 stocks (BUY≥8, WATCH≥6)")
+    print("🌍 Weekends: 200 international stocks (BUY≥8, WATCH≥6)")
     print()
     print(f"📧 Email alerts to: {EMAIL_TO}")
     print("🔄 System Status: ACTIVE 24/7")

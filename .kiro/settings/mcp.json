@@ -7,7 +7,7 @@
       ],
       "cwd": "/Users/monie/Desktop/kiro/mcp-stock-alert copy",
       "env": {},
-      "disabled": false,
+      "disabled": true,
       "autoApprove": [
         "get_stock_quote",
         "get_earnings_calendar",
