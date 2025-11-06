@@ -32,9 +32,9 @@ def create_x_sentiment_workflow():
                     "url": "http://host.docker.internal:5002/api/comprehensive-analysis",
                     "sendBody": True,
                     "bodyContentType": "json",
-                    "jsonBody": "{\n  \"analysis_type\": \"full_universe\",\n  \"include_earnings\": true,\n  \"include_themes\": true,\n  \"include_sentiment\": true,\n  \"stock_limit\": 30\n}",
+                    "jsonBody": "{\n  \"analysis_type\": \"full_universe\",\n  \"include_earnings\": true,\n  \"include_themes\": true,\n  \"include_sentiment\": true,\n  \"stock_limit\": 100\n}",
                     "options": {
-                        "timeout": 60000
+                        "timeout": 120000
                     }
                 },
                 "name": "Get Stocks with X Sentiment",

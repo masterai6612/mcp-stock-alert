@@ -45,7 +45,7 @@ print_info() {
 }
 
 # Check if we're in the right directory
-if [ ! -f "main.py" ] || [ ! -f "n8n_integration.py" ]; then
+if [ ! -f "main_enhanced.py" ] || [ ! -f "n8n_integration.py" ]; then
     print_error "Please run this script from the mcp-stock-alert directory"
     exit 1
 fi
@@ -203,19 +203,43 @@ done
 
 # 5. Start MCP Server (Yahoo Finance)
 print_info "Starting MCP Server (Yahoo Finance)..."
-python yahoo_finance_mcp_server.py > mcp_server.log 2>&1 &
-MCP_SERVER_PID=$!
-sleep 5
-
-# Check if MCP server is running (it uses stdio, so we check process)
-if kill -0 $MCP_SERVER_PID 2>/dev/null; then
-    print_status "MCP Server started (PID: $MCP_SERVER_PID)"
+if [ -f "start_mcp_server.py" ]; then
+    python start_mcp_server.py > mcp_server.log 2>&1 &
+    MCP_SERVER_PID=$!
+    sleep 3
+    
+    # Check if MCP server is running (it uses stdio, so we check process)
+    if kill -0 $MCP_SERVER_PID 2>/dev/null; then
+        print_status "MCP Server started (PID: $MCP_SERVER_PID)"
+    else
+        print_warning "MCP Server failed to start (optional component)"
+        MCP_SERVER_PID=""
+    fi
 else
-    print_warning "MCP Server failed to start (optional component)"
+    print_warning "MCP Server script not found (optional component)"
     MCP_SERVER_PID=""
 fi
 
-# 6. Start Web Dashboard (essential component)
+# 6. Start Enhanced 24/7 Market Alert System
+print_info "Starting Enhanced 24/7 Market Alert System..."
+python scheduled_market_alerts.py &
+SCHEDULED_ALERTS_PID=$!
+sleep 3
+
+if kill -0 $SCHEDULED_ALERTS_PID 2>/dev/null; then
+    print_status "Enhanced 24/7 Market Alert System started (PID: $SCHEDULED_ALERTS_PID)"
+    print_info "   🔍 24/7 analysis: Pre-market, Regular, After-hours"
+    print_info "   📧 Emails ONLY for significant changes"
+    print_info "   🌅 Morning consolidation at 7:00 AM EST"
+    print_info "   📊 Daily summary at market close (4:05 PM EST)"
+    print_info "   📧 Email alerts to: masterai6612@gmail.com"
+    print_info "   🎯 Smart logic: Zero spam, maximum coverage"
+else
+    print_warning "Enhanced 24/7 Market Alert System failed to start"
+    SCHEDULED_ALERTS_PID=""
+fi
+
+# 7. Start Web Dashboard (essential component)
 print_info "Installing dashboard dependencies..."
 pip install psutil gunicorn > /dev/null 2>&1 || true
 print_status "Dashboard dependencies ready"
@@ -281,14 +305,24 @@ done
 # 8. Test the complete system
 print_info "Testing system components..."
 
-# Test n8n API
+# Test n8n API with enhanced technical analysis
+print_info "Testing enhanced technical analysis API..."
 if curl -s http://localhost:5002/api/comprehensive-analysis \
     -X POST \
     -H "Content-Type: application/json" \
-    -d '{"stock_limit": 3}' | grep -q "success"; then
-    print_status "n8n Integration API is working"
+    -d '{"stock_limit": 3, "include_earnings": true, "include_themes": true, "include_sentiment": true}' | grep -q "technical_score"; then
+    print_status "✅ Enhanced Technical Analysis API is working"
+    print_info "   Features: Technical scores, MACD, Bollinger Bands, RSI, Volume analysis"
 else
-    print_error "n8n Integration API test failed"
+    print_warning "Enhanced Technical Analysis API test failed - checking basic API..."
+    if curl -s http://localhost:5002/api/comprehensive-analysis \
+        -X POST \
+        -H "Content-Type: application/json" \
+        -d '{"stock_limit": 3}' | grep -q "success"; then
+        print_status "Basic n8n Integration API is working"
+    else
+        print_error "n8n Integration API test failed completely"
+    fi
 fi
 
 # Test email functionality
@@ -336,11 +370,89 @@ echo "      • Workflow: 'FULL UNIVERSE - All 269 Stocks Analysis'"
 echo "      • Status: Should be running automatically"
 echo
 print_info "📥 Setting up n8n workflows and authentication..."
-python scripts/setup_n8n_workflows.py
+echo "🔧 AUTOMATIC N8N WORKFLOW IMPORT"
+echo "=================================================="
+
+# Wait a bit more for n8n to be fully ready
+sleep 5
+
+# Setup n8n authentication first
+print_info "Setting up n8n authentication..."
+if python scripts/setup_n8n_auth.py; then
+    print_status "n8n authentication configured"
+else
+    print_warning "n8n authentication setup failed - will need manual setup"
+fi
+
+# Wait a bit more for n8n authentication to be ready
+sleep 3
+
+# Create and import essential workflows programmatically
+print_info "Creating essential n8n workflows with enhanced technical analysis..."
+if python create_workflow_via_api.py; then
+    print_status "Essential workflows created successfully!"
+    
+    # Activate the scheduled workflow
+    print_info "Activating scheduled workflows..."
+    if python activate_all_workflows.py; then
+        print_status "Scheduled workflows activated!"
+        
+        # Verify the scheduled workflow is running
+        print_info "Verifying scheduled workflow status..."
+        if python workflows/list_workflows.py | grep -q "Scheduled.*Active: True"; then
+            print_status "✅ Scheduled Stock Agent is ACTIVE and running every 30 minutes"
+        else
+            print_warning "Scheduled workflow may need manual activation"
+        fi
+    else
+        print_warning "Workflow activation failed - may need manual activation"
+    fi
+else
+    print_warning "Automatic workflow creation failed"
+fi
+
+# Try additional workflow import from JSON files
+print_info "Importing additional workflows from JSON files..."
+if python scripts/import_n8n_workflows.py; then
+    print_status "Additional n8n workflows imported successfully!"
+else
+    print_warning "Additional workflow import failed"
+fi
+
+print_status "🌐 N8N ACCESS:"
+echo "   URL: http://localhost:5678"
+echo "   Email: admin@stockagent.local"
+echo "   Password: stockagent123"
+echo
+print_info "🎯 Available workflows with Enhanced Technical Analysis:"
+echo "   • Scheduled Stock Agent - Every 30 Minutes (ACTIVE)"
+echo "   • Comprehensive Stock Analysis - Manual Test"
+echo "   • API Test - Health Check"
+echo "   • Additional workflows from JSON files"
+echo
+print_info "🔬 Enhanced Technical Analysis Features:"
+echo "   • RSI (Relative Strength Index)"
+echo "   • MACD (Moving Average Convergence Divergence)"
+echo "   • Bollinger Bands with breakout detection"
+echo "   • Moving Averages (SMA 20, 50) with Golden/Death Cross"
+echo "   • Volume Analysis with breakout detection"
+echo "   • Momentum Indicators (Stochastic oscillator)"
+echo "   • Technical Score (0-100) for each stock"
+echo "   • Multi-indicator signal confirmation"
+
+# Verify enhanced technical analysis integration
+print_info "Verifying enhanced technical analysis integration..."
+if python -c "from n8n_integration import *; from main_enhanced import fetch_stocks; print('✅ Enhanced technical analysis integration verified')"; then
+    print_status "✅ n8n integration is using main_enhanced.py with comprehensive technical analysis"
+else
+    print_error "❌ n8n integration verification failed"
+fi
 
 print_info "🧪 Quick Tests:"
-echo "   • Test Script: python main_enhanced.py"
+echo "   • Test Enhanced Script: python main_enhanced.py"
+echo "   • Test Basic Script: python main.py (legacy)"
 echo "   • Test n8n API: curl http://localhost:5002/health"
+echo "   • Test Enhanced API: curl -X POST http://localhost:5002/api/comprehensive-analysis -H 'Content-Type: application/json' -d '{\"stock_limit\": 1}'"
 echo "   • Test n8n UI: open http://localhost:5678"
 echo
 print_info "📧 Email Alert Features:"
@@ -401,14 +513,18 @@ print_status "Created scripts/monitor_system.sh for system status checks"
 echo "N8N_API_PID=$N8N_API_PID" > .system_pids
 echo "DASHBOARD_PID=$DASHBOARD_PID" >> .system_pids
 echo "MCP_SERVER_PID=$MCP_SERVER_PID" >> .system_pids
+echo "SCHEDULED_ALERTS_PID=$SCHEDULED_ALERTS_PID" >> .system_pids
 print_status "Process IDs saved for cleanup"
 
 echo
 print_info "💡 Useful Commands:"
 echo "   • Monitor system: ./scripts/monitor_system.sh"
 echo "   • Stop system: ./scripts/stop_system.sh"
-echo "   • Test system: python tests/test_both_options.py"
-echo "   • View logs: tail -f *.log"
+echo "   • Test 24/7 alerts: python test_hourly_alerts.py"
+echo "   • View alert logs: tail -f scheduled_alerts.log"
+echo "   • View overnight actions: cat overnight_actions.json"
+echo "   • View all logs: tail -f *.log"
+echo "   • Manual analysis: python main_enhanced.py"
 echo "   • Restart n8n: docker-compose restart n8n"
 echo
 
@@ -453,6 +569,11 @@ if [ -f ".system_pids" ]; then
         echo "✅ Stopped MCP Server"
     fi
     
+    if [ ! -z "$SCHEDULED_ALERTS_PID" ]; then
+        kill $SCHEDULED_ALERTS_PID 2>/dev/null
+        echo "✅ Stopped Scheduled Alert System"
+    fi
+    
     rm .system_pids
 fi
 
@@ -467,16 +588,42 @@ chmod +x scripts/stop_system.sh
 print_status "Created scripts/stop_system.sh for clean shutdown"
 
 echo
-print_status "🎯 READY FOR EMAIL ALERTS!"
-print_info "Both script-based and n8n workflow options are now active."
-print_info "You will receive email alerts at masterai6612@gmail.com"
+# Final system verification
+print_info "🔍 Running final system verification..."
+if python scripts/verify_enhanced_system.py; then
+    print_status "✅ System verification passed!"
+else
+    print_warning "⚠️ System verification found issues - check logs above"
+fi
+
+print_status "🎯 READY FOR SMART EMAIL ALERTS!"
+print_info "Enhanced hourly monitoring system is now active."
+print_info "You will receive email alerts at masterai6612@gmail.com ONLY when recommendations change"
+print_info "Enhanced technical analysis with MACD, Bollinger Bands, RSI, and volume analysis is active"
+print_info "🎯 Smart Alert Logic: Runs every hour, emails only on changes - no spam!"
 
 echo
-print_status "🌐 N8N WORKFLOW ACCESS:"
-echo "   URL: http://localhost:5678"
-echo "   Login: admin@stockagent.local"
-echo "   Password: stockagent123"
+
+# Show final workflow status
+print_info "📊 Final n8n Workflow Status:"
+if python workflows/list_workflows.py 2>/dev/null | grep -q "Scheduled.*Active: True"; then
+    print_status "✅ Scheduled Stock Agent is ACTIVE - running every 30 minutes"
+    print_info "   The system will automatically analyze stocks and send email alerts"
+else
+    print_warning "⚠️ Scheduled workflow may need manual activation"
+    print_info "   Go to http://localhost:5678 and activate the 'Scheduled Stock Agent' workflow"
+fi
+
+print_info "💡 If workflows need manual setup:"
+echo "   1. Go to: http://localhost:5678"
+echo "   2. Login: admin@stockagent.local / stockagent123"
+echo "   3. Import workflows from: workflows/n8n-workflows/"
+echo "   4. Activate the 'Scheduled Stock Agent - Every 30 Minutes' workflow"
 echo
-print_info "💡 If workflows aren't visible, run:"
-echo "   python scripts/setup_n8n_workflows.py"
+
+print_info "🔧 Troubleshooting commands:"
+echo "   • Check workflows: python workflows/list_workflows.py"
+echo "   • Activate workflows: python activate_all_workflows.py"
+echo "   • Create workflows: python create_workflow_via_api.py"
+echo "   • Setup auth: python scripts/setup_n8n_auth.py"
 echo

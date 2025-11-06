@@ -1,103 +1,134 @@
-# MCP Stock Alert Agent
+# 🚀 MCP Stock Alert Agent
 
-This project is an **automated stock and news monitoring agent**, paired with a FastAPI WebSocket server.  
-It is designed for swing trading, stock alerts, and real-time analytics, with easy deployment across any Mac/Linux via Git.
+A production-ready automated stock monitoring and alert system with MCP (Model Context Protocol) integration, designed for swing trading and real-time market analytics.
 
----
+## 🎯 Quick Start
 
-## Features
-
-- **FastAPI MCP Server:** Runs a local WebSocket endpoint for agentic communication and monitoring.
-- **Automated Stock/News Analytics:** Monitors 269+ stocks including S&P 500 large caps, recent IPOs, and trending stocks with periodic analysis for price, news, and alerts.
-- **Easy Startup:** One-click script launches server, analytics agent, and (optionally) a WebSocket test client.
-- **Portable Setup:** Fully reproducible on any Mac/Linux via git clone and shell scripts.
-- **Extensible:** Add new agents, endpoints, or analytics tasks with ease.
-
----
-
-## Getting Started
-
-### 1. Clone This Repository
-
-git clone https://github.com/masterai6612/mcp-stock-alert.git
-cd mcp-stock-alert
-
-text
-
-### 2. Run the Setup Script
-
-Creates and activates a Python virtual environment, installs dependencies, and prepares startup scripts.
-
-chmod +x setup_mcp_agent.sh
+### Local Development
+```bash
+# Setup and start the complete system
 ./setup_mcp_agent.sh
+./start_complete_system.sh
+```
 
-text
+### Production Deployment
+```bash
+# Deploy to Hostinger VPS
+./scripts/hostinger_deploy.sh
 
-### 3. Run the Agent
+# Or use generic production deployment
+./scripts/deploy_production.sh
+```
 
-This launches the MCP FastAPI server, your analytics/alert agent, and a WebSocket test client (optional).
+## 🏗️ Architecture
 
-./start_stock_monitor.sh
+### Core Components
+- **Stock Analysis Engine** (`main_enhanced.py`) - Advanced technical analysis with 269+ stock universe
+- **MCP Server** (`yahoo_finance_mcp_server.py`) - WebSocket server for agentic communication  
+- **Web Dashboard** (`web_dashboard.py`) - Real-time monitoring interface
+- **Alert System** (`scheduled_market_alerts.py`) - Automated email notifications
+- **Yahoo Finance Client** (`enhanced_yahoo_client.py`) - Extended market data integration
 
-text
+### Project Structure
+```
+📁 mcp-stock-alert/
+├── 🚀 Core System
+│   ├── main_enhanced.py           # Enhanced analysis engine
+│   ├── yahoo_finance_mcp_server.py # MCP WebSocket server
+│   ├── web_dashboard.py           # Flask dashboard
+│   ├── scheduled_market_alerts.py # Alert scheduler
+│   └── enhanced_yahoo_client.py   # Yahoo Finance client
+├── 📁 scripts/                    # Deployment & management
+│   ├── hostinger_deploy.sh        # Hostinger VPS deployment
+│   ├── deploy_production.sh       # Generic production deployment
+│   └── health_monitor.sh          # System health monitoring
+├── 📁 config/                     # Production configuration
+│   └── nginx.conf                 # Nginx reverse proxy config
+├── 📁 docs/                       # Documentation
+└── 📁 tests/                      # Testing suite
+```
+
+## 🎛️ Features
+
+### Market Analysis
+- **269+ Stock Universe** across multiple sectors (Tech, Healthcare, Finance, Energy, etc.)
+- **Technical Indicators**: RSI, volume analysis, price momentum
+- **Earnings Calendar** integration with Yahoo Finance
+- **Investment Themes** tracking (AI, Clean Energy, Biotech, etc.)
+- **News Sentiment** analysis from multiple sources
+
+### Alert System
+- **Smart Recommendations**: BUY/WATCH/NO SIGNAL based on multiple factors
+- **Email Notifications**: Professional HTML emails with color-coded signals
+- **Configurable Thresholds**: Customizable criteria for buy signals
+- **Market Context**: Earnings dates and theme-based insights
+
+### Production Features
+- **MCP Integration**: WebSocket server for agentic communication
+- **Health Monitoring**: Automated system health checks
+- **Nginx Reverse Proxy**: Production-grade web server configuration
+- **Process Management**: Systemd service integration
+- **Cost Optimization**: Efficient resource usage for VPS deployment
+
+## 🚀 Deployment Options
+
+### 1. Hostinger VPS (Recommended)
+```bash
+./scripts/hostinger_deploy.sh
+```
+- **Cost**: ~$3.99/month
+- **Specs**: 1 vCPU, 1GB RAM, 20GB SSD
+- **Features**: Full root access, systemd services, nginx
+
+### 2. Local Development
+```bash
+./start_complete_system.sh
+```
+- **Dashboard**: http://localhost:5001
+- **MCP Server**: ws://localhost:8000
+
+## 📊 System Management
+
+```bash
+# Health monitoring
+./scripts/health_monitor.sh
+
+# Stop all services
+./stop_complete_system.sh
+
+# Check system status
+systemctl status stock-dashboard  # Production only
+```
+
+## 📧 Email Configuration
+
+Configure email settings in your environment:
+```bash
+export EMAIL_TO="your-email@gmail.com"
+export EMAIL_FROM="sender@gmail.com" 
+export EMAIL_PASSWORD="your-app-password"
+```
+
+## 📚 Documentation
+
+- 🚀 **Production Deployment**: [HOSTINGER_DEPLOYMENT_GUIDE.md](HOSTINGER_DEPLOYMENT_GUIDE.md)
+- ✅ **Production Checklist**: [PRODUCTION_CHECKLIST.md](PRODUCTION_CHECKLIST.md)
+- 📋 **Readiness Plan**: [PRODUCTION_READINESS_PLAN.md](PRODUCTION_READINESS_PLAN.md)
+- 💰 **Cost Analysis**: [COST_COMPARISON.md](COST_COMPARISON.md)
+- 🏗️ **System Design**: [docs/AGENTIC_SYSTEM_DESIGN.md](docs/AGENTIC_SYSTEM_DESIGN.md)
+- 🔒 **Security Guide**: [docs/SECURITY_GUIDE.md](docs/SECURITY_GUIDE.md)
+- 🌐 **Dashboard Guide**: [docs/WEB_DASHBOARD_GUIDE.md](docs/WEB_DASHBOARD_GUIDE.md)
+
+## 🛠️ Technology Stack
+
+- **Python 3.8+**: Core language
+- **FastAPI**: MCP WebSocket server
+- **Flask**: Web dashboard backend
+- **yfinance**: Yahoo Finance API client
+- **pandas**: Data analysis
+- **nginx**: Production web server
+- **systemd**: Process management
 
 ---
 
-## What This Code Does
-
-- **Starts a FastAPI server** (MCP agent) on `ws://127.0.0.1:8000/ws`.
-- **Runs a stock/news analytics agent** (main.py) for trading alerts and background jobs.
-- **Includes a WebSocket client test** (ws_test.py) to verify connections.
-- **Setup and startup scripts** ensure consistent environments, easy usage, and reproducibility.
-
----
-
-## Requirements
-
-- Python 3.8+
-- macOS/Linux terminal
-- Email/X (Twitter) API keys as needed (see main.py or .env for details)
-
----
-
-
-
-
-
-# GitHub Copilot
-
-source venv/bin/activate
-python -c 'from main_copilot import main_task; main_task()'
-
-
-# To run this continiously
-
-# install tmux if needed
-brew install tmux
-
-# start a session
-tmux new -s mcp-alert
-
-# inside tmux: activate venv and run the script
-cd /Users/monie/Desktop/GitHub/Stocks/Preplexity/mcp-stock-alert
-source venv/bin/activate
-# run continuously (script already loops)
-python main_copilot.py
-
-# detach from session: Ctrl-b d
-# reattach later:
-tmux attach -t mcp-alert
-
-
-# Graceful stop: attach and Ctrl-C inside session
-tmux attach -t mcp-alert   # then Ctrl-C in the running window
-
-# Kill the whole session from shell:
-tmux kill-session -t mcp-alert
-
-# To restart, create a new session as above or run:
-tmux new -s mcp-alert 'cd /Users/monie/Desktop/GitHub/Stocks/Preplexity/mcp-stock-alert && source venv/bin/activate && python main_copilot.py >> ~/mcp-stock-alert.log 2>&1'
-
-
-# follow output
-tail -F ~/mcp-stock-alert.log
+**🤖 Production-ready MCP stock alert system with institutional-level analysis of 269+ stocks!** 📈✨

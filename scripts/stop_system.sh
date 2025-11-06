@@ -37,6 +37,11 @@ if [ -f ".system_pids" ]; then
         echo "✅ Stopped MCP Server"
     fi
     
+    if [ ! -z "$SCHEDULED_ALERTS_PID" ]; then
+        kill $SCHEDULED_ALERTS_PID 2>/dev/null
+        echo "✅ Stopped Scheduled Alert System"
+    fi
+    
     rm .system_pids
 fi
 

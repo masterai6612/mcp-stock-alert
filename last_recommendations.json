@@ -1,0 +1,1574 @@
+{
+  "buy_signals": [
+    {
+      "symbol": "MRVL",
+      "score": 8,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (57.2)",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 93.73999786376953,
+      "rsi": 57.24275683666867,
+      "ma_20": 87.64012031555175,
+      "ma_50": 79.00834671020507,
+      "macd": 2.4747368119510043
+    },
+    {
+      "symbol": "LLY",
+      "score": 8,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (64.5)",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 862.8599853515625,
+      "rsi": 64.52733443831562,
+      "ma_20": 826.9309967041015,
+      "ma_50": 780.4911999511719,
+      "macd": 15.078718943383706
+    },
+    {
+      "symbol": "XOM",
+      "score": 8,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (58.4)",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 114.36000061035156,
+      "rsi": 58.41270014271796,
+      "ma_20": 113.65499992370606,
+      "ma_50": 113.18899993896484,
+      "macd": 0.6819960289971334
+    },
+    {
+      "symbol": "EQIX",
+      "score": 8,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (62.8)",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 846.010009765625,
+      "rsi": 62.81125373988769,
+      "ma_20": 817.276498413086,
+      "ma_50": 796.5465954589844,
+      "macd": 10.68106562260175
+    },
+    {
+      "symbol": "AEP",
+      "score": 8,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (61.2)",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 120.26000213623047,
+      "rsi": 61.23377327896311,
+      "ma_20": 117.75850067138671,
+      "ma_50": 113.00839965820313,
+      "macd": 1.8501017864320772
+    },
+    {
+      "symbol": "XPEV",
+      "score": 8,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (68.4)",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 23.489999771118164,
+      "rsi": 68.41007097501968,
+      "ma_20": 22.295000076293945,
+      "ma_50": 21.99300018310547,
+      "macd": 0.2692638091727666
+    },
+    {
+      "symbol": "FSLR",
+      "score": 8,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (67.2)",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 266.94000244140625,
+      "rsi": 67.17474043996711,
+      "ma_20": 234.64000091552734,
+      "ma_50": 219.34840087890626,
+      "macd": 7.464950477390687
+    },
+    {
+      "symbol": "BE",
+      "score": 8,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (63.6)",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 132.16000366210938,
+      "rsi": 63.5521968916983,
+      "ma_20": 106.82050018310547,
+      "ma_50": 82.97859985351562,
+      "macd": 11.819120666911061
+    },
+    {
+      "symbol": "HWX.TO",
+      "score": 8,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (58.3)",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 7.400000095367432,
+      "rsi": 58.2524253866082,
+      "ma_20": 7.3199999809265135,
+      "ma_50": 7.199980792999267,
+      "macd": 0.001209314945164408
+    }
+  ],
+  "watch_signals": [
+    {
+      "symbol": "AMZN",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (69.7)",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 244.22000122070312,
+      "rsi": 69.71427090926393,
+      "ma_20": 222.34550018310546,
+      "ma_50": 225.49100006103515,
+      "macd": 2.19958474104169
+    },
+    {
+      "symbol": "NVDA",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (65.4)",
+        "MACD bullish"
+      ],
+      "current_price": 202.49000549316406,
+      "rsi": 65.35877016712563,
+      "ma_20": 188.30350036621093,
+      "ma_50": 181.91663848876954,
+      "macd": 5.1341517584015435
+    },
+    {
+      "symbol": "AVGO",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (56.6)",
+        "MACD bullish"
+      ],
+      "current_price": 369.6300048828125,
+      "rsi": 56.565445571373054,
+      "ma_20": 352.02049865722654,
+      "ma_50": 339.01378540039065,
+      "macd": 9.48681228340422
+    },
+    {
+      "symbol": "CRM",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (58.7)",
+        "MACD bullish"
+      ],
+      "current_price": 260.4100036621094,
+      "rsi": 58.69890001006325,
+      "ma_20": 249.48000106811523,
+      "ma_50": 247.2015933227539,
+      "macd": 3.5284822741319886
+    },
+    {
+      "symbol": "TEAM",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (68.1)",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 169.4199981689453,
+      "rsi": 68.14640142529635,
+      "ma_20": 157.02199935913086,
+      "ma_50": 163.95179931640624,
+      "macd": 1.1040030493089148
+    },
+    {
+      "symbol": "CRWD",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (65.4)",
+        "MACD bullish"
+      ],
+      "current_price": 543.010009765625,
+      "rsi": 65.42325071258752,
+      "ma_20": 510.3779998779297,
+      "ma_50": 475.39080017089844,
+      "macd": 17.489384077073225
+    },
+    {
+      "symbol": "PANW",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (60.0)",
+        "MACD bullish"
+      ],
+      "current_price": 220.24000549316406,
+      "rsi": 59.97135370781919,
+      "ma_20": 213.70899963378906,
+      "ma_50": 204.41840026855468,
+      "macd": 4.178879941232282
+    },
+    {
+      "symbol": "ZS",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (63.4)",
+        "MACD bullish"
+      ],
+      "current_price": 331.1400146484375,
+      "rsi": 63.359893895906076,
+      "ma_20": 312.4529998779297,
+      "ma_50": 295.65430053710935,
+      "macd": 8.367446702499365
+    },
+    {
+      "symbol": "OKTA",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (54.3)",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 91.52999877929688,
+      "rsi": 54.25076503971487,
+      "ma_20": 89.58849983215332,
+      "ma_50": 90.89539978027344,
+      "macd": -0.5723042500164013
+    },
+    {
+      "symbol": "WFC",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (69.4)",
+        "MACD bullish"
+      ],
+      "current_price": 86.97000122070312,
+      "rsi": 69.4163019427895,
+      "ma_20": 83.73450012207032,
+      "ma_50": 82.70080062866211,
+      "macd": 1.2542125590532862
+    },
+    {
+      "symbol": "GS",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (51.0)",
+        "MACD bullish"
+      ],
+      "current_price": 789.3699951171875,
+      "rsi": 50.983356584368806,
+      "ma_20": 774.3910064697266,
+      "ma_50": 773.3025256347656,
+      "macd": 2.4617090784000766
+    },
+    {
+      "symbol": "MS",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (64.3)",
+        "MACD bullish"
+      ],
+      "current_price": 164.0,
+      "rsi": 64.2926127394912,
+      "ma_20": 159.832999420166,
+      "ma_50": 156.6531997680664,
+      "macd": 2.300845191723681
+    },
+    {
+      "symbol": "TGT",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (65.0)",
+        "MACD bullish"
+      ],
+      "current_price": 92.72000122070312,
+      "rsi": 65.01116309010683,
+      "ma_20": 91.72299919128417,
+      "ma_50": 91.41819931030274,
+      "macd": 1.0824109782820273
+    },
+    {
+      "symbol": "ROST",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (63.1)",
+        "MACD bullish"
+      ],
+      "current_price": 158.9199981689453,
+      "rsi": 63.108039852250556,
+      "ma_20": 155.5465003967285,
+      "ma_50": 151.80199188232422,
+      "macd": 2.203347311146075
+    },
+    {
+      "symbol": "BBY",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (69.2)",
+        "MACD bullish"
+      ],
+      "current_price": 82.13999938964844,
+      "rsi": 69.1741546538641,
+      "ma_20": 79.57750053405762,
+      "ma_50": 76.5707763671875,
+      "macd": 2.165483376121557
+    },
+    {
+      "symbol": "CVX",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (67.5)",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 157.72000122070312,
+      "rsi": 67.47281275023894,
+      "ma_20": 153.80750122070313,
+      "ma_50": 156.0140005493164,
+      "macd": 0.0867786120236076
+    },
+    {
+      "symbol": "MPC",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (67.0)",
+        "MACD bullish"
+      ],
+      "current_price": 194.91000366210938,
+      "rsi": 66.95140740367864,
+      "ma_20": 189.13899993896484,
+      "ma_50": 186.2932000732422,
+      "macd": 2.4925332980674284
+    },
+    {
+      "symbol": "VLO",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (59.9)",
+        "MACD bullish"
+      ],
+      "current_price": 169.55999755859375,
+      "rsi": 59.917240897835626,
+      "ma_20": 164.2860008239746,
+      "ma_50": 161.92280029296876,
+      "macd": 2.447951743753265
+    },
+    {
+      "symbol": "GE",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (61.1)",
+        "MACD bullish"
+      ],
+      "current_price": 308.95001220703125,
+      "rsi": 61.1393075019334,
+      "ma_20": 303.2570007324219,
+      "ma_50": 293.16465942382814,
+      "macd": 4.599038362171541
+    },
+    {
+      "symbol": "ETN",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (53.9)",
+        "MACD bullish"
+      ],
+      "current_price": 381.55999755859375,
+      "rsi": 53.913266605443695,
+      "ma_20": 376.1424987792969,
+      "ma_50": 367.29459777832034,
+      "macd": 3.2993197795265132
+    },
+    {
+      "symbol": "XYL",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (66.2)",
+        "MACD bullish"
+      ],
+      "current_price": 150.85000610351562,
+      "rsi": 66.24249324443099,
+      "ma_20": 147.87700119018555,
+      "ma_50": 144.7278274536133,
+      "macd": 1.705177094701554
+    },
+    {
+      "symbol": "FTV",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (62.5)",
+        "MACD bullish"
+      ],
+      "current_price": 50.34000015258789,
+      "rsi": 62.50002031981768,
+      "ma_20": 49.390999984741214,
+      "ma_50": 48.830893173217774,
+      "macd": 0.3981911052728222
+    },
+    {
+      "symbol": "OTIS",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (63.7)",
+        "MACD bullish"
+      ],
+      "current_price": 92.76000213623047,
+      "rsi": 63.70596599373058,
+      "ma_20": 91.3810001373291,
+      "ma_50": 89.82559997558593,
+      "macd": 0.7339401464641782
+    },
+    {
+      "symbol": "RIVN",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (56.8)",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 13.569999694824219,
+      "rsi": 56.83645050136928,
+      "ma_20": 13.187999963760376,
+      "ma_50": 13.795799942016602,
+      "macd": -0.1280179109478734
+    },
+    {
+      "symbol": "RARE",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (61.5)",
+        "MACD bullish"
+      ],
+      "current_price": 34.599998474121094,
+      "rsi": 61.507558943973365,
+      "ma_20": 33.04875001907349,
+      "ma_50": 31.258899879455566,
+      "macd": 1.1506475293589205
+    },
+    {
+      "symbol": "CYBR",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (60.6)",
+        "MACD bullish"
+      ],
+      "current_price": 520.780029296875,
+      "rsi": 60.62375301819409,
+      "ma_20": 504.9404998779297,
+      "ma_50": 484.0814019775391,
+      "macd": 9.555827727358462
+    },
+    {
+      "symbol": "HOOD",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (55.0)",
+        "MACD bullish"
+      ],
+      "current_price": 146.77999877929688,
+      "rsi": 54.98692673482728,
+      "ma_20": 139.67099990844727,
+      "ma_50": 127.08459976196289,
+      "macd": 3.5594863364113962
+    },
+    {
+      "symbol": "SOFI",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (59.1)",
+        "MACD bullish"
+      ],
+      "current_price": 29.68000030517578,
+      "rsi": 59.13669544522327,
+      "ma_20": 28.316000270843507,
+      "ma_50": 27.284400062561033,
+      "macd": 0.8169606687497399
+    },
+    {
+      "symbol": "IRDM",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (52.5)",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 19.149999618530273,
+      "rsi": 52.4613252131952,
+      "ma_20": 18.713999843597414,
+      "ma_50": 19.680370483398438,
+      "macd": -0.3702575421941994
+    },
+    {
+      "symbol": "EXPE",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (53.8)",
+        "MACD bullish"
+      ],
+      "current_price": 220.0,
+      "rsi": 53.827247275666224,
+      "ma_20": 218.9184997558594,
+      "ma_50": 218.45680480957031,
+      "macd": 1.0047342514164086
+    },
+    {
+      "symbol": "BNS.TO",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (69.0)",
+        "MACD bullish"
+      ],
+      "current_price": 91.98999786376953,
+      "rsi": 68.95310074209952,
+      "ma_20": 90.24307212829589,
+      "ma_50": 87.9138655090332,
+      "macd": 1.0391240143151208
+    },
+    {
+      "symbol": "CM.TO",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (67.6)",
+        "MACD bullish"
+      ],
+      "current_price": 116.20999908447266,
+      "rsi": 67.57404907488288,
+      "ma_20": 113.97699966430665,
+      "ma_50": 110.34231842041015,
+      "macd": 1.4658374894357564
+    },
+    {
+      "symbol": "LB.TO",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (69.1)",
+        "MACD bullish"
+      ],
+      "current_price": 33.29999923706055,
+      "rsi": 69.13571452959854,
+      "ma_20": 32.42700004577637,
+      "ma_50": 32.026610145568846,
+      "macd": 0.16340974861383728
+    },
+    {
+      "symbol": "CNQ.TO",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (57.2)",
+        "MACD bullish"
+      ],
+      "current_price": 44.869998931884766,
+      "rsi": 57.16557520742383,
+      "ma_20": 43.92450008392334,
+      "ma_50": 43.604976654052734,
+      "macd": 0.14506792956107262
+    },
+    {
+      "symbol": "ARX.TO",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (48.3)",
+        "MACD bullish"
+      ],
+      "current_price": 25.8700008392334,
+      "rsi": 48.2517729692383,
+      "ma_20": 25.717999935150146,
+      "ma_50": 25.547635917663573,
+      "macd": -0.0007054557275196771
+    },
+    {
+      "symbol": "CJ.TO",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (55.8)",
+        "MACD bullish"
+      ],
+      "current_price": 7.980000019073486,
+      "rsi": 55.752221725223436,
+      "ma_20": 7.907499980926514,
+      "ma_50": 7.6711578273773195,
+      "macd": 0.06536870240085069
+    },
+    {
+      "symbol": "KEL.TO",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (56.7)",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 6.670000076293945,
+      "rsi": 56.73758913217348,
+      "ma_20": 6.4480000019073485,
+      "ma_50": 6.69479998588562,
+      "macd": -0.11989174005596848
+    },
+    {
+      "symbol": "TKO.TO",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (54.0)",
+        "MACD bullish"
+      ],
+      "current_price": 6.349999904632568,
+      "rsi": 54.04255457300042,
+      "ma_20": 5.869499969482422,
+      "ma_50": 5.335,
+      "macd": 0.18760458319634754
+    },
+    {
+      "symbol": "CCO.TO",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (66.1)",
+        "MACD bullish"
+      ],
+      "current_price": 143.33999633789062,
+      "rsi": 66.11933599100087,
+      "ma_20": 126.9275001525879,
+      "ma_50": 117.40820007324218,
+      "macd": 6.76970761227345
+    },
+    {
+      "symbol": "NXE.TO",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (60.9)",
+        "MACD bullish"
+      ],
+      "current_price": 13.710000038146973,
+      "rsi": 60.942247764336315,
+      "ma_20": 12.519500017166138,
+      "ma_50": 11.747200012207031,
+      "macd": 0.38270135794365956
+    },
+    {
+      "symbol": "DML.TO",
+      "score": 7,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (60.9)",
+        "MACD bullish"
+      ],
+      "current_price": 4.46999979019165,
+      "rsi": 60.891081396122885,
+      "ma_20": 4.115499985218048,
+      "ma_50": 3.6991999912261964,
+      "macd": 0.1630243316872999
+    },
+    {
+      "symbol": "AAPL",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 270.3699951171875,
+      "rsi": 80.53243779951421,
+      "ma_20": 258.50949935913087,
+      "ma_50": 248.24839935302734,
+      "macd": 5.970392797388797
+    },
+    {
+      "symbol": "MSFT",
+      "score": 6,
+      "signals": [
+        "20-day > 50-day MA",
+        "RSI healthy (53.3)",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 517.8099975585938,
+      "rsi": 53.28901987165113,
+      "ma_20": 521.7434951782227,
+      "ma_50": 513.8253985595703,
+      "macd": 3.9376972195672124
+    },
+    {
+      "symbol": "GOOGL",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 281.19000244140625,
+      "rsi": 84.68167972522731,
+      "ma_20": 255.4990005493164,
+      "ma_50": 243.81834228515626,
+      "macd": 9.144741354029293
+    },
+    {
+      "symbol": "GOOG",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 281.82000732421875,
+      "rsi": 85.95747782973247,
+      "ma_20": 256.21950073242186,
+      "ma_50": 244.41726470947265,
+      "macd": 9.137559461129115
+    },
+    {
+      "symbol": "CSCO",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 73.11000061035156,
+      "rsi": 78.27824876986676,
+      "ma_20": 70.26400032043458,
+      "ma_50": 68.55157669067383,
+      "macd": 1.1505984328870795
+    },
+    {
+      "symbol": "CDNS",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (55.4)",
+        "MACD bullish"
+      ],
+      "current_price": 338.69000244140625,
+      "rsi": 55.43038858597639,
+      "ma_20": 337.0920013427734,
+      "ma_50": 346.23940002441407,
+      "macd": -1.8949937020928473
+    },
+    {
+      "symbol": "INTU",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (56.2)",
+        "MACD bullish"
+      ],
+      "current_price": 667.5499877929688,
+      "rsi": 56.21791576184959,
+      "ma_20": 662.8178588867188,
+      "ma_50": 668.1661499023437,
+      "macd": -1.0917311171065194
+    },
+    {
+      "symbol": "NET",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 253.3000030517578,
+      "rsi": 71.21170483364111,
+      "ma_20": 219.80650024414064,
+      "ma_50": 217.2286004638672,
+      "macd": 4.117257035267926
+    },
+    {
+      "symbol": "BMY",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (67.3)",
+        "MACD bullish"
+      ],
+      "current_price": 46.06999969482422,
+      "rsi": 67.30504092838498,
+      "ma_20": 44.08150005340576,
+      "ma_50": 44.99778129577637,
+      "macd": -0.09595297952693471
+    },
+    {
+      "symbol": "AMGN",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (58.9)",
+        "High volume"
+      ],
+      "current_price": 298.42999267578125,
+      "rsi": 58.85982808639623,
+      "ma_20": 294.9290008544922,
+      "ma_50": 287.8704010009766,
+      "macd": 1.6455342442675374
+    },
+    {
+      "symbol": "GILD",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (55.0)",
+        "High volume"
+      ],
+      "current_price": 119.79000091552734,
+      "rsi": 55.012688205149054,
+      "ma_20": 119.17950019836425,
+      "ma_50": 115.4547183227539,
+      "macd": 1.2375251011709878
+    },
+    {
+      "symbol": "BIIB",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 154.27000427246094,
+      "rsi": 71.75295179900533,
+      "ma_20": 148.20850143432617,
+      "ma_50": 144.35440063476562,
+      "macd": 1.6751563586575458
+    },
+    {
+      "symbol": "MRNA",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (51.6)",
+        "High volume"
+      ],
+      "current_price": 27.15999984741211,
+      "rsi": 51.57421383674776,
+      "ma_20": 26.880000019073485,
+      "ma_50": 25.919799995422363,
+      "macd": 0.09867607332478556
+    },
+    {
+      "symbol": "BSX",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (67.2)",
+        "MACD bullish"
+      ],
+      "current_price": 100.72000122070312,
+      "rsi": 67.20336330499947,
+      "ma_20": 99.03849983215332,
+      "ma_50": 100.78680007934571,
+      "macd": 0.5367579966157479
+    },
+    {
+      "symbol": "JPM",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (53.3)",
+        "MACD bullish"
+      ],
+      "current_price": 311.1199951171875,
+      "rsi": 53.30257047546342,
+      "ma_20": 303.16399841308595,
+      "ma_50": 303.9380914306641,
+      "macd": 0.44014928971807876
+    },
+    {
+      "symbol": "C",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (61.2)",
+        "MACD bullish"
+      ],
+      "current_price": 101.2300033569336,
+      "rsi": 61.23523412196077,
+      "ma_20": 98.18600044250488,
+      "ma_50": 98.60580032348633,
+      "macd": 0.4718752827710233
+    },
+    {
+      "symbol": "SCHW",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (57.0)",
+        "MACD bullish"
+      ],
+      "current_price": 94.5199966430664,
+      "rsi": 56.98779914658208,
+      "ma_20": 94.10699920654297,
+      "ma_50": 94.304599609375,
+      "macd": 0.10717827467465213
+    },
+    {
+      "symbol": "SPGI",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (53.9)",
+        "MACD bullish"
+      ],
+      "current_price": 487.2099914550781,
+      "rsi": 53.890253939673336,
+      "ma_20": 483.26399993896484,
+      "ma_50": 507.62702575683596,
+      "macd": -4.091244756888898
+    },
+    {
+      "symbol": "COF",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (62.3)",
+        "MACD bullish"
+      ],
+      "current_price": 219.99000549316406,
+      "rsi": 62.3257636985677,
+      "ma_20": 215.14400100708008,
+      "ma_50": 219.74660125732422,
+      "macd": 0.8023531293505926
+    },
+    {
+      "symbol": "SYF",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (64.2)",
+        "MACD bullish"
+      ],
+      "current_price": 74.37999725341797,
+      "rsi": 64.22819386462984,
+      "ma_20": 72.37649917602539,
+      "ma_50": 73.75799942016602,
+      "macd": 0.3680944409921807
+    },
+    {
+      "symbol": "PRU",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (60.5)",
+        "MACD bullish"
+      ],
+      "current_price": 104.0,
+      "rsi": 60.456290750606,
+      "ma_20": 102.07299880981445,
+      "ma_50": 104.17919937133789,
+      "macd": -0.2638582424833231
+    },
+    {
+      "symbol": "DLTR",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (65.2)",
+        "MACD bullish"
+      ],
+      "current_price": 99.12000274658203,
+      "rsi": 65.1931294970031,
+      "ma_20": 95.72200012207031,
+      "ma_50": 98.18980041503906,
+      "macd": 1.32295382121697
+    },
+    {
+      "symbol": "SHOP",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 173.86000061035156,
+      "rsi": 76.60694596355658,
+      "ma_20": 164.70100021362305,
+      "ma_50": 153.58620025634767,
+      "macd": 6.3816397194883905
+    },
+    {
+      "symbol": "UBER",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (59.4)",
+        "MACD bullish"
+      ],
+      "current_price": 96.5,
+      "rsi": 59.37985339709704,
+      "ma_20": 95.12349967956543,
+      "ma_50": 95.61039978027344,
+      "macd": -0.01667023533357792
+    },
+    {
+      "symbol": "LYFT",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (55.4)",
+        "High volume"
+      ],
+      "current_price": 20.459999084472656,
+      "rsi": 55.353075071873256,
+      "ma_20": 20.280499839782713,
+      "ma_50": 19.876499862670897,
+      "macd": -0.028596680957186038
+    },
+    {
+      "symbol": "DIS",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (57.6)",
+        "MACD bullish"
+      ],
+      "current_price": 112.62000274658203,
+      "rsi": 57.60519173715004,
+      "ma_20": 111.68949928283692,
+      "ma_50": 114.1327995300293,
+      "macd": -0.43982904338622575
+    },
+    {
+      "symbol": "PINS",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (54.3)",
+        "MACD bullish"
+      ],
+      "current_price": 33.099998474121094,
+      "rsi": 54.28275273730925,
+      "ma_20": 32.755500411987306,
+      "ma_50": 34.267000122070314,
+      "macd": -0.1409995959992969
+    },
+    {
+      "symbol": "PSX",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (63.4)",
+        "MACD bullish"
+      ],
+      "current_price": 136.13999938964844,
+      "rsi": 63.40230820858126,
+      "ma_20": 132.1844997406006,
+      "ma_50": 132.566600189209,
+      "macd": 1.1918271969583714
+    },
+    {
+      "symbol": "ET",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (57.6)",
+        "MACD bullish"
+      ],
+      "current_price": 16.829999923706055,
+      "rsi": 57.63546659175066,
+      "ma_20": 16.722000217437746,
+      "ma_50": 17.119400062561034,
+      "macd": -0.051406508537802154
+    },
+    {
+      "symbol": "MPLX",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (68.9)",
+        "MACD bullish"
+      ],
+      "current_price": 50.7599983215332,
+      "rsi": 68.90460149865137,
+      "ma_20": 49.59499969482422,
+      "ma_50": 50.145800018310545,
+      "macd": 0.2264274337120611
+    },
+    {
+      "symbol": "BKR",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (64.8)",
+        "MACD bullish"
+      ],
+      "current_price": 48.40999984741211,
+      "rsi": 64.77731136563006,
+      "ma_20": 46.96700019836426,
+      "ma_50": 46.973800048828124,
+      "macd": 0.29134557365428293
+    },
+    {
+      "symbol": "CTRA",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (58.1)",
+        "MACD bullish"
+      ],
+      "current_price": 23.65999984741211,
+      "rsi": 58.085802971560376,
+      "ma_20": 23.4354998588562,
+      "ma_50": 23.744999885559082,
+      "macd": -0.04801744532898056
+    },
+    {
+      "symbol": "CNX",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (57.9)",
+        "High volume"
+      ],
+      "current_price": 33.65999984741211,
+      "rsi": 57.94392634427929,
+      "ma_20": 32.51099996566772,
+      "ma_50": 31.25840003967285,
+      "macd": 0.30662431037896454
+    },
+    {
+      "symbol": "HON",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (61.9)",
+        "MACD bullish"
+      ],
+      "current_price": 201.3300018310547,
+      "rsi": 61.893395259188566,
+      "ma_20": 196.9815200805664,
+      "ma_50": 199.4955303955078,
+      "macd": 1.0673133774042753
+    },
+    {
+      "symbol": "DE",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (65.8)",
+        "MACD bullish"
+      ],
+      "current_price": 461.6300048828125,
+      "rsi": 65.79244276776076,
+      "ma_20": 460.34700164794924,
+      "ma_50": 467.21607421875,
+      "macd": 1.0386898722217666
+    },
+    {
+      "symbol": "PH",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (68.5)",
+        "MACD bullish"
+      ],
+      "current_price": 772.8300170898438,
+      "rsi": 68.52924759705246,
+      "ma_20": 751.3220001220703,
+      "ma_50": 754.2822863769532,
+      "macd": 6.45598690016277
+    },
+    {
+      "symbol": "CARR",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (59.2)",
+        "MACD bullish"
+      ],
+      "current_price": 59.4900016784668,
+      "rsi": 59.235187720894665,
+      "ma_20": 57.98098487854004,
+      "ma_50": 60.4015193939209,
+      "macd": -0.22364290934738307
+    },
+    {
+      "symbol": "PCAR",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (68.8)",
+        "MACD bullish"
+      ],
+      "current_price": 98.4000015258789,
+      "rsi": 68.77268178952185,
+      "ma_20": 97.24450073242187,
+      "ma_50": 98.55800048828125,
+      "macd": 0.34574893684086305
+    },
+    {
+      "symbol": "WSM",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (56.6)",
+        "MACD bullish"
+      ],
+      "current_price": 194.33999633789062,
+      "rsi": 56.6008452923554,
+      "ma_20": 190.59622116088866,
+      "ma_50": 194.54039337158204,
+      "macd": 0.26149556907327565
+    },
+    {
+      "symbol": "XEL",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (57.1)",
+        "High volume"
+      ],
+      "current_price": 81.16999816894531,
+      "rsi": 57.08270557619545,
+      "ma_20": 80.91650047302247,
+      "ma_50": 76.825517578125,
+      "macd": 0.8961715271022541
+    },
+    {
+      "symbol": "DOCU",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (60.8)",
+        "MACD bullish"
+      ],
+      "current_price": 73.13999938964844,
+      "rsi": 60.76431113714584,
+      "ma_20": 70.31475028991699,
+      "ma_50": 75.12390014648437,
+      "macd": -0.9077582276361369
+    },
+    {
+      "symbol": "QS",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (55.1)",
+        "High volume"
+      ],
+      "current_price": 18.440000534057617,
+      "rsi": 55.05931813559557,
+      "ma_20": 15.863499975204467,
+      "ma_50": 12.649999980926514,
+      "macd": 0.9587476039757199
+    },
+    {
+      "symbol": "BMRN",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (55.7)",
+        "MACD bullish"
+      ],
+      "current_price": 53.56999969482422,
+      "rsi": 55.74947567545339,
+      "ma_20": 53.410000038146975,
+      "ma_50": 54.78159996032715,
+      "macd": -0.47163993182907404
+    },
+    {
+      "symbol": "U",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (52.4)",
+        "MACD bullish"
+      ],
+      "current_price": 37.900001525878906,
+      "rsi": 52.38394839193869,
+      "ma_20": 36.71250057220459,
+      "ma_50": 40.08660003662109,
+      "macd": -0.7562178435269189
+    },
+    {
+      "symbol": "S",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (58.0)",
+        "MACD bullish"
+      ],
+      "current_price": 17.850000381469727,
+      "rsi": 58.02753758485739,
+      "ma_20": 17.36000003814697,
+      "ma_50": 17.754400062561036,
+      "macd": -0.09449228587834213
+    },
+    {
+      "symbol": "LC",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (63.1)",
+        "MACD bullish"
+      ],
+      "current_price": 17.389999389648438,
+      "rsi": 63.071067157091036,
+      "ma_20": 16.491500043869017,
+      "ma_50": 16.535600032806396,
+      "macd": 0.39440019910193413
+    },
+    {
+      "symbol": "VTR",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 73.79000091552734,
+      "rsi": 71.80191511232356,
+      "ma_20": 69.90350036621093,
+      "ma_50": 68.77379821777343,
+      "macd": 1.0430163648991737
+    },
+    {
+      "symbol": "WELL",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 181.0399932861328,
+      "rsi": 72.74766433781281,
+      "ma_20": 174.45750045776367,
+      "ma_50": 171.51759979248047,
+      "macd": 2.5314046723982813
+    },
+    {
+      "symbol": "TRIP",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (57.2)",
+        "MACD bullish"
+      ],
+      "current_price": 16.059999465942383,
+      "rsi": 57.234035947841726,
+      "ma_20": 15.935000085830689,
+      "ma_50": 16.846599998474122,
+      "macd": -0.12274274957250597
+    },
+    {
+      "symbol": "SU.TO",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (54.5)",
+        "MACD bullish"
+      ],
+      "current_price": 55.849998474121094,
+      "rsi": 54.54544901450679,
+      "ma_20": 55.62000007629395,
+      "ma_50": 56.561689453125,
+      "macd": -0.3570350189704854
+    },
+    {
+      "symbol": "BTE.TO",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (56.1)",
+        "High volume"
+      ],
+      "current_price": 3.390000104904175,
+      "rsi": 56.122456675320294,
+      "ma_20": 3.302499997615814,
+      "ma_50": 3.2473362398147585,
+      "macd": -0.005881151526429207
+    },
+    {
+      "symbol": "POU.TO",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (66.2)",
+        "High volume"
+      ],
+      "current_price": 23.0,
+      "rsi": 66.23569862072611,
+      "ma_20": 22.644868755340575,
+      "ma_50": 21.61083709716797,
+      "macd": 0.2539383652034708
+    },
+    {
+      "symbol": "TVE.TO",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "RSI healthy (62.9)",
+        "High volume"
+      ],
+      "current_price": 6.230000019073486,
+      "rsi": 62.85714545217572,
+      "ma_20": 6.170499992370606,
+      "ma_50": 5.8880220222473145,
+      "macd": 0.09294050822621536
+    },
+    {
+      "symbol": "BIR.TO",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 6.539999961853027,
+      "rsi": 78.10220121353369,
+      "ma_20": 6.127999997138977,
+      "ma_50": 6.079299955368042,
+      "macd": 0.11574483309139438
+    },
+    {
+      "symbol": "PEY.TO",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "20-day > 50-day MA",
+        "MACD bullish",
+        "High volume"
+      ],
+      "current_price": 20.43000030517578,
+      "rsi": 70.6703961213671,
+      "ma_20": 19.708999919891358,
+      "ma_50": 18.917890815734864,
+      "macd": 0.42149038469706923
+    },
+    {
+      "symbol": "YGR.TO",
+      "score": 6,
+      "signals": [
+        "Above 20-day MA",
+        "RSI healthy (62.5)",
+        "MACD bullish"
+      ],
+      "current_price": 1.0199999809265137,
+      "rsi": 62.499990686772314,
+      "ma_20": 0.9994999974966049,
+      "ma_50": 1.0021999967098236,
+      "macd": 0.0032230488938598256
+    }
+  ],
+  "timestamp": "2025-10-31T17:30:36.608981",
+  "session": "AFTER_HOURS",
+  "analyzed_stocks": 400
+}

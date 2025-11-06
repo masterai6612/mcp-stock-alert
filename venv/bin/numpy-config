@@ -1,4 +1,6 @@
-#!/Users/monie/Desktop/GitHub/Stocks/Preplexity/mcp-stock-alert/venv/bin/python3.13
+#!/bin/sh
+'''exec' "/Users/monie/Desktop/kiro/mcp-stock-alert copy/venv/bin/python3" "$0" "$@"
+' '''
 import sys
 from numpy._configtool import main
 if __name__ == '__main__':

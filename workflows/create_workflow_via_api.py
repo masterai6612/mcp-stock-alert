@@ -213,7 +213,7 @@ def create_scheduled_workflow():
                     "bodyContentType": "json",
                     "jsonBody": "{\n  \"analysis_type\": \"full_universe\",\n  \"include_earnings\": true,\n  \"include_themes\": true,\n  \"stock_limit\": 100\n}",
                     "options": {
-                        "timeout": 60000
+                        "timeout": 120000
                     }
                 },
                 "name": "Comprehensive Analysis",
