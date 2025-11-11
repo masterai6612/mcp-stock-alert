@@ -311,13 +311,45 @@ def should_run_analysis():
     
     return False
 
+def calculate_growth_potential_simple(close_prices, rsi, macd, signal, volume_ratio):
+    """Calculate growth potential for scheduled alerts"""
+    growth_potential = 0
+    confidence = 0
+    
+    # Recent price momentum
+    if len(close_prices) >= 5:
+        price_5d = ((close_prices.iloc[-1] - close_prices.iloc[-5]) / close_prices.iloc[-5]) * 100
+        if price_5d > 3:
+            growth_potential += 5
+            confidence += 0.2
+    
+    # RSI momentum
+    if 45 <= rsi <= 65:
+        growth_potential += 5
+        confidence += 0.2
+    elif 30 <= rsi < 45:
+        growth_potential += 7
+        confidence += 0.25
+    
+    # MACD bullish
+    if macd > signal and macd > 0:
+        growth_potential += 6
+        confidence += 0.25
+    
+    # Volume confirmation
+    if volume_ratio > 1.5:
+        growth_potential += 4
+        confidence += 0.15
+    
+    return growth_potential, min(confidence, 1.0)
+
 def get_technical_score(symbol):
-    """Get technical analysis score for a stock"""
+    """Get technical analysis score for a stock with 7% growth filter"""
     try:
         ticker = yf.Ticker(symbol)
         hist = ticker.history(period="3mo")
         
-        if hist.empty:
+        if hist.empty or len(hist) < 20:
             return None
         
         close = hist['Close']
@@ -342,6 +374,11 @@ def get_technical_score(symbol):
         signal = macd_line.ewm(span=9).mean().iloc[-1]
         
         current_price = close.iloc[-1]
+        
+        # Calculate recent growth
+        price_1w = ((close.iloc[-1] - close.iloc[-5]) / close.iloc[-5]) * 100 if len(close) >= 5 else 0
+        price_2w = ((close.iloc[-1] - close.iloc[-10]) / close.iloc[-10]) * 100 if len(close) >= 10 else 0
+        price_1m = ((close.iloc[-1] - close.iloc[-20]) / close.iloc[-20]) * 100 if len(close) >= 20 else 0
         
         # Scoring system
         score = 0
@@ -372,9 +409,27 @@ def get_technical_score(symbol):
         # Volume analysis
         avg_volume = volume.tail(20).mean()
         recent_volume = volume.iloc[-1]
-        if recent_volume > avg_volume * 1.2:
+        volume_ratio = recent_volume / avg_volume if avg_volume > 0 else 1
+        if volume_ratio > 1.2:
             score += 1
             signals.append("High volume")
+        
+        # Calculate growth potential
+        growth_potential, growth_confidence = calculate_growth_potential_simple(
+            close, rsi, macd, signal, volume_ratio
+        )
+        
+        # 🚨 HARD 7% GROWTH FILTER
+        has_recent_growth = (price_1w >= 7.0 or price_2w >= 7.0 or price_1m >= 7.0)
+        has_growth_potential = (growth_potential >= 7.0 and growth_confidence >= 0.5)
+        meets_growth_requirement = has_recent_growth or has_growth_potential
+        
+        # Add growth info to signals
+        if meets_growth_requirement:
+            if has_recent_growth:
+                signals.append(f"✅ Recent growth: {max(price_1w, price_2w, price_1m):.1f}%")
+            else:
+                signals.append(f"📈 Growth potential: {growth_potential:.1f}%")
         
         return {
             'symbol': symbol,
@@ -384,7 +439,14 @@ def get_technical_score(symbol):
             'rsi': rsi,
             'ma_20': ma_20,
             'ma_50': ma_50,
-            'macd': macd
+            'macd': macd,
+            'growth_potential': growth_potential,
+            'growth_confidence': growth_confidence,
+            'has_recent_growth': has_recent_growth,
+            'meets_growth_requirement': meets_growth_requirement,
+            'price_1w': price_1w,
+            'price_2w': price_2w,
+            'price_1m': price_1m
         }
     except Exception as e:
         print(f"Error analyzing {symbol}: {e}")
@@ -440,7 +502,8 @@ def analyze_market_24x7():
         try:
             analysis = get_technical_score(symbol)
             if analysis:
-                if analysis['score'] >= buy_threshold:
+                # Apply 7% growth filter for BUY signals
+                if analysis['score'] >= buy_threshold and analysis.get('meets_growth_requirement', False):
                     buy_signals.append(analysis)
                 elif analysis['score'] >= watch_threshold:
                     watch_signals.append(analysis)
@@ -676,7 +739,8 @@ def send_daily_summary():
     for symbol in monitor_stocks:
         analysis = get_technical_score(symbol)
         if analysis:
-            if analysis['score'] >= 7:
+            # Apply 7% growth filter for BUY signals
+            if analysis['score'] >= 7 and analysis.get('meets_growth_requirement', False):
                 buy_signals.append(analysis)
             elif analysis['score'] >= 5:
                 watch_signals.append(analysis)
@@ -788,7 +852,8 @@ def send_weekend_summary():
     for symbol in international_symbols:
         analysis = get_technical_score(symbol)
         if analysis:
-            if analysis['score'] >= 8:  # Higher weekend threshold
+            # Apply 7% growth filter for BUY signals (weekend)
+            if analysis['score'] >= 8 and analysis.get('meets_growth_requirement', False):
                 buy_signals.append(analysis)
             elif analysis['score'] >= 6:
                 watch_signals.append(analysis)
@@ -1072,7 +1137,8 @@ def send_morning_consolidation():
     for symbol in monitor_stocks:
         analysis = get_technical_score(symbol)
         if analysis:
-            if analysis['score'] >= 8:  # Pre-market threshold
+            # Apply 7% growth filter for BUY signals (pre-market)
+            if analysis['score'] >= 8 and analysis.get('meets_growth_requirement', False):
                 buy_signals.append(analysis)
             elif analysis['score'] >= 6:
                 watch_signals.append(analysis)

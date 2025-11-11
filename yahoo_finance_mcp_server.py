@@ -6,7 +6,12 @@ Provides tools to fetch stock data, earnings calendar, and investment themes fro
 import json
 import asyncio
 import sys
+import warnings
 from typing import Any, Sequence
+
+# Suppress SSL warnings for LibreSSL compatibility
+warnings.filterwarnings('ignore', message='.*urllib3 v2.*')
+warnings.filterwarnings('ignore', category=DeprecationWarning)
 
 # Check if MCP is available (requires Python 3.10+)
 try:
@@ -151,13 +156,18 @@ if MCP_AVAILABLE:
             )]
 
     async def main():
-        # Run the server using stdin/stdout streams
-        async with mcp.server.stdio.stdio_server() as (read_stream, write_stream):
-            await server.run(
-                read_stream,
-                write_stream,
-                server.create_initialization_options()
-            )
+        """Main entry point for MCP server"""
+        try:
+            # Run the server using stdin/stdout streams
+            async with mcp.server.stdio.stdio_server() as (read_stream, write_stream):
+                await server.run(
+                    read_stream,
+                    write_stream,
+                    server.create_initialization_options()
+                )
+        except Exception as e:
+            print(f"MCP Server error: {e}", file=sys.stderr)
+            raise
 
 if __name__ == "__main__":
     if not MCP_AVAILABLE:
