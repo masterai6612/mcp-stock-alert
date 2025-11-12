@@ -447,7 +447,8 @@ def api_market_comparison():
         
     except Exception as e:
         print(f"Error getting market comparison: {e}")
-        return jsonify({'error': str(e)}), 500
+        # Security: Don't expose internal error details
+        return jsonify({'error': 'Failed to retrieve market comparison data'}), 500
 
 @app.route('/api/refresh')
 def api_refresh():

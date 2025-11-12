@@ -29,6 +29,15 @@ load_dotenv()
 
 app = Flask(__name__)
 
+# Security: Helper function to sanitize error messages
+def sanitize_error(error):
+    """Sanitize error messages to prevent information exposure"""
+    # In production, return generic error message
+    if os.getenv('FLASK_DEBUG', 'False').lower() != 'true':
+        return "An error occurred while processing your request"
+    # In development, return actual error for debugging
+    return str(error)
+
 # n8n Configuration
 N8N_BASE_URL = "http://localhost:5678"
 
@@ -275,7 +284,7 @@ def quick_analysis():
         
     except Exception as e:
         print(f"❌ Quick analysis error: {e}")
-        return jsonify({'success': False, 'error': str(e)}), 500
+        return jsonify({'success': False, 'error': sanitize_error(e)}), 500
 
 @app.route('/api/comprehensive-analysis', methods=['GET', 'POST'])
 def comprehensive_analysis():
@@ -433,7 +442,7 @@ def comprehensive_analysis():
         
     except Exception as e:
         print(f"❌ Comprehensive analysis error: {e}")
-        return jsonify({'success': False, 'error': str(e)}), 500
+        return jsonify({'success': False, 'error': sanitize_error(e)}), 500
 
 @app.route('/api/stock-analysis', methods=['POST'])
 def stock_analysis():
@@ -484,7 +493,7 @@ def stock_analysis():
         })
         
     except Exception as e:
-        return jsonify({'success': False, 'error': str(e)}), 500
+        return jsonify({'success': False, 'error': sanitize_error(e)}), 500
 
 @app.route('/api/market-data', methods=['GET'])
 def market_data():
@@ -518,7 +527,7 @@ def market_data():
         })
         
     except Exception as e:
-        return jsonify({'success': False, 'error': str(e)}), 500
+        return jsonify({'success': False, 'error': sanitize_error(e)}), 500
 
 @app.route('/api/alerts', methods=['POST'])
 def create_alert():
@@ -545,7 +554,7 @@ def create_alert():
         })
         
     except Exception as e:
-        return jsonify({'success': False, 'error': str(e)}), 500
+        return jsonify({'success': False, 'error': sanitize_error(e)}), 500
 
 @app.route('/api/portfolio', methods=['GET'])
 def portfolio_status():
@@ -572,7 +581,7 @@ def portfolio_status():
         })
         
     except Exception as e:
-        return jsonify({'success': False, 'error': str(e)}), 500
+        return jsonify({'success': False, 'error': sanitize_error(e)}), 500
 
 @app.route('/api/send-telegram-alert', methods=['POST'])
 def send_telegram_alert():
@@ -622,7 +631,7 @@ def send_telegram_alert():
         
     except Exception as e:
         print(f"❌ Telegram alert error: {e}")
-        return jsonify({'success': False, 'error': str(e)}), 500
+        return jsonify({'success': False, 'error': sanitize_error(e)}), 500
 
 @app.route('/api/send-email-alert', methods=['GET', 'POST'])
 def send_email_alert():
@@ -814,7 +823,7 @@ def send_email_alert():
         
     except Exception as e:
         print(f"❌ Email alert error: {e}")
-        return jsonify({'success': False, 'error': str(e)}), 500
+        return jsonify({'success': False, 'error': sanitize_error(e)}), 500
 
 @app.route('/webhook/market-update', methods=['POST'])
 def market_update_webhook():
@@ -831,7 +840,7 @@ def market_update_webhook():
         return jsonify({'success': True, 'message': 'Market update processed'})
         
     except Exception as e:
-        return jsonify({'success': False, 'error': str(e)}), 500
+        return jsonify({'success': False, 'error': sanitize_error(e)}), 500
 
 @app.route('/api/telegram-config', methods=['GET'])
 def telegram_config():
@@ -865,7 +874,7 @@ def telegram_config():
         })
         
     except Exception as e:
-        return jsonify({'success': False, 'error': str(e)}), 500
+        return jsonify({'success': False, 'error': sanitize_error(e)}), 500
 
 @app.route('/api/test-telegram', methods=['POST'])
 def test_telegram():
@@ -883,7 +892,7 @@ def test_telegram():
         })
         
     except Exception as e:
-        return jsonify({'success': False, 'error': str(e)}), 500
+        return jsonify({'success': False, 'error': sanitize_error(e)}), 500
 
 @app.route('/health', methods=['GET'])
 def health_check():
@@ -927,4 +936,6 @@ if __name__ == '__main__':
     print()
     print("🔗 n8n Integration Server running on http://localhost:5002")
     
-    app.run(host='0.0.0.0', port=5002, debug=True)
+    # Use debug=False in production for security
+    debug_mode = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
+    app.run(host='0.0.0.0', port=5002, debug=debug_mode)
