@@ -1,0 +1,54 @@
+name: Update Streamlit Data
+
+on:
+  schedule:
+    # Run every weekday at 7 AM EST (12 PM UTC)
+    - cron: '0 12 * * 1-5'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      
+      - name: Install dependencies
+        run: |
+          pip install yfinance pandas python-dotenv requests beautifulsoup4
+      
+      - name: Run Gemma analysis (fallback mode)
+        env:
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        run: |
+          python gemma_market_analysis.py || echo "Gemma analysis completed with fallback"
+      
+      - name: Create data summary
+        run: |
+          python -c "
+          import json
+          from datetime import datetime
+          summary = {
+              'date': datetime.now().isoformat(),
+              'last_update': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+              'updated_by': 'GitHub Actions'
+          }
+          with open('streamlit_data_summary.json', 'w') as f:
+              json.dump(summary, f, indent=2)
+          "
+      
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add gemma_top_10_picks.json streamlit_data_summary.json last_recommendations.json || true
+          git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 Auto-update data [skip ci]" && git push)
