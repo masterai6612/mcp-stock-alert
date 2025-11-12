@@ -49,7 +49,11 @@ st.sidebar.markdown("---")
 st.sidebar.markdown("### 📧 Email Alerts")
 st.sidebar.text("masterai6612@gmail.com")
 st.sidebar.markdown("### 🔄 Last Updated")
-st.sidebar.text(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+try:
+    from timezone_utils import get_local_now_str
+    st.sidebar.text(get_local_now_str())
+except:
+    st.sidebar.text(datetime.now().strftime("%Y-%m-%d %H:%M:%S EST"))
 
 # Page routing
 if page == "🏠 Dashboard":
