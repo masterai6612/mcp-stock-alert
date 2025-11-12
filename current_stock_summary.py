@@ -25,6 +25,83 @@ EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 
+def calculate_growth_potential(price_data, technical_indicators):
+    """
+    Calculate estimated growth potential based on technical indicators
+    Returns: (growth_potential_percent, confidence_level, factors)
+    """
+    growth_potential = 0
+    confidence = 0
+    factors = []
+    
+    # 1. Distance to resistance (potential upside)
+    resistance_distance = technical_indicators.get('resistance_distance', 0)
+    if resistance_distance > 0:
+        growth_potential += min(resistance_distance, 15)  # Cap at 15%
+        confidence += 0.15
+        factors.append(f"Resistance upside: +{resistance_distance:.1f}%")
+    
+    # 2. Bollinger Band position (mean reversion potential)
+    bb_position = technical_indicators.get('bb_position', 50)
+    if bb_position < 30:  # Near lower band
+        bb_potential = (50 - bb_position) * 0.3  # Up to 6% potential
+        growth_potential += bb_potential
+        confidence += 0.2
+        factors.append(f"BB mean reversion: +{bb_potential:.1f}%")
+    
+    # 3. RSI momentum (continuation potential)
+    rsi = technical_indicators.get('rsi', 50)
+    if 45 <= rsi <= 65:  # Healthy momentum zone
+        growth_potential += 5
+        confidence += 0.15
+        factors.append("RSI momentum: +5%")
+    elif 30 <= rsi < 45:  # Oversold bounce
+        growth_potential += 8
+        confidence += 0.2
+        factors.append("RSI oversold bounce: +8%")
+    
+    # 4. MACD bullish signal (trend continuation)
+    macd = technical_indicators.get('macd', 0)
+    macd_signal = technical_indicators.get('macd_signal', 0)
+    if macd > macd_signal and macd > 0:
+        growth_potential += 6
+        confidence += 0.2
+        factors.append("MACD bullish trend: +6%")
+    
+    # 5. Moving average alignment (trend strength)
+    ma_score = technical_indicators.get('ma_score', 0)
+    if ma_score >= 5:  # Perfect alignment
+        growth_potential += 8
+        confidence += 0.15
+        factors.append("Perfect MA alignment: +8%")
+    elif ma_score >= 3:
+        growth_potential += 4
+        confidence += 0.1
+        factors.append("Good MA trend: +4%")
+    
+    # 6. Volume confirmation (breakout potential)
+    volume_ratio = technical_indicators.get('volume_ratio', 1)
+    if volume_ratio > 2.0:
+        growth_potential += 5
+        confidence += 0.15
+        factors.append("High volume breakout: +5%")
+    elif volume_ratio > 1.5:
+        growth_potential += 3
+        confidence += 0.1
+        factors.append("Volume support: +3%")
+    
+    # 7. Recent momentum (continuation)
+    price_1w = technical_indicators.get('price_1w', 0)
+    if 3 <= price_1w <= 10:  # Healthy momentum
+        growth_potential += 4
+        confidence += 0.1
+        factors.append("Momentum continuation: +4%")
+    
+    # Normalize confidence to 0-1 scale
+    confidence = min(confidence, 1.0)
+    
+    return growth_potential, confidence, factors
+
 def get_technical_analysis(symbol):
     """Get comprehensive technical analysis with BUY/SELL signals"""
     try:
@@ -300,13 +377,33 @@ def get_technical_analysis(symbol):
             sell_reasons.append("Death cross formation")
             signals.append("💀 Death cross")
         
-        # Determine recommendation
-        if score >= 8:
+        # Calculate growth potential
+        technical_indicators = {
+            'resistance_distance': resistance_distance,
+            'bb_position': bb_position,
+            'rsi': rsi,
+            'macd': macd,
+            'macd_signal': signal_line,
+            'ma_score': ma_score,
+            'volume_ratio': volume_ratio,
+            'price_1w': price_1w
+        }
+        growth_potential, growth_confidence, growth_factors = calculate_growth_potential(hist, technical_indicators)
+        
+        # 🚨 HARD 7% GROWTH FILTER FOR BUY SIGNALS
+        # Check if stock has recent growth OR strong growth potential
+        has_recent_growth = (price_1w >= 7.0 or price_2w >= 7.0 or price_1m >= 7.0)
+        has_growth_potential = (growth_potential >= 7.0 and growth_confidence >= 0.5)
+        
+        meets_growth_requirement = has_recent_growth or has_growth_potential
+        
+        # Determine recommendation with HARD 7% GROWTH FILTER
+        if score >= 8 and meets_growth_requirement:
             recommendation = "STRONG BUY"
-        elif score >= 5:
+        elif score >= 5 and meets_growth_requirement:
             recommendation = "BUY"
         elif score >= 2:
-            recommendation = "WEAK BUY"
+            recommendation = "WEAK BUY" if meets_growth_requirement else "HOLD"
         elif score >= -2:
             recommendation = "HOLD"
         elif score >= -5:
@@ -315,6 +412,12 @@ def get_technical_analysis(symbol):
             recommendation = "SELL"
         else:
             recommendation = "STRONG SELL"
+        
+        # Add growth filter info to signals
+        if not meets_growth_requirement and score >= 5:
+            signals.append(f"⚠️ Below 7% growth threshold (recent: {max(price_1w, price_2w, price_1m):.1f}%, potential: {growth_potential:.1f}%)")
+        elif has_growth_potential:
+            signals.append(f"📈 Growth potential: {growth_potential:.1f}% (confidence: {growth_confidence*100:.0f}%)")
         
         return {
             'symbol': symbol,
@@ -358,6 +461,11 @@ def get_technical_analysis(symbol):
             'signals': signals,
             'buy_reasons': buy_reasons,
             'sell_reasons': sell_reasons,
+            'growth_potential': growth_potential,
+            'growth_confidence': growth_confidence,
+            'growth_factors': growth_factors,
+            'has_recent_growth': has_recent_growth,
+            'meets_growth_requirement': meets_growth_requirement,
             'market_cap': info.get('marketCap', 0),
             'sector': info.get('sector', 'Unknown'),
             'pe_ratio': info.get('trailingPE', 0),
@@ -643,11 +751,16 @@ def create_summary_report(us_results, canadian_results):
 """
     
     for stock in us_buy_signals[:10]:
+        growth_info = f"📊 Growth Potential: {stock['growth_potential']:.1f}% (confidence: {stock['growth_confidence']*100:.0f}%)" if stock.get('growth_potential') else ""
+        recent_growth = max(stock['change_1w'], stock['change_2w'], stock['change_1m'])
+        growth_status = "✅ 7%+ growth" if stock.get('meets_growth_requirement') else f"⚠️ Below 7% ({recent_growth:.1f}%)"
+        
         email_body += f"""
-📈 {stock['symbol']} - {stock['recommendation']} (Score: {stock['score']})
+📈 {stock['symbol']} - {stock['recommendation']} (Score: {stock['score']}) | {growth_status}
    💰 ${stock['current_price']:.2f} | 1D: {stock['change_1d']:+.2f}% | 5D: {stock['change_5d']:+.2f}% | 1M: {stock['change_1m']:+.2f}%
    🎯 RSI: {stock['rsi']:.1f} | MACD: {stock['macd']:.3f} | Stoch: {stock['stoch_k']:.1f}
    📊 BB Position: {stock['bb_position']:.1f}% | Volume: {stock['volume_ratio']:.1f}x avg
+   {growth_info}
    🏢 {stock['sector']} | P/E: {stock['pe_ratio']:.1f} | Div: {stock['dividend_yield']:.1f}%
    🔍 Key Signals: {', '.join(stock['signals'][:4])}
    🚀 Buy Reasons: {', '.join(stock['buy_reasons'][:2]) if stock['buy_reasons'] else 'Technical alignment'}
@@ -688,11 +801,16 @@ def create_summary_report(us_results, canadian_results):
 """
     
     for stock in ca_buy_signals[:10]:
+        growth_info = f"📊 Growth Potential: {stock['growth_potential']:.1f}% (confidence: {stock['growth_confidence']*100:.0f}%)" if stock.get('growth_potential') else ""
+        recent_growth = max(stock['change_1w'], stock['change_2w'], stock['change_1m'])
+        growth_status = "✅ 7%+ growth" if stock.get('meets_growth_requirement') else f"⚠️ Below 7% ({recent_growth:.1f}%)"
+        
         email_body += f"""
-📈 {stock['symbol']} - {stock['recommendation']} (Score: {stock['score']})
+📈 {stock['symbol']} - {stock['recommendation']} (Score: {stock['score']}) | {growth_status}
    💰 ${stock['current_price']:.2f} CAD | 1D: {stock['change_1d']:+.2f}% | 5D: {stock['change_5d']:+.2f}% | 1M: {stock['change_1m']:+.2f}%
    🎯 RSI: {stock['rsi']:.1f} | MACD: {stock['macd']:.3f} | Stoch: {stock['stoch_k']:.1f}
    📊 BB Position: {stock['bb_position']:.1f}% | Volume: {stock['volume_ratio']:.1f}x avg
+   {growth_info}
    🏢 {stock['sector']} | P/E: {stock['pe_ratio']:.1f} | Div: {stock['dividend_yield']:.1f}%
    🔍 Key Signals: {', '.join(stock['signals'][:4])}
    🚀 Buy Reasons: {', '.join(stock['buy_reasons'][:2]) if stock['buy_reasons'] else 'Technical alignment'}
