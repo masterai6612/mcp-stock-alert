@@ -114,7 +114,7 @@ def show():
     info_data = {
         "Python Version": subprocess.run(['python', '--version'], capture_output=True, text=True).stdout.strip(),
         "Working Directory": os.getcwd(),
-        "Last Updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "Last Updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S EST"),
         "Stocks Monitored": "529",
         "Growth Filter": "7%+",
         "Email Alerts": "Enabled"
