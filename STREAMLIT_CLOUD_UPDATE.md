@@ -1,7 +1,7 @@
 # 🌐 Streamlit Cloud Update Instructions
 
 ## Your App URL
-https://mcp-stock-alert-ry7g69lecpcrtwsniuwjaa.streamlit.app/
+https://mcp-stock-alert-kiro-enhanced.streamlit.app/
 
 ## ✅ What Was Updated
 
@@ -110,7 +110,7 @@ EMAIL_PASSWORD = "your_password"
 ## ✅ Verify Deployment
 
 1. Wait 2-5 minutes for auto-deploy
-2. Visit: https://mcp-stock-alert-ry7g69lecpcrtwsniuwjaa.streamlit.app/
+2. Visit: https://mcp-stock-alert-kiro-enhanced.streamlit.app/
 3. You should see the new multi-page app
 4. Navigate between pages using the sidebar
 
@@ -173,6 +173,6 @@ If you need help:
 4. Check main file path in settings
 
 Your app should be live at:
-**https://mcp-stock-alert-ry7g69lecpcrtwsniuwjaa.streamlit.app/**
+**https://mcp-stock-alert-kiro-enhanced.streamlit.app/**
 
 Enjoy your new multi-page dashboard! 🚀

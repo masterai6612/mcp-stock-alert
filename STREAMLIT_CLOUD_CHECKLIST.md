@@ -1,7 +1,7 @@
 # ✅ Streamlit Cloud Update Checklist
 
 ## 🎯 Your App
-**URL:** https://mcp-stock-alert-ry7g69lecpcrtwsniuwjaa.streamlit.app/
+**URL:** https://mcp-stock-alert-kiro-enhanced.streamlit.app/
 
 ## 📦 What Was Pushed to GitHub
 
@@ -43,7 +43,7 @@
 - Watch the deployment logs
 
 ### Step 3: Verify the Update
-Visit: https://mcp-stock-alert-ry7g69lecpcrtwsniuwjaa.streamlit.app/
+Visit: https://mcp-stock-alert-kiro-enhanced.streamlit.app/
 
 You should see:
 - ✅ New sidebar navigation
