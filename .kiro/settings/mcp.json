@@ -5,9 +5,9 @@
       "args": [
         "/Users/monie/Desktop/kiro/mcp-stock-alert copy/yahoo_finance_mcp_server.py"
       ],
-      "cwd": "/Users/monie/Desktop/kiro/mcp-stock-alert copy",
       "env": {},
-      "disabled": true,
+      "cwd": "/Users/monie/Desktop/kiro/mcp-stock-alert copy",
+      "disabled": false,
       "autoApprove": [
         "get_stock_quote",
         "get_earnings_calendar",

@@ -1,0 +1,13 @@
+# Gemma AI Requirements
+keras-nlp>=0.6.0
+tensorflow>=2.15.0
+tensorflow-metal>=1.0.0  # For Mac M1/M2 GPU acceleration
+keras>=3.0.0
+
+# Existing requirements
+yfinance>=0.2.66
+pandas>=2.3.3
+requests>=2.32.5
+urllib3<2.0.0
+beautifulsoup4>=4.14.2
+python-dotenv>=1.2.1
