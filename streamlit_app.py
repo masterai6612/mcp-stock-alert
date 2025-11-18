@@ -41,7 +41,7 @@ st.markdown("---")
 st.sidebar.title("📱 Navigation")
 page = st.sidebar.radio(
     "Go to",
-    ["🏠 Dashboard", "🤖 Gemma AI Top 10", "📊 Market Analysis", "⚙️ Settings"]
+    ["🏠 Dashboard", "🤖 Gemma AI Top 10", "💰 Top 50 Dividends", "📊 Market Analysis", "⚙️ Settings"]
 )
 
 # Footer in sidebar
@@ -62,6 +62,9 @@ if page == "🏠 Dashboard":
 elif page == "🤖 Gemma AI Top 10":
     import pages.gemma_picks as gemma_picks
     gemma_picks.show()
+elif page == "💰 Top 50 Dividends":
+    import pages.dividend_stocks as dividend_stocks
+    dividend_stocks.show()
 elif page == "📊 Market Analysis":
     import pages.market_analysis as market_analysis
     market_analysis.show()
