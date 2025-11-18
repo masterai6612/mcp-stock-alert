@@ -1,9 +1,12 @@
 {
-  "date": "2025-11-18T06:15:47.651815",
+  "date": "2025-11-18T12:44:04.962157",
   "gemma_available": true,
+  "dividend_available": true,
   "recommendations_available": true,
-  "last_update": "2025-11-18 06:15:47",
+  "last_update": "2025-11-18 12:44:04",
   "gemma_picks_count": 10,
+  "dividend_stocks_count": 50,
+  "total_dividend_stocks": 336,
   "buy_signals_count": 10,
   "watch_signals_count": 106
 }
