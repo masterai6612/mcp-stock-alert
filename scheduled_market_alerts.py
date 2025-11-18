@@ -796,6 +796,39 @@ def send_daily_summary():
     
     body += f"""
 
+💰 TOP DIVIDEND STOCKS (Income + Growth)
+========================================
+"""
+    
+    # Add dividend stocks section
+    try:
+        import json
+        if os.path.exists('top_50_dividend_stocks.json'):
+            with open('top_50_dividend_stocks.json', 'r') as f:
+                dividend_data = json.load(f)
+            
+            top_dividends = dividend_data.get('top_50_dividend_stocks', [])[:10]
+            
+            if top_dividends:
+                for i, stock in enumerate(top_dividends, 1):
+                    body += f"""
+{i}. 💎 {stock['symbol']} - {stock.get('category', 'Dividend')}
+   💰 Price: ${stock['current_price']:.2f} | Yield: {stock['dividend_yield']:.2f}%
+   📈 1M Growth: {stock['change_1m']:+.2f}% | Score: {stock['dividend_score']:.0f}/100
+   🏢 {stock.get('company_name', stock['symbol'])[:40]}
+"""
+                
+                body += f"\n📊 Total dividend stocks analyzed: {dividend_data.get('total_dividend_stocks', 0)}\n"
+                body += f"📅 Last updated: {dividend_data.get('generated_at', 'N/A')[:10]}\n"
+            else:
+                body += "⚠️ No dividend data available. Run: python dividend_stock_analyzer.py\n"
+        else:
+            body += "⚠️ Dividend analysis not yet run. Run: python dividend_stock_analyzer.py\n"
+    except Exception as e:
+        body += f"⚠️ Error loading dividend data: {e}\n"
+    
+    body += f"""
+
 🌙 AFTER-HOURS & TOMORROW'S PLAN
 ================================
 • 24/7 monitoring continues through after-hours (4PM-8PM EST)
