@@ -27,28 +27,14 @@ jobs:
       
       - name: Install dependencies
         run: |
-          pip install yfinance pandas python-dotenv requests beautifulsoup4
+          pip install yfinance pandas python-dotenv requests beautifulsoup4 pytz numpy
       
-      - name: Run Gemma analysis (fallback mode)
+      - name: Run update script
         env:
           EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
         run: |
-          python gemma_market_analysis.py || echo "Gemma analysis completed with fallback"
-      
-      - name: Create data summary
-        run: |
-          python -c "
-          import json
-          from datetime import datetime
-          summary = {
-              'date': datetime.now().isoformat(),
-              'last_update': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-              'updated_by': 'GitHub Actions'
-          }
-          with open('streamlit_data_summary.json', 'w') as f:
-              json.dump(summary, f, indent=2)
-          "
+          python update_streamlit_data.py || echo "Update completed with warnings"
       
       - name: Commit and push changes
         run: |
