@@ -8,6 +8,6 @@ keras>=3.0.0
 yfinance>=0.2.66
 pandas>=2.3.3
 requests>=2.32.5
-urllib3<2.0.0
+urllib3>=1.26.20,<2.0.0
 beautifulsoup4>=4.14.2
 python-dotenv>=1.2.1
