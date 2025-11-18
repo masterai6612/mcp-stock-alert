@@ -8,7 +8,7 @@ import streamlit as st
 from datetime import datetime
 
 st.set_page_config(
-    page_title="Stock Alert System",
+    page_title="Stock Alert System - Enhanced with Dividends",
     page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded"
