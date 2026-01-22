@@ -1,9 +1,10 @@
 {
-  "date": "2025-11-18T06:15:47.651815",
+  "date": "2026-01-22T09:54:17.338861",
   "gemma_available": true,
+  "dividend_available": true,
   "recommendations_available": true,
-  "last_update": "2025-11-18 06:15:47",
-  "gemma_picks_count": 10,
-  "buy_signals_count": 10,
-  "watch_signals_count": 106
+  "last_update": "2026-01-22 09:54:17",
+  "buy_signals_count": 0,
+  "watch_signals_count": 14,
+  "market_sentiment": "BULLISH"
 }

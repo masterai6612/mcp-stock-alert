@@ -1,1721 +1,980 @@
 {
-  "buy_signals": [
-    {
-      "symbol": "ROST",
-      "score": 8,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (67.7)",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 161.9199981689453,
-      "rsi": 67.71705543120629,
-      "ma_20": 158.63699951171876,
-      "ma_50": 153.436728515625,
-      "macd": 2.3862455869070516
-    },
-    {
-      "symbol": "LYFT",
-      "score": 8,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (67.4)",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 23.719999313354492,
-      "rsi": 67.38149195587437,
-      "ma_20": 20.501499938964844,
-      "ma_50": 20.43639991760254,
-      "macd": 0.3779314054648495
-    },
-    {
-      "symbol": "AEP",
-      "score": 8,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (65.5)",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 122.55999755859375,
-      "rsi": 65.53602843624233,
-      "ma_20": 118.79549980163574,
-      "ma_50": 113.9713998413086,
-      "macd": 1.8629695932395691
-    },
-    {
-      "symbol": "XPEV",
-      "score": 8,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (68.4)",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 26.040000915527344,
-      "rsi": 68.38710570558838,
-      "ma_20": 22.459500217437743,
-      "ma_50": 22.066200218200684,
-      "macd": 0.484753921036301
-    },
-    {
-      "symbol": "SEDG",
-      "score": 8,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (60.7)",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 45.380001068115234,
-      "rsi": 60.74098097585819,
-      "ma_20": 38.123000144958496,
-      "ma_50": 36.20730010986328,
-      "macd": 0.9211920557578708
-    },
-    {
-      "symbol": "ABX.TO",
-      "score": 8,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (70.0)",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 48.88999938964844,
-      "rsi": 69.99153543910111,
-      "ma_20": 46.2,
-      "ma_50": 44.56559997558594,
-      "macd": 0.471483994522643
-    },
-    {
-      "symbol": "CTC-A.TO",
-      "score": 8,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (46.5)",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 170.4199981689453,
-      "rsi": 46.50420797317315,
-      "ma_20": 168.08418197631835,
-      "ma_50": 167.0828286743164,
-      "macd": 0.0038822508885516527
-    },
-    {
-      "symbol": "AQN.TO",
-      "score": 8,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (64.7)",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 8.850000381469727,
-      "rsi": 64.70586750335607,
-      "ma_20": 8.164500093460083,
-      "ma_50": 7.888777322769165,
-      "macd": 0.1091487905619708
-    },
-    {
-      "symbol": "BLX.TO",
-      "score": 8,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (55.9)",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 28.40999984741211,
-      "rsi": 55.87468663191937,
-      "ma_20": 28.208999824523925,
-      "ma_50": 27.866199913024904,
-      "macd": 0.07946693791758008
-    },
-    {
-      "symbol": "BIP-UN.TO",
-      "score": 8,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (63.0)",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 50.060001373291016,
-      "rsi": 63.01617446534273,
-      "ma_20": 48.34200019836426,
-      "ma_50": 45.97320014953613,
-      "macd": 0.7530300479047654
-    }
-  ],
+  "timestamp": "2026-01-22T09:54:17.334396",
+  "date": "2026-01-22",
+  "buy_signals": [],
   "watch_signals": [
     {
-      "symbol": "AMZN",
+      "symbol": "META",
+      "company_name": "Meta Platforms, Inc.",
+      "current_price": 631.16,
+      "change": 18.2,
+      "change_pct": 2.97,
+      "rsi": 61.8,
+      "volume_ratio": 0.3,
+      "market_cap": 1590856122368,
+      "sector": "Communication Services",
       "score": 7,
       "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (68.0)",
-        "MACD bullish"
-      ],
-      "current_price": 248.39999389648438,
-      "rsi": 68.03940103874176,
-      "ma_20": 230.20999984741212,
-      "ma_50": 227.77419982910158,
-      "macd": 6.740042864372242
+        "Bullish trend"
+      ]
     },
     {
-      "symbol": "LRCX",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (67.5)",
-        "MACD bullish"
-      ],
-      "current_price": 166.3699951171875,
-      "rsi": 67.51520178624904,
-      "ma_20": 152.90849838256835,
-      "ma_50": 136.19556228637694,
-      "macd": 7.4582789774073035
+      "symbol": "GOOGL",
+      "company_name": "Alphabet Inc.",
+      "current_price": 332.55,
+      "change": 4.17,
+      "change_pct": 1.27,
+      "rsi": 49.4,
+      "volume_ratio": 0.2,
+      "market_cap": 4027946631168,
+      "sector": "Communication Services",
+      "score": 6,
+      "signals": []
     },
     {
-      "symbol": "MRVL",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (62.4)",
-        "MACD bullish"
-      ],
-      "current_price": 93.2300033569336,
-      "rsi": 62.39977590639367,
-      "ma_20": 88.3654998779297,
-      "ma_50": 81.2789045715332,
-      "macd": 2.5697786786147674
+      "symbol": "NVDA",
+      "company_name": "NVIDIA Corporation",
+      "current_price": 184.99,
+      "change": 1.81,
+      "change_pct": 0.99,
+      "rsi": 43.5,
+      "volume_ratio": 0.1,
+      "market_cap": 4503954259968,
+      "sector": "Technology",
+      "score": 6,
+      "signals": []
     },
     {
-      "symbol": "NET",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (63.9)",
-        "MACD bullish"
-      ],
-      "current_price": 240.52999877929688,
-      "rsi": 63.93525396963833,
-      "ma_20": 224.4574996948242,
-      "ma_50": 221.0445999145508,
-      "macd": 4.958053335146417
+      "symbol": "TSLA",
+      "company_name": "Tesla, Inc.",
+      "current_price": 435.75,
+      "change": 4.31,
+      "change_pct": 1.0,
+      "rsi": 46.1,
+      "volume_ratio": 0.2,
+      "market_cap": 1449192456192,
+      "sector": "Consumer Cyclical",
+      "score": 6,
+      "signals": []
     },
     {
-      "symbol": "PFE",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (49.3)",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 24.389999389648438,
-      "rsi": 49.26995001183564,
-      "ma_20": 24.171360778808594,
-      "ma_50": 24.32231315612793,
-      "macd": -0.04985074584196525
-    },
-    {
-      "symbol": "BIIB",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (68.0)",
-        "MACD bullish"
-      ],
-      "current_price": 156.25999450683594,
-      "rsi": 67.99281360492876,
-      "ma_20": 149.43899993896486,
-      "ma_50": 146.53620056152343,
-      "macd": 2.5021522747896086
-    },
-    {
-      "symbol": "VEEV",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (58.4)",
-        "MACD bullish"
-      ],
-      "current_price": 295.75,
-      "rsi": 58.36399051563667,
-      "ma_20": 290.74650115966796,
-      "ma_50": 286.89359985351564,
-      "macd": 1.478196111999523
-    },
-    {
-      "symbol": "DGX",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (49.4)",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 184.30999755859375,
-      "rsi": 49.42367804636265,
-      "ma_20": 181.55849838256836,
-      "ma_50": 182.00298400878907,
-      "macd": -0.9814643563038032
-    },
-    {
-      "symbol": "BAC",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (65.8)",
-        "MACD bullish"
-      ],
-      "current_price": 53.41999816894531,
-      "rsi": 65.78071068691793,
-      "ma_20": 52.37449989318848,
-      "ma_50": 51.375483932495115,
-      "macd": 0.6550197895200185
-    },
-    {
-      "symbol": "C",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (62.6)",
-        "MACD bullish"
-      ],
-      "current_price": 101.48999786376953,
-      "rsi": 62.563299090679756,
-      "ma_20": 99.22248458862305,
-      "ma_50": 98.71366363525391,
-      "macd": 0.9069170114509433
-    },
-    {
-      "symbol": "SCHW",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (53.1)",
-        "MACD bullish"
-      ],
-      "current_price": 95.58000183105469,
-      "rsi": 53.12106380331846,
-      "ma_20": 94.32799911499023,
-      "ma_50": 94.03719955444336,
-      "macd": 0.16127176853568415
-    },
-    {
-      "symbol": "CME",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (63.5)",
-        "MACD bullish"
-      ],
-      "current_price": 277.2799987792969,
-      "rsi": 63.525780008436385,
-      "ma_20": 268.0399993896484,
-      "ma_50": 265.9498846435547,
-      "macd": 1.6763114339545382
-    },
-    {
-      "symbol": "TJX",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (58.9)",
-        "MACD bullish"
-      ],
-      "current_price": 146.72000122070312,
-      "rsi": 58.89804138336239,
-      "ma_20": 143.14700088500976,
-      "ma_50": 141.79680084228517,
-      "macd": 0.6961466651993078
-    },
-    {
-      "symbol": "SBUX",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (46.4)",
-        "MACD bullish"
-      ],
-      "current_price": 84.5999984741211,
-      "rsi": 46.448076724244316,
-      "ma_20": 83.89199981689453,
-      "ma_50": 83.85279983520508,
-      "macd": -0.16227543969644387
-    },
-    {
-      "symbol": "DLTR",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (65.2)",
-        "MACD bullish"
-      ],
-      "current_price": 106.29000091552734,
-      "rsi": 65.17785050984139,
-      "ma_20": 100.32550010681152,
-      "ma_50": 97.19400024414062,
-      "macd": 2.331269124377883
-    },
-    {
-      "symbol": "ROKU",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (63.5)",
-        "MACD bullish"
-      ],
-      "current_price": 105.0,
-      "rsi": 63.47327862906262,
-      "ma_20": 100.09999961853028,
-      "ma_50": 99.13979965209961,
-      "macd": 1.9221824104627103
-    },
-    {
-      "symbol": "SNAP",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (65.3)",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 8.6899995803833,
-      "rsi": 65.32846518435244,
-      "ma_20": 7.834999966621399,
-      "ma_50": 7.865800008773804,
-      "macd": 0.04624550209709355
-    },
-    {
-      "symbol": "XOM",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (68.6)",
-        "MACD bullish"
-      ],
-      "current_price": 118.22000122070312,
-      "rsi": 68.60229644179793,
-      "ma_20": 114.31300010681153,
-      "ma_50": 113.52140014648438,
-      "macd": 0.8240601950709703
-    },
-    {
-      "symbol": "MPC",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (64.3)",
-        "MACD bullish"
-      ],
-      "current_price": 196.36000061035156,
-      "rsi": 64.28119355285804,
-      "ma_20": 190.28749923706056,
-      "ma_50": 188.19559967041016,
-      "macd": 1.574280543466955
-    },
-    {
-      "symbol": "ET",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (57.1)",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 16.690000534057617,
-      "rsi": 57.06315305590133,
-      "ma_20": 16.467270851135254,
-      "ma_50": 16.691241188049318,
-      "macd": -0.01850342090820689
-    },
-    {
-      "symbol": "HAL",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (70.0)",
-        "MACD bullish"
-      ],
-      "current_price": 27.709999084472656,
-      "rsi": 69.95153976115299,
-      "ma_20": 25.76299982070923,
-      "ma_50": 24.21279998779297,
-      "macd": 1.028011959794469
-    },
-    {
-      "symbol": "OXY",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (55.3)",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 41.79999923706055,
-      "rsi": 55.30393000234611,
-      "ma_20": 41.2495002746582,
-      "ma_50": 44.06650360107422,
-      "macd": -0.873775571094626
-    },
-    {
-      "symbol": "EQT",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (64.5)",
-        "MACD bullish"
-      ],
-      "current_price": 58.939998626708984,
-      "rsi": 64.46983772244909,
-      "ma_20": 54.55280818939209,
-      "ma_50": 53.35169418334961,
-      "macd": 0.9619617337903819
-    },
-    {
-      "symbol": "UPS",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (60.2)",
-        "MACD bullish"
-      ],
-      "current_price": 93.05999755859375,
-      "rsi": 60.187451849926596,
-      "ma_20": 90.69049987792968,
-      "ma_50": 87.03420028686523,
-      "macd": 2.3244692686999144
-    },
-    {
-      "symbol": "FDX",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (63.1)",
-        "MACD bullish"
-      ],
-      "current_price": 253.88999938964844,
-      "rsi": 63.12663341322232,
-      "ma_20": 246.5824996948242,
-      "ma_50": 237.8378643798828,
-      "macd": 5.644747222315829
-    },
-    {
-      "symbol": "DE",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (59.9)",
-        "MACD bullish"
-      ],
-      "current_price": 474.3900146484375,
-      "rsi": 59.93997250127625,
-      "ma_20": 465.3590026855469,
-      "ma_50": 465.15394897460936,
-      "macd": 2.413240896789091
-    },
-    {
-      "symbol": "DOV",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (62.0)",
-        "MACD bullish"
-      ],
-      "current_price": 182.08999633789062,
-      "rsi": 62.044190794606585,
-      "ma_20": 175.15850143432618,
-      "ma_50": 172.06960052490234,
-      "macd": 3.0709603298247146
-    },
-    {
-      "symbol": "XYL",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (62.7)",
-        "MACD bullish"
-      ],
-      "current_price": 151.0500030517578,
-      "rsi": 62.71411842164781,
-      "ma_20": 148.81750030517577,
-      "ma_50": 145.6040005493164,
-      "macd": 1.436804871810466
-    },
-    {
-      "symbol": "FTV",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (62.1)",
-        "MACD bullish"
-      ],
-      "current_price": 51.33000183105469,
-      "rsi": 62.12835054623605,
-      "ma_20": 49.84850006103515,
-      "ma_50": 49.1087321472168,
-      "macd": 0.5483469412859492
-    },
-    {
-      "symbol": "AME",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (62.7)",
-        "MACD bullish"
-      ],
-      "current_price": 198.00999450683594,
-      "rsi": 62.746117601249225,
-      "ma_20": 191.06700057983397,
-      "ma_50": 188.09843322753906,
-      "macd": 3.3203563908632248
-    },
-    {
-      "symbol": "F",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (60.0)",
-        "MACD bullish"
-      ],
-      "current_price": 13.15999984741211,
-      "rsi": 60.020325485351925,
-      "ma_20": 12.59211859703064,
-      "ma_50": 12.031552448272706,
-      "macd": 0.3262463993796114
-    },
-    {
-      "symbol": "GM",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (67.4)",
-        "MACD bullish"
-      ],
-      "current_price": 71.05000305175781,
-      "rsi": 67.37253982092776,
-      "ma_20": 65.98749980926513,
-      "ma_50": 61.560200958251954,
-      "macd": 2.7162055246352708
-    },
-    {
-      "symbol": "BE",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (65.9)",
-        "MACD bullish"
-      ],
-      "current_price": 139.22999572753906,
-      "rsi": 65.9379882860544,
-      "ma_20": 120.825,
-      "ma_50": 93.33280006408691,
-      "macd": 13.011816072530223
-    },
-    {
-      "symbol": "FOLD",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (66.1)",
-        "MACD bullish"
-      ],
-      "current_price": 9.0,
-      "rsi": 66.06059239916053,
-      "ma_20": 8.678499841690064,
-      "ma_50": 8.331999940872192,
-      "macd": 0.21230179079599587
-    },
-    {
-      "symbol": "U",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (64.0)",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 43.130001068115234,
-      "rsi": 63.99345445362029,
-      "ma_20": 37.52150039672851,
-      "ma_50": 40.084400024414066,
-      "macd": 0.46800663402900256
-    },
-    {
-      "symbol": "LC",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (63.3)",
-        "MACD bullish"
-      ],
-      "current_price": 18.860000610351562,
-      "rsi": 63.34165638275785,
-      "ma_20": 17.35550003051758,
-      "ma_50": 16.713400058746338,
-      "macd": 0.5761738755402703
-    },
-    {
-      "symbol": "LB.TO",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (65.7)",
-        "MACD bullish"
-      ],
-      "current_price": 33.16999816894531,
-      "rsi": 65.67152707003649,
-      "ma_20": 32.64749984741211,
-      "ma_50": 32.3401448059082,
-      "macd": 0.2652779367488378
-    },
-    {
-      "symbol": "ENB.TO",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (57.2)",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 67.1500015258789,
-      "rsi": 57.16668997876479,
-      "ma_20": 66.0990005493164,
-      "ma_50": 67.2688003540039,
-      "macd": -0.2879628706390207
-    },
-    {
-      "symbol": "CVE.TO",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (67.6)",
-        "MACD bullish"
-      ],
-      "current_price": 25.030000686645508,
-      "rsi": 67.62295946963212,
-      "ma_20": 23.83849983215332,
-      "ma_50": 23.71581413269043,
-      "macd": 0.12094986719019829
-    },
-    {
-      "symbol": "MEG.TO",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (65.2)",
-        "MACD bullish"
-      ],
-      "current_price": 30.290000915527344,
-      "rsi": 65.19725376801475,
-      "ma_20": 29.54900007247925,
-      "ma_50": 29.00447494506836,
-      "macd": 0.28342577826848014
-    },
-    {
-      "symbol": "OVV.TO",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (68.2)",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 54.459999084472656,
-      "rsi": 68.23866974093873,
-      "ma_20": 52.10899982452393,
-      "ma_50": 55.06344856262207,
-      "macd": -0.3093430732819229
-    },
-    {
-      "symbol": "SGY.TO",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (65.9)",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 6.929999828338623,
-      "rsi": 65.87946786021783,
-      "ma_20": 6.668483996391297,
-      "ma_50": 6.831620445251465,
-      "macd": -0.04927797672851497
-    },
-    {
-      "symbol": "PEY.TO",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (69.3)",
-        "MACD bullish"
-      ],
-      "current_price": 21.1299991607666,
-      "rsi": 69.30971018092347,
-      "ma_20": 20.037816429138182,
-      "ma_50": 19.085925636291503,
-      "macd": 0.5148116492580073
-    },
-    {
-      "symbol": "AAV.TO",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (69.9)",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 12.119999885559082,
-      "rsi": 69.85645605523827,
-      "ma_20": 11.41899995803833,
-      "ma_50": 11.480999946594238,
-      "macd": 0.11330409675608344
-    },
-    {
-      "symbol": "K.TO",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (64.6)",
-        "MACD bullish"
-      ],
-      "current_price": 35.65999984741211,
-      "rsi": 64.63414958332405,
-      "ma_20": 34.003500080108644,
-      "ma_50": 33.162000007629395,
-      "macd": 0.10995875531233423
-    },
-    {
-      "symbol": "CS.TO",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (64.3)",
-        "MACD bullish"
-      ],
-      "current_price": 12.300000190734863,
-      "rsi": 64.25438674459747,
-      "ma_20": 11.80750002861023,
-      "ma_50": 11.336199951171874,
-      "macd": 0.15606243911818218
-    },
-    {
-      "symbol": "IMG.TO",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (64.1)",
-        "MACD bullish"
-      ],
-      "current_price": 18.6299991607666,
-      "rsi": 64.06532824568588,
-      "ma_20": 17.394499921798705,
-      "ma_50": 16.60079999923706,
-      "macd": 0.05693130588839779
-    },
-    {
-      "symbol": "EQX.TO",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (66.3)",
-        "MACD bullish"
-      ],
-      "current_price": 17.100000381469727,
-      "rsi": 66.34241129625087,
-      "ma_20": 15.927999925613403,
-      "ma_50": 15.177599983215332,
-      "macd": 0.18762227008268262
-    },
-    {
-      "symbol": "BEP-UN.TO",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (67.1)",
-        "MACD bullish"
-      ],
-      "current_price": 43.63999938964844,
-      "rsi": 67.12203314339753,
-      "ma_20": 41.71050033569336,
-      "ma_50": 38.15720016479492,
-      "macd": 1.614893300769019
-    },
-    {
-      "symbol": "MKP.TO",
-      "score": 7,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (62.3)",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 21.969999313354492,
-      "rsi": 62.25806669935821,
-      "ma_20": 21.336000061035158,
-      "ma_50": 21.492766876220703,
-      "macd": 0.1251111948476904
+      "symbol": "QCOM",
+      "company_name": "QUALCOMM Incorporated",
+      "current_price": 159.22,
+      "change": 2.85,
+      "change_pct": 1.82,
+      "rsi": 41.3,
+      "volume_ratio": 0.1,
+      "market_cap": 171798396928,
+      "sector": "Technology",
+      "score": 6,
+      "signals": []
     },
     {
       "symbol": "DDOG",
+      "company_name": "Datadog, Inc.",
+      "current_price": 130.13,
+      "change": 6.67,
+      "change_pct": 5.4,
+      "rsi": 77.3,
+      "volume_ratio": 0.3,
+      "market_cap": 45632786432,
+      "sector": "Technology",
       "score": 6,
       "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 199.72000122070312,
-      "rsi": 82.59110775331683,
-      "ma_20": 162.59375076293946,
-      "ma_50": 151.13290130615235,
-      "macd": 8.97360141493624
+        "Strong momentum",
+        "Overbought",
+        "Bullish trend"
+      ]
     },
     {
-      "symbol": "PLTR",
+      "symbol": "OKTA",
+      "company_name": "Okta, Inc.",
+      "current_price": 91.19,
+      "change": 2.25,
+      "change_pct": 2.53,
+      "rsi": 45.1,
+      "volume_ratio": 0.0,
+      "market_cap": 16161624064,
+      "sector": "Technology",
       "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (56.2)",
-        "High volume"
-      ],
-      "current_price": 193.61000061035156,
-      "rsi": 56.24226787406172,
-      "ma_20": 186.21749877929688,
-      "ma_50": 178.47199981689454,
-      "macd": 2.5549761958032775
+      "signals": []
     },
     {
-      "symbol": "LLY",
+      "symbol": "BAC",
+      "company_name": "Bank of America Corporation",
+      "current_price": 52.87,
+      "change": 0.8,
+      "change_pct": 1.54,
+      "rsi": 56.7,
+      "volume_ratio": 0.1,
+      "market_cap": 386082930688,
+      "sector": "Financial Services",
       "score": 6,
       "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 966.6400146484375,
-      "rsi": 88.1490789253995,
-      "ma_20": 852.6815002441406,
-      "ma_50": 804.80919921875,
-      "macd": 37.59487873329658
+        "Bullish trend"
+      ]
     },
     {
-      "symbol": "BMY",
+      "symbol": "PYPL",
+      "company_name": "PayPal Holdings, Inc.",
+      "current_price": 57.03,
+      "change": 1.14,
+      "change_pct": 2.03,
+      "rsi": 53.6,
+      "volume_ratio": 0.2,
+      "market_cap": 54480457728,
+      "sector": "Financial Services",
       "score": 6,
       "signals": [
-        "Above 20-day MA",
-        "RSI healthy (68.0)",
-        "MACD bullish"
-      ],
-      "current_price": 47.2599983215332,
-      "rsi": 67.98939756555752,
-      "ma_20": 44.688500022888185,
-      "ma_50": 44.96877914428711,
-      "macd": 0.5784540262855558
+        "Bullish trend"
+      ]
     },
     {
-      "symbol": "GS",
+      "symbol": "JNJ",
+      "company_name": "Johnson & Johnson",
+      "current_price": 219.83,
+      "change": 1.82,
+      "change_pct": 0.83,
+      "rsi": 53.8,
+      "volume_ratio": 0.2,
+      "market_cap": 529635344384,
+      "sector": "Healthcare",
       "score": 6,
       "signals": [
-        "Above 20-day MA",
-        "RSI healthy (67.7)",
-        "MACD bullish"
-      ],
-      "current_price": 797.2000122070312,
-      "rsi": 67.72399793266206,
-      "ma_20": 776.717007446289,
-      "ma_50": 778.9956042480469,
-      "macd": 4.516613358193922
+        "Bullish trend"
+      ]
     },
     {
-      "symbol": "SPGI",
+      "symbol": "PFE",
+      "company_name": "Pfizer Inc.",
+      "current_price": 26.09,
+      "change": 0.2,
+      "change_pct": 0.77,
+      "rsi": 60.6,
+      "volume_ratio": 0.1,
+      "market_cap": 148368539648,
+      "sector": "Healthcare",
       "score": 6,
       "signals": [
-        "Above 20-day MA",
-        "RSI healthy (55.1)",
-        "MACD bullish"
-      ],
-      "current_price": 493.8399963378906,
-      "rsi": 55.14697056462604,
-      "ma_20": 487.1910003662109,
-      "ma_50": 501.0067993164063,
-      "macd": -0.015382582419135815
+        "Bullish trend"
+      ]
     },
     {
-      "symbol": "MCO",
+      "symbol": "HD",
+      "company_name": "The Home Depot, Inc.",
+      "current_price": 385.56,
+      "change": 0.92,
+      "change_pct": 0.24,
+      "rsi": 69.4,
+      "volume_ratio": 0.2,
+      "market_cap": 383829409792,
+      "sector": "Consumer Cyclical",
       "score": 6,
       "signals": [
-        "Above 20-day MA",
-        "RSI healthy (50.0)",
-        "MACD bullish"
-      ],
-      "current_price": 484.92999267578125,
-      "rsi": 50.00569396951167,
-      "ma_20": 481.67250061035156,
-      "ma_50": 487.5466009521484,
-      "macd": -0.011908895239059802
+        "Bullish trend"
+      ]
     },
     {
-      "symbol": "COF",
+      "symbol": "LOW",
+      "company_name": "Lowe's Companies, Inc.",
+      "current_price": 278.3,
+      "change": 1.19,
+      "change_pct": 0.43,
+      "rsi": 56.1,
+      "volume_ratio": 0.1,
+      "market_cap": 156109996032,
+      "sector": "Consumer Cyclical",
       "score": 6,
       "signals": [
-        "Above 20-day MA",
-        "RSI healthy (55.8)",
-        "MACD bullish"
-      ],
-      "current_price": 220.36000061035156,
-      "rsi": 55.84186220870672,
-      "ma_20": 218.07099990844728,
-      "ma_50": 219.20040100097657,
-      "macd": 0.715683917208537
-    },
-    {
-      "symbol": "SYF",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (54.6)",
-        "MACD bullish"
-      ],
-      "current_price": 74.69999694824219,
-      "rsi": 54.570273249122955,
-      "ma_20": 73.17257461547851,
-      "ma_50": 73.31900329589844,
-      "macd": 0.40475796097273076
-    },
-    {
-      "symbol": "PGR",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (44.2)",
-        "MACD bullish"
-      ],
-      "current_price": 217.52999877929688,
-      "rsi": 44.20061591767124,
-      "ma_20": 216.68100051879884,
-      "ma_50": 232.92954315185546,
-      "macd": -6.3365639605914055
+        "Bullish trend"
+      ]
     },
     {
       "symbol": "DIS",
+      "company_name": "The Walt Disney Company",
+      "current_price": 113.78,
+      "change": 0.59,
+      "change_pct": 0.52,
+      "rsi": 52.8,
+      "volume_ratio": 0.1,
+      "market_cap": 204568903680,
+      "sector": "Communication Services",
       "score": 6,
       "signals": [
-        "Above 20-day MA",
-        "RSI healthy (41.2)",
-        "MACD bullish"
-      ],
-      "current_price": 112.23999786376953,
-      "rsi": 41.15118579989631,
-      "ma_20": 111.7294994354248,
-      "ma_50": 113.334599609375,
-      "macd": -0.412500030814698
+        "Bullish trend"
+      ]
+    }
+  ],
+  "all_stocks": [
+    {
+      "symbol": "DDOG",
+      "company_name": "Datadog, Inc.",
+      "current_price": 130.13,
+      "change": 6.67,
+      "change_pct": 5.4,
+      "rsi": 77.3,
+      "volume_ratio": 0.3,
+      "market_cap": 45632786432,
+      "sector": "Technology",
+      "score": 6,
+      "signals": [
+        "Strong momentum",
+        "Overbought",
+        "Bullish trend"
+      ]
     },
     {
-      "symbol": "VZ",
+      "symbol": "META",
+      "company_name": "Meta Platforms, Inc.",
+      "current_price": 631.16,
+      "change": 18.2,
+      "change_pct": 2.97,
+      "rsi": 61.8,
+      "volume_ratio": 0.3,
+      "market_cap": 1590856122368,
+      "sector": "Communication Services",
+      "score": 7,
+      "signals": [
+        "Bullish trend"
+      ]
+    },
+    {
+      "symbol": "OKTA",
+      "company_name": "Okta, Inc.",
+      "current_price": 91.19,
+      "change": 2.25,
+      "change_pct": 2.53,
+      "rsi": 45.1,
+      "volume_ratio": 0.0,
+      "market_cap": 16161624064,
+      "sector": "Technology",
+      "score": 6,
+      "signals": []
+    },
+    {
+      "symbol": "ORCL",
+      "company_name": "Oracle Corporation",
+      "current_price": 177.52,
+      "change": 3.64,
+      "change_pct": 2.09,
+      "rsi": 22.1,
+      "volume_ratio": 0.2,
+      "market_cap": 510038048768,
+      "sector": "Technology",
+      "score": 5,
+      "signals": [
+        "Oversold"
+      ]
+    },
+    {
+      "symbol": "PYPL",
+      "company_name": "PayPal Holdings, Inc.",
+      "current_price": 57.03,
+      "change": 1.14,
+      "change_pct": 2.03,
+      "rsi": 53.6,
+      "volume_ratio": 0.2,
+      "market_cap": 54480457728,
+      "sector": "Financial Services",
       "score": 6,
       "signals": [
-        "Above 20-day MA",
-        "RSI healthy (46.8)",
-        "MACD bullish"
-      ],
-      "current_price": 39.849998474121094,
-      "rsi": 46.80850488200139,
-      "ma_20": 39.77999973297119,
-      "ma_50": 41.35992042541504,
-      "macd": -0.4214412872194302
+        "Bullish trend"
+      ]
+    },
+    {
+      "symbol": "QCOM",
+      "company_name": "QUALCOMM Incorporated",
+      "current_price": 159.22,
+      "change": 2.85,
+      "change_pct": 1.82,
+      "rsi": 41.3,
+      "volume_ratio": 0.1,
+      "market_cap": 171798396928,
+      "sector": "Technology",
+      "score": 6,
+      "signals": []
+    },
+    {
+      "symbol": "BAC",
+      "company_name": "Bank of America Corporation",
+      "current_price": 52.87,
+      "change": 0.8,
+      "change_pct": 1.54,
+      "rsi": 56.7,
+      "volume_ratio": 0.1,
+      "market_cap": 386082930688,
+      "sector": "Financial Services",
+      "score": 6,
+      "signals": [
+        "Bullish trend"
+      ]
+    },
+    {
+      "symbol": "UNH",
+      "company_name": "UnitedHealth Group Incorporated",
+      "current_price": 353.06,
+      "change": 5.31,
+      "change_pct": 1.53,
+      "rsi": 73.5,
+      "volume_ratio": 0.2,
+      "market_cap": 319815385088,
+      "sector": "Healthcare",
+      "score": 5,
+      "signals": [
+        "Overbought",
+        "Bullish trend"
+      ]
+    },
+    {
+      "symbol": "AI",
+      "company_name": "C3.ai, Inc.",
+      "current_price": 12.81,
+      "change": 0.19,
+      "change_pct": 1.51,
+      "rsi": 23.5,
+      "volume_ratio": 0.1,
+      "market_cap": 1803049600,
+      "sector": "Technology",
+      "score": 2,
+      "signals": [
+        "Oversold"
+      ]
+    },
+    {
+      "symbol": "ADBE",
+      "company_name": "Adobe Inc.",
+      "current_price": 298.48,
+      "change": 4.26,
+      "change_pct": 1.45,
+      "rsi": 37.2,
+      "volume_ratio": 0.1,
+      "market_cap": 124943728640,
+      "sector": "Technology",
+      "score": 5,
+      "signals": []
+    },
+    {
+      "symbol": "SBUX",
+      "company_name": "Starbucks Corporation",
+      "current_price": 97.66,
+      "change": 1.23,
+      "change_pct": 1.28,
+      "rsi": 94.2,
+      "volume_ratio": 0.1,
+      "market_cap": 111003705344,
+      "sector": "Consumer Cyclical",
+      "score": 4,
+      "signals": [
+        "Overbought",
+        "Bullish trend"
+      ]
+    },
+    {
+      "symbol": "GOOGL",
+      "company_name": "Alphabet Inc.",
+      "current_price": 332.55,
+      "change": 4.17,
+      "change_pct": 1.27,
+      "rsi": 49.4,
+      "volume_ratio": 0.2,
+      "market_cap": 4027946631168,
+      "sector": "Communication Services",
+      "score": 6,
+      "signals": []
+    },
+    {
+      "symbol": "AVGO",
+      "company_name": "Broadcom Inc.",
+      "current_price": 332.63,
+      "change": 3.83,
+      "change_pct": 1.16,
+      "rsi": 35.3,
+      "volume_ratio": 0.2,
+      "market_cap": 1577089892352,
+      "sector": "Technology",
+      "score": 5,
+      "signals": []
+    },
+    {
+      "symbol": "JPM",
+      "company_name": "JPMorgan Chase & Co.",
+      "current_price": 305.5,
+      "change": 3.46,
+      "change_pct": 1.15,
+      "rsi": 39.0,
+      "volume_ratio": 0.1,
+      "market_cap": 831678382080,
+      "sector": "Financial Services",
+      "score": 5,
+      "signals": []
+    },
+    {
+      "symbol": "PLTR",
+      "company_name": "Palantir Technologies Inc.",
+      "current_price": 167.0,
+      "change": 1.67,
+      "change_pct": 1.01,
+      "rsi": 12.5,
+      "volume_ratio": 0.2,
+      "market_cap": 398033846272,
+      "sector": "Technology",
+      "score": 4,
+      "signals": [
+        "Oversold"
+      ]
+    },
+    {
+      "symbol": "TSLA",
+      "company_name": "Tesla, Inc.",
+      "current_price": 435.75,
+      "change": 4.31,
+      "change_pct": 1.0,
+      "rsi": 46.1,
+      "volume_ratio": 0.2,
+      "market_cap": 1449192456192,
+      "sector": "Consumer Cyclical",
+      "score": 6,
+      "signals": []
+    },
+    {
+      "symbol": "NVDA",
+      "company_name": "NVIDIA Corporation",
+      "current_price": 184.99,
+      "change": 1.81,
+      "change_pct": 0.99,
+      "rsi": 43.5,
+      "volume_ratio": 0.1,
+      "market_cap": 4503954259968,
+      "sector": "Technology",
+      "score": 6,
+      "signals": []
+    },
+    {
+      "symbol": "CRWD",
+      "company_name": "CrowdStrike Holdings, Inc.",
+      "current_price": 450.08,
+      "change": 4.2,
+      "change_pct": 0.94,
+      "rsi": 37.4,
+      "volume_ratio": 0.1,
+      "market_cap": 113463205888,
+      "sector": "Technology",
+      "score": 5,
+      "signals": []
+    },
+    {
+      "symbol": "BLK",
+      "company_name": "BlackRock, Inc.",
+      "current_price": 1138.01,
+      "change": 10.16,
+      "change_pct": 0.9,
+      "rsi": 39.4,
+      "volume_ratio": 0.1,
+      "market_cap": 176562896896,
+      "sector": "Financial Services",
+      "score": 5,
+      "signals": []
+    },
+    {
+      "symbol": "JNJ",
+      "company_name": "Johnson & Johnson",
+      "current_price": 219.83,
+      "change": 1.82,
+      "change_pct": 0.83,
+      "rsi": 53.8,
+      "volume_ratio": 0.2,
+      "market_cap": 529635344384,
+      "sector": "Healthcare",
+      "score": 6,
+      "signals": [
+        "Bullish trend"
+      ]
+    },
+    {
+      "symbol": "PFE",
+      "company_name": "Pfizer Inc.",
+      "current_price": 26.09,
+      "change": 0.2,
+      "change_pct": 0.77,
+      "rsi": 60.6,
+      "volume_ratio": 0.1,
+      "market_cap": 148368539648,
+      "sector": "Healthcare",
+      "score": 6,
+      "signals": [
+        "Bullish trend"
+      ]
+    },
+    {
+      "symbol": "NKE",
+      "company_name": "NIKE, Inc.",
+      "current_price": 65.85,
+      "change": 0.44,
+      "change_pct": 0.68,
+      "rsi": 69.9,
+      "volume_ratio": 0.1,
+      "market_cap": 97489461248,
+      "sector": "Consumer Cyclical",
+      "score": 5,
+      "signals": [
+        "Bullish trend"
+      ]
+    },
+    {
+      "symbol": "AAPL",
+      "company_name": "Apple Inc.",
+      "current_price": 249.18,
+      "change": 1.53,
+      "change_pct": 0.62,
+      "rsi": 17.7,
+      "volume_ratio": 0.1,
+      "market_cap": 3682119450624,
+      "sector": "Technology",
+      "score": 4,
+      "signals": [
+        "Oversold"
+      ]
+    },
+    {
+      "symbol": "GS",
+      "company_name": "The Goldman Sachs Group, Inc.",
+      "current_price": 958.43,
+      "change": 5.42,
+      "change_pct": 0.57,
+      "rsi": 31.7,
+      "volume_ratio": 0.1,
+      "market_cap": 290136981504,
+      "sector": "Financial Services",
+      "score": 5,
+      "signals": []
+    },
+    {
+      "symbol": "CRM",
+      "company_name": "Salesforce, Inc.",
+      "current_price": 222.79,
+      "change": 1.21,
+      "change_pct": 0.55,
+      "rsi": 16.8,
+      "volume_ratio": 0.1,
+      "market_cap": 212057997312,
+      "sector": "Technology",
+      "score": 4,
+      "signals": [
+        "Oversold"
+      ]
+    },
+    {
+      "symbol": "SNOW",
+      "company_name": "Snowflake Inc.",
+      "current_price": 207.6,
+      "change": 1.1,
+      "change_pct": 0.54,
+      "rsi": 49.2,
+      "volume_ratio": 0.1,
+      "market_cap": 71042433024,
+      "sector": "Technology",
+      "score": 5,
+      "signals": []
+    },
+    {
+      "symbol": "TMO",
+      "company_name": "Thermo Fisher Scientific Inc.",
+      "current_price": 639.76,
+      "change": 3.46,
+      "change_pct": 0.54,
+      "rsi": 78.0,
+      "volume_ratio": 0.1,
+      "market_cap": 240361111552,
+      "sector": "Healthcare",
+      "score": 5,
+      "signals": [
+        "Overbought",
+        "Bullish trend"
+      ]
+    },
+    {
+      "symbol": "DIS",
+      "company_name": "The Walt Disney Company",
+      "current_price": 113.78,
+      "change": 0.59,
+      "change_pct": 0.52,
+      "rsi": 52.8,
+      "volume_ratio": 0.1,
+      "market_cap": 204568903680,
+      "sector": "Communication Services",
+      "score": 6,
+      "signals": [
+        "Bullish trend"
+      ]
+    },
+    {
+      "symbol": "MSFT",
+      "company_name": "Microsoft Corporation",
+      "current_price": 446.36,
+      "change": 2.25,
+      "change_pct": 0.51,
+      "rsi": 25.7,
+      "volume_ratio": 0.1,
+      "market_cap": 3317831041024,
+      "sector": "Technology",
+      "score": 4,
+      "signals": [
+        "Oversold"
+      ]
+    },
+    {
+      "symbol": "NET",
+      "company_name": "Cloudflare, Inc.",
+      "current_price": 170.79,
+      "change": 0.82,
+      "change_pct": 0.48,
+      "rsi": 5.6,
+      "volume_ratio": 0.1,
+      "market_cap": 59824517120,
+      "sector": "Technology",
+      "score": 3,
+      "signals": [
+        "Oversold"
+      ]
+    },
+    {
+      "symbol": "LOW",
+      "company_name": "Lowe's Companies, Inc.",
+      "current_price": 278.3,
+      "change": 1.19,
+      "change_pct": 0.43,
+      "rsi": 56.1,
+      "volume_ratio": 0.1,
+      "market_cap": 156109996032,
+      "sector": "Consumer Cyclical",
+      "score": 6,
+      "signals": [
+        "Bullish trend"
+      ]
+    },
+    {
+      "symbol": "SLB",
+      "company_name": "SLB N.V.",
+      "current_price": 48.73,
+      "change": 0.21,
+      "change_pct": 0.43,
+      "rsi": 89.7,
+      "volume_ratio": 0.2,
+      "market_cap": 72798896128,
+      "sector": "Energy",
+      "score": 3,
+      "signals": [
+        "Overbought",
+        "Bullish trend"
+      ]
+    },
+    {
+      "symbol": "AMD",
+      "company_name": "Advanced Micro Devices, Inc.",
+      "current_price": 250.77,
+      "change": 0.97,
+      "change_pct": 0.39,
+      "rsi": 100.0,
+      "volume_ratio": 0.2,
+      "market_cap": 408215158784,
+      "sector": "Technology",
+      "score": 4,
+      "signals": [
+        "Overbought",
+        "Bullish trend"
+      ]
+    },
+    {
+      "symbol": "V",
+      "company_name": "Visa Inc.",
+      "current_price": 326.1,
+      "change": 0.82,
+      "change_pct": 0.25,
+      "rsi": 31.2,
+      "volume_ratio": 0.1,
+      "market_cap": 629339652096,
+      "sector": "Financial Services",
+      "score": 5,
+      "signals": []
+    },
+    {
+      "symbol": "HD",
+      "company_name": "The Home Depot, Inc.",
+      "current_price": 385.56,
+      "change": 0.92,
+      "change_pct": 0.24,
+      "rsi": 69.4,
+      "volume_ratio": 0.2,
+      "market_cap": 383829409792,
+      "sector": "Consumer Cyclical",
+      "score": 6,
+      "signals": [
+        "Bullish trend"
+      ]
+    },
+    {
+      "symbol": "MCD",
+      "company_name": "McDonald's Corporation",
+      "current_price": 306.41,
+      "change": 0.72,
+      "change_pct": 0.24,
+      "rsi": 38.2,
+      "volume_ratio": 0.1,
+      "market_cap": 218655539200,
+      "sector": "Consumer Cyclical",
+      "score": 5,
+      "signals": []
+    },
+    {
+      "symbol": "ZS",
+      "company_name": "Zscaler, Inc.",
+      "current_price": 209.1,
+      "change": 0.44,
+      "change_pct": 0.21,
+      "rsi": 44.7,
+      "volume_ratio": 0.1,
+      "market_cap": 33345429504,
+      "sector": "Technology",
+      "score": 5,
+      "signals": []
+    },
+    {
+      "symbol": "LLY",
+      "company_name": "Eli Lilly and Company",
+      "current_price": 1080.76,
+      "change": 2.24,
+      "change_pct": 0.21,
+      "rsi": 100.0,
+      "volume_ratio": 0.1,
+      "market_cap": 968854601728,
+      "sector": "Healthcare",
+      "score": 4,
+      "signals": [
+        "Overbought",
+        "Bullish trend"
+      ]
+    },
+    {
+      "symbol": "AMZN",
+      "company_name": "Amazon.com, Inc.",
+      "current_price": 231.71,
+      "change": 0.41,
+      "change_pct": 0.18,
+      "rsi": 16.8,
+      "volume_ratio": 0.1,
+      "market_cap": 2476976373760,
+      "sector": "Consumer Cyclical",
+      "score": 4,
+      "signals": [
+        "Oversold"
+      ]
+    },
+    {
+      "symbol": "ABBV",
+      "company_name": "AbbVie Inc.",
+      "current_price": 215.96,
+      "change": -0.19,
+      "change_pct": -0.09,
+      "rsi": 64.2,
+      "volume_ratio": 0.1,
+      "market_cap": 381737402368,
+      "sector": "Healthcare",
+      "score": 5,
+      "signals": []
+    },
+    {
+      "symbol": "MA",
+      "company_name": "Mastercard Incorporated",
+      "current_price": 526.39,
+      "change": -1.18,
+      "change_pct": -0.22,
+      "rsi": 0.0,
+      "volume_ratio": 0.1,
+      "market_cap": 475876392960,
+      "sector": "Financial Services",
+      "score": 3,
+      "signals": [
+        "Oversold"
+      ]
     },
     {
       "symbol": "CVX",
-      "score": 6,
+      "company_name": "Chevron Corporation",
+      "current_price": 166.27,
+      "change": -0.46,
+      "change_pct": -0.28,
+      "rsi": 51.9,
+      "volume_ratio": 0.1,
+      "market_cap": 335004532736,
+      "sector": "Energy",
+      "score": 5,
+      "signals": []
+    },
+    {
+      "symbol": "MPC",
+      "company_name": "Marathon Petroleum Corporation",
+      "current_price": 176.85,
+      "change": -0.63,
+      "change_pct": -0.36,
+      "rsi": 43.7,
+      "volume_ratio": 0.1,
+      "market_cap": 53764472832,
+      "sector": "Energy",
+      "score": 4,
+      "signals": []
+    },
+    {
+      "symbol": "MS",
+      "company_name": "Morgan Stanley",
+      "current_price": 182.63,
+      "change": -0.69,
+      "change_pct": -0.38,
+      "rsi": 11.1,
+      "volume_ratio": 0.1,
+      "market_cap": 290255568896,
+      "sector": "Financial Services",
+      "score": 3,
       "signals": [
-        "Above 20-day MA",
-        "RSI healthy (54.7)",
-        "MACD bullish"
-      ],
-      "current_price": 155.64999389648438,
-      "rsi": 54.650005073551235,
-      "ma_20": 154.23500061035156,
-      "ma_50": 155.43000030517578,
-      "macd": -0.10089404627453291
+        "Oversold"
+      ]
+    },
+    {
+      "symbol": "COST",
+      "company_name": "Costco Wholesale Corporation",
+      "current_price": 978.82,
+      "change": -4.04,
+      "change_pct": -0.41,
+      "rsi": 86.6,
+      "volume_ratio": 0.1,
+      "market_cap": 434552438784,
+      "sector": "Consumer Defensive",
+      "score": 3,
+      "signals": [
+        "Overbought"
+      ]
     },
     {
       "symbol": "COP",
-      "score": 6,
+      "company_name": "ConocoPhillips",
+      "current_price": 96.53,
+      "change": -0.62,
+      "change_pct": -0.64,
+      "rsi": 28.8,
+      "volume_ratio": 0.1,
+      "market_cap": 120572895232,
+      "sector": "Energy",
+      "score": 3,
       "signals": [
-        "Above 20-day MA",
-        "RSI healthy (55.6)",
-        "MACD bullish"
-      ],
-      "current_price": 88.2300033569336,
-      "rsi": 55.64515938190556,
-      "ma_20": 87.68750114440918,
-      "ma_50": 91.36880035400391,
-      "macd": -1.1076871826659414
+        "Oversold"
+      ]
+    },
+    {
+      "symbol": "INTC",
+      "company_name": "Intel Corporation",
+      "current_price": 53.88,
+      "change": -0.38,
+      "change_pct": -0.69,
+      "rsi": 80.8,
+      "volume_ratio": 0.3,
+      "market_cap": 256983744512,
+      "sector": "Technology",
+      "score": 3,
+      "signals": [
+        "Overbought"
+      ]
+    },
+    {
+      "symbol": "WMT",
+      "company_name": "Walmart Inc.",
+      "current_price": 118.41,
+      "change": -0.95,
+      "change_pct": -0.8,
+      "rsi": 37.2,
+      "volume_ratio": 0.0,
+      "market_cap": 944145039360,
+      "sector": "Consumer Defensive",
+      "score": 4,
+      "signals": []
+    },
+    {
+      "symbol": "MRK",
+      "company_name": "Merck & Co., Inc.",
+      "current_price": 110.16,
+      "change": -0.95,
+      "change_pct": -0.86,
+      "rsi": 42.5,
+      "volume_ratio": 0.1,
+      "market_cap": 275155812352,
+      "sector": "Healthcare",
+      "score": 5,
+      "signals": []
+    },
+    {
+      "symbol": "XOM",
+      "company_name": "Exxon Mobil Corporation",
+      "current_price": 132.07,
+      "change": -1.55,
+      "change_pct": -1.16,
+      "rsi": 74.4,
+      "volume_ratio": 0.1,
+      "market_cap": 563047104512,
+      "sector": "Energy",
+      "score": 4,
+      "signals": [
+        "Overbought"
+      ]
     },
     {
       "symbol": "EOG",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (53.1)",
-        "MACD bullish"
-      ],
-      "current_price": 106.56999969482422,
-      "rsi": 53.13608858407416,
-      "ma_20": 106.21445426940917,
-      "ma_50": 111.29706634521484,
-      "macd": -1.4256318326201551
+      "company_name": "EOG Resources, Inc.",
+      "current_price": 106.69,
+      "change": -1.36,
+      "change_pct": -1.25,
+      "rsi": 47.4,
+      "volume_ratio": 0.0,
+      "market_cap": 58254766080,
+      "sector": "Energy",
+      "score": 4,
+      "signals": []
     },
     {
-      "symbol": "KMI",
-      "score": 6,
+      "symbol": "NFLX",
+      "company_name": "Netflix, Inc.",
+      "current_price": 84.15,
+      "change": -1.21,
+      "change_pct": -1.41,
+      "rsi": 0.0,
+      "volume_ratio": 0.2,
+      "market_cap": 356594057216,
+      "sector": "Communication Services",
+      "score": 3,
       "signals": [
-        "Above 20-day MA",
-        "RSI healthy (48.4)",
-        "MACD bullish"
-      ],
-      "current_price": 27.059999465942383,
-      "rsi": 48.42596974119819,
-      "ma_20": 26.398958110809325,
-      "ma_50": 26.893974609375,
-      "macd": -0.1945797439519339
+        "Oversold"
+      ]
     },
     {
-      "symbol": "OKE",
-      "score": 6,
+      "symbol": "ABT",
+      "company_name": "Abbott Laboratories",
+      "current_price": 113.08,
+      "change": -7.65,
+      "change_pct": -6.34,
+      "rsi": 0.0,
+      "volume_ratio": 1.0,
+      "market_cap": 196811112448,
+      "sector": "Healthcare",
+      "score": 3,
       "signals": [
-        "Above 20-day MA",
-        "RSI healthy (50.0)",
-        "MACD bullish"
-      ],
-      "current_price": 67.9000015258789,
-      "rsi": 50.04496928474084,
-      "ma_20": 67.17969703674316,
-      "ma_50": 69.77561721801757,
-      "macd": -0.7898931105273306
-    },
-    {
-      "symbol": "WMB",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (44.0)",
-        "MACD bullish"
-      ],
-      "current_price": 60.599998474121094,
-      "rsi": 43.958326545025486,
-      "ma_20": 59.70149955749512,
-      "ma_50": 60.35846313476563,
-      "macd": -0.7246257300776335
-    },
-    {
-      "symbol": "EPD",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (67.2)",
-        "MACD bullish"
-      ],
-      "current_price": 31.280000686645508,
-      "rsi": 67.20282615605683,
-      "ma_20": 30.50278377532959,
-      "ma_50": 30.816020736694338,
-      "macd": 0.09088731133451589
-    },
-    {
-      "symbol": "BKR",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (59.4)",
-        "MACD bullish"
-      ],
-      "current_price": 48.79999923706055,
-      "rsi": 59.42521460413133,
-      "ma_20": 46.88454113006592,
-      "ma_50": 47.09695587158203,
-      "macd": 0.29013760056193405
-    },
-    {
-      "symbol": "DVN",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (66.1)",
-        "MACD bullish"
-      ],
-      "current_price": 33.91999816894531,
-      "rsi": 66.14581022272938,
-      "ma_20": 32.55749979019165,
-      "ma_50": 33.88394290924072,
-      "macd": -0.1804796416038812
-    },
-    {
-      "symbol": "FANG",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (55.3)",
-        "MACD bullish"
-      ],
-      "current_price": 144.72999572753906,
-      "rsi": 55.32976888705002,
-      "ma_20": 142.0984992980957,
-      "ma_50": 142.23140014648436,
-      "macd": -0.21002157192421578
-    },
-    {
-      "symbol": "APA",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (62.0)",
-        "MACD bullish"
-      ],
-      "current_price": 24.350000381469727,
-      "rsi": 61.96682389482286,
-      "ma_20": 22.914302349090576,
-      "ma_50": 23.22966537475586,
-      "macd": 0.04089094091128942
-    },
-    {
-      "symbol": "ROK",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 391.239990234375,
-      "rsi": 77.20071727114595,
-      "ma_20": 360.6285003662109,
-      "ma_50": 350.7042010498047,
-      "macd": 7.652501006252919
-    },
-    {
-      "symbol": "PCAR",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (47.0)",
-        "MACD bullish"
-      ],
-      "current_price": 98.9800033569336,
-      "rsi": 47.00621377616334,
-      "ma_20": 98.17900047302246,
-      "ma_50": 98.29220031738281,
-      "macd": 0.2832099273036164
-    },
-    {
-      "symbol": "ORLY",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (41.2)",
-        "MACD bullish"
-      ],
-      "current_price": 98.0999984741211,
-      "rsi": 41.22472322091144,
-      "ma_20": 97.69149971008301,
-      "ma_50": 101.82280014038086,
-      "macd": -1.827196457666986
-    },
-    {
-      "symbol": "WSM",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (53.9)",
-        "MACD bullish"
-      ],
-      "current_price": 194.64999389648438,
-      "rsi": 53.899070601455634,
-      "ma_20": 192.39534530639648,
-      "ma_50": 194.64880157470702,
-      "macd": 0.6759356907705012
-    },
-    {
-      "symbol": "ESS",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (47.9)",
-        "MACD bullish"
-      ],
-      "current_price": 260.1499938964844,
-      "rsi": 47.86162885071555,
-      "ma_20": 258.22350082397463,
-      "ma_50": 261.03364624023436,
-      "macd": -0.8992629161972445
-    },
-    {
-      "symbol": "NEE",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (53.0)",
-        "High volume"
-      ],
-      "current_price": 84.7699966430664,
-      "rsi": 53.046873137353074,
-      "ma_20": 83.49899978637696,
-      "ma_50": 78.43419982910156,
-      "macd": 0.9089980736064405
-    },
-    {
-      "symbol": "AFRM",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (52.3)",
-        "MACD bullish"
-      ],
-      "current_price": 76.08999633789062,
-      "rsi": 52.31347520015038,
-      "ma_20": 72.44349975585938,
-      "ma_50": 78.06320022583007,
-      "macd": -1.1969793784832063
-    },
-    {
-      "symbol": "CRON",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (54.8)",
-        "MACD bullish"
-      ],
-      "current_price": 2.559999942779541,
-      "rsi": 54.83870967741936,
-      "ma_20": 2.4915000081062315,
-      "ma_50": 2.5589999961853027,
-      "macd": -0.02057239130978683
-    },
-    {
-      "symbol": "GTBIF",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (52.8)",
-        "MACD bullish"
-      ],
-      "current_price": 7.769999980926514,
-      "rsi": 52.80612005958032,
-      "ma_20": 7.396100044250488,
-      "ma_50": 7.827020034790039,
-      "macd": -0.28140739894129574
-    },
-    {
-      "symbol": "SPG",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (58.2)",
-        "MACD bullish"
-      ],
-      "current_price": 182.94000244140625,
-      "rsi": 58.15302434451408,
-      "ma_20": 178.5115005493164,
-      "ma_50": 180.20281372070312,
-      "macd": 0.5552829331255111
-    },
-    {
-      "symbol": "BXP",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (48.6)",
-        "MACD bullish"
-      ],
-      "current_price": 71.61000061035156,
-      "rsi": 48.6280459438588,
-      "ma_20": 71.59200019836426,
-      "ma_50": 73.32157913208007,
-      "macd": -0.5432655662066139
-    },
-    {
-      "symbol": "EXPE",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 268.0400085449219,
-      "rsi": 72.98661148011712,
-      "ma_20": 223.53649978637696,
-      "ma_50": 220.56959930419922,
-      "macd": 6.137096069347336
-    },
-    {
-      "symbol": "IAC",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (50.4)",
-        "MACD bullish"
-      ],
-      "current_price": 34.0099983215332,
-      "rsi": 50.40649776142455,
-      "ma_20": 33.05799970626831,
-      "ma_50": 34.38200008392334,
-      "macd": -0.2779996621575549
-    },
-    {
-      "symbol": "RY.TO",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (55.8)",
-        "High volume"
-      ],
-      "current_price": 205.83999633789062,
-      "rsi": 55.83661251931966,
-      "ma_20": 204.90480346679686,
-      "ma_50": 202.51723266601562,
-      "macd": 0.9119022959492042
-    },
-    {
-      "symbol": "NA.TO",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 158.49000549316406,
-      "rsi": 70.76699028054264,
-      "ma_20": 154.83550186157225,
-      "ma_50": 150.9245867919922,
-      "macd": 1.9994677811292547
-    },
-    {
-      "symbol": "TRP.TO",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (65.7)",
-        "MACD bullish"
-      ],
-      "current_price": 74.7699966430664,
-      "rsi": 65.71753808187276,
-      "ma_20": 71.6305004119873,
-      "ma_50": 72.37382888793945,
-      "macd": -0.1261238977144501
-    },
-    {
-      "symbol": "POU.TO",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 23.469999313354492,
-      "rsi": 70.83334216365482,
-      "ma_20": 22.624499893188478,
-      "ma_50": 21.969565010070802,
-      "macd": 0.28482284858724327
-    },
-    {
-      "symbol": "CJ.TO",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 8.5600004196167,
-      "rsi": 79.89476740336275,
-      "ma_20": 7.883638548851013,
-      "ma_50": 7.725753259658814,
-      "macd": 0.1472018534530939
-    },
-    {
-      "symbol": "BIR.TO",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 6.860000133514404,
-      "rsi": 70.96773697359976,
-      "ma_20": 6.388499999046326,
-      "ma_50": 6.140247974395752,
-      "macd": 0.20547770354888417
-    },
-    {
-      "symbol": "NVA.TO",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 18.06999969482422,
-      "rsi": 87.85713823474215,
-      "ma_20": 16.56449999809265,
-      "ma_50": 16.02560001373291,
-      "macd": 0.4969880459016025
-    },
-    {
-      "symbol": "HWX.TO",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 7.989999771118164,
-      "rsi": 83.12500018626453,
-      "ma_20": 7.309499979019165,
-      "ma_50": 7.307204523086548,
-      "macd": 0.10250113177871079
-    },
-    {
-      "symbol": "GTE.TO",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (68.5)",
-        "MACD bullish"
-      ],
-      "current_price": 6.230000019073486,
-      "rsi": 68.47826218409752,
-      "ma_20": 5.510999989509583,
-      "ma_50": 5.714599962234497,
-      "macd": 0.004345558050280474
-    },
-    {
-      "symbol": "IPO.TO",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (67.4)",
-        "MACD bullish"
-      ],
-      "current_price": 12.699999809265137,
-      "rsi": 67.44186783338134,
-      "ma_20": 12.07699990272522,
-      "ma_50": 12.195825595855712,
-      "macd": 0.05078294012886353
-    },
-    {
-      "symbol": "ENS.TO",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (61.7)",
-        "MACD bullish"
-      ],
-      "current_price": 15.109999656677246,
-      "rsi": 61.71238062988385,
-      "ma_20": 14.791507577896118,
-      "ma_50": 15.052652473449706,
-      "macd": -0.05568344713666917
-    },
-    {
-      "symbol": "WPM.TO",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (64.4)",
-        "MACD bullish"
-      ],
-      "current_price": 143.38999938964844,
-      "rsi": 64.3670817923657,
-      "ma_20": 140.0375,
-      "ma_50": 144.70360015869142,
-      "macd": -2.2157194968489193
-    },
-    {
-      "symbol": "NTR.TO",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (61.9)",
-        "MACD bullish"
-      ],
-      "current_price": 82.62999725341797,
-      "rsi": 61.9075552484153,
-      "ma_20": 79.22449989318848,
-      "ma_50": 79.6201904296875,
-      "macd": -0.4079652298145504
-    },
-    {
-      "symbol": "FNV.TO",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (53.4)",
-        "MACD bullish"
-      ],
-      "current_price": 273.1000061035156,
-      "rsi": 53.35472175489391,
-      "ma_20": 271.7445007324219,
-      "ma_50": 280.6756256103516,
-      "macd": -5.046066214658879
-    },
-    {
-      "symbol": "QBR-B.TO",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 49.0,
-      "rsi": 90.89575397714542,
-      "ma_20": 44.61200008392334,
-      "ma_50": 43.88019981384277,
-      "macd": 0.9916810754601855
-    },
-    {
-      "symbol": "VI.TO",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (66.3)",
-        "High volume"
-      ],
-      "current_price": 46.689998626708984,
-      "rsi": 66.25006755231729,
-      "ma_20": 46.11574993133545,
-      "ma_50": 45.11634246826172,
-      "macd": 0.35631434451164523
-    },
-    {
-      "symbol": "CU.TO",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 41.9900016784668,
-      "rsi": 72.49644317229667,
-      "ma_20": 39.438741302490236,
-      "ma_50": 38.45256042480469,
-      "macd": 0.5462260187731971
-    },
-    {
-      "symbol": "MFC.TO",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "MACD bullish",
-        "High volume"
-      ],
-      "current_price": 46.849998474121094,
-      "rsi": 72.40703069302866,
-      "ma_20": 45.5894998550415,
-      "ma_50": 44.31539985656738,
-      "macd": 0.7061392786382328
-    },
-    {
-      "symbol": "GWO.TO",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "20-day > 50-day MA",
-        "RSI healthy (67.3)",
-        "High volume"
-      ],
-      "current_price": 60.029998779296875,
-      "rsi": 67.2932479089061,
-      "ma_20": 59.09799995422363,
-      "ma_50": 56.78,
-      "macd": 0.874408500031393
-    },
-    {
-      "symbol": "CCL-B.TO",
-      "score": 6,
-      "signals": [
-        "Above 20-day MA",
-        "RSI healthy (57.2)",
-        "MACD bullish"
-      ],
-      "current_price": 79.87000274658203,
-      "rsi": 57.24022524264273,
-      "ma_20": 78.26699943542481,
-      "ma_50": 78.89144287109374,
-      "macd": 0.10317486151554078
+        "Oversold"
+      ]
     }
   ],
-  "timestamp": "2025-11-18T01:05:17.414868-05:00",
-  "session": "AFTER_HOURS",
-  "analyzed_stocks": 400
+  "summary": {
+    "total_analyzed": 53,
+    "buy_count": 0,
+    "watch_count": 14,
+    "gainers": 39,
+    "losers": 14,
+    "market_sentiment": "BULLISH"
+  }
 }
