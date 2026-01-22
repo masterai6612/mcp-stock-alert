@@ -1,12 +1,12 @@
 {
   "mcpServers": {
     "yahoo-finance-enhanced": {
-      "command": "/Users/monie/Desktop/kiro/mcp-stock-alert copy/venv/bin/python",
+      "command": "/Users/monie/Desktop/kiro/mcp-stock-alert/venv/bin/python",
       "args": [
-        "/Users/monie/Desktop/kiro/mcp-stock-alert copy/yahoo_finance_mcp_server.py"
+        "/Users/monie/Desktop/kiro/mcp-stock-alert/yahoo_finance_mcp_server.py"
       ],
       "env": {},
-      "cwd": "/Users/monie/Desktop/kiro/mcp-stock-alert copy",
+      "cwd": "/Users/monie/Desktop/kiro/mcp-stock-alert",
       "disabled": false,
       "autoApprove": [
         "get_stock_quote",

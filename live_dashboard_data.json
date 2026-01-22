@@ -1,0 +1,95 @@
+{
+  "timestamp": "2026-01-22T09:33:10.193806",
+  "stocks": [
+    {
+      "symbol": "AAPL",
+      "price": 249.39,
+      "change": 1.74,
+      "change_pct": 0.7,
+      "rsi": NaN,
+      "volume_ratio": 0.0,
+      "market_cap": 3685074599936
+    },
+    {
+      "symbol": "MSFT",
+      "price": 447.76,
+      "change": 3.65,
+      "change_pct": 0.82,
+      "rsi": NaN,
+      "volume_ratio": 0.1,
+      "market_cap": 3328125698048
+    },
+    {
+      "symbol": "GOOGL",
+      "price": 334.98,
+      "change": 6.6,
+      "change_pct": 2.01,
+      "rsi": NaN,
+      "volume_ratio": 0.1,
+      "market_cap": 4057318817792
+    },
+    {
+      "symbol": "AMZN",
+      "price": 233.26,
+      "change": 1.96,
+      "change_pct": 0.85,
+      "rsi": NaN,
+      "volume_ratio": 0.1,
+      "market_cap": 2493546496000
+    },
+    {
+      "symbol": "NVDA",
+      "price": 185.54,
+      "change": 2.36,
+      "change_pct": 1.29,
+      "rsi": NaN,
+      "volume_ratio": 0.1,
+      "market_cap": 4517220843520
+    },
+    {
+      "symbol": "META",
+      "price": 630.77,
+      "change": 17.81,
+      "change_pct": 2.91,
+      "rsi": NaN,
+      "volume_ratio": 0.1,
+      "market_cap": 1589797584896
+    },
+    {
+      "symbol": "TSLA",
+      "price": 433.59,
+      "change": 2.15,
+      "change_pct": 0.5,
+      "rsi": NaN,
+      "volume_ratio": 0.1,
+      "market_cap": 1442075508736
+    },
+    {
+      "symbol": "NFLX",
+      "price": 84.13,
+      "change": -1.23,
+      "change_pct": -1.44,
+      "rsi": NaN,
+      "volume_ratio": 0.1,
+      "market_cap": 356507189248
+    },
+    {
+      "symbol": "AMD",
+      "price": 250.16,
+      "change": 0.36,
+      "change_pct": 0.15,
+      "rsi": NaN,
+      "volume_ratio": 0.1,
+      "market_cap": 407279009792
+    },
+    {
+      "symbol": "CRM",
+      "price": 223.21,
+      "change": 1.66,
+      "change_pct": 0.75,
+      "rsi": NaN,
+      "volume_ratio": 0.0,
+      "market_cap": 211971358720
+    }
+  ]
+}
