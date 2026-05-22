@@ -1,12 +1,12 @@
 {
-  "date": "2026-05-21T15:28:53.672761",
+  "date": "2026-05-22T14:41:32.738713",
   "gemma_available": true,
   "dividend_available": true,
   "recommendations_available": true,
-  "last_update": "2026-05-21 15:28:53",
+  "last_update": "2026-05-22 14:41:32",
   "gemma_picks_count": 10,
   "dividend_stocks_count": 50,
-  "total_dividend_stocks": 310,
+  "total_dividend_stocks": 330,
   "buy_signals_count": 0,
   "watch_signals_count": 14
 }
